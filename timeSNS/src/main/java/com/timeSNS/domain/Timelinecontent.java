@@ -27,7 +27,7 @@ public class Timelinecontent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TLCIDX")
-	private int tlcidx;
+	private Long tlcidx;
 	
 	@Column(name = "TLIDX")
 	private int tlidx;

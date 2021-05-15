@@ -25,7 +25,7 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TIDX")
-	private int tidx;
+	private Long tidx;
 	
 	@Column(name = "PTIDX")
 	private int ptidx;

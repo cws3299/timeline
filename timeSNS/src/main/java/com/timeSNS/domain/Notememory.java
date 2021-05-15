@@ -27,7 +27,7 @@ public class Notememory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "NMIDX")
-	private int nmidx;
+	private Long nmidx;
 	
 	@Column(name = "TLCIDX")
 	private int tlcidx;

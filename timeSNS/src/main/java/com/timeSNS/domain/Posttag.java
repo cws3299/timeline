@@ -25,7 +25,7 @@ public class Posttag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PTIDX")
-	private int ptidx;
+	private Long ptidx;
 	
 	@Column(name = "TLCIDX")
 	private int tlcidx;

@@ -25,7 +25,7 @@ public class Anniversary {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "AIDX")
-	private int aidx;
+	private Long aidx;
 	
 	@Column(name = "TLIDX")
 	private int tlidx;

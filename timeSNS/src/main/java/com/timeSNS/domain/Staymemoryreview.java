@@ -27,7 +27,7 @@ public class Staymemoryreview {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SMRIDX")
-	private int smridx;
+	private Long smridx;
 	
 	@Column(name = "SMIDX")
 	private int smidx;

@@ -27,7 +27,7 @@ public class Letter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LIDX")
-	private int lidx;
+	private Long lidx;
 	
 	@Column(name = "TLCIDX")
 	private int tlcidx;

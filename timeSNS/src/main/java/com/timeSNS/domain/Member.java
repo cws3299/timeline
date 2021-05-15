@@ -29,7 +29,7 @@ public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MIDX")
-	private int midx;
+	private Long midx;
 	
 	@Column(name = "MID")
 	private String mid;

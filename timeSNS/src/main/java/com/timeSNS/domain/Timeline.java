@@ -27,7 +27,7 @@ public class Timeline {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TLIDX")
-	private int tlidx;
+	private Long tlidx;
 	
 	@Column(name = "MIDX")
 	private int midx;

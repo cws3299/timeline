@@ -27,7 +27,7 @@ public class Timecapsule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TCIDX")
-	private int tcidx;
+	private Long tcidx;
 	
 	@Column(name = "MIDX")
 	private int midx;

@@ -25,7 +25,7 @@ public class Staymemory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SMIDX")
-	private int smidx;
+	private Long smidx;
 	
 	@Column(name = "MIDX")
 	private int midx;
