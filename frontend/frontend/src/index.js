@@ -2,15 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-// import TimeCapsule from './components/TimeCapsule/TimeCapsuleMain/TimeCapsule'
-import NoLogin from './components/NoLogin/NoLogin'
-import NoLogin2 from './components/NoLogin2/NoLogin2'
-// import AppA from './components/NoLogin/app'
+import TimeCapsule from './components/TimeCapsule/TimeCapsuleMain/TimeCapsule'
+import Main from './components/NoLogin/Main'
+import FeedsBox from './components/Feeds/FeedsBox'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NoLogin2 />
+    <FeedsBox />
   </React.StrictMode>,
   document.getElementById('root')
 );

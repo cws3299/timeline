@@ -1,0 +1,8 @@
+.FeedsBox{
+    width:100vw;
+    height:100vh;
+    background-color: #023246;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
