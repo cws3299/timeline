@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>로그인 예제 확인</title>
+	<script type="text/javascript">
+		function jsonTest(){
+			
+			alert("메소드 시작");
+			
+			var beforeName = document.getElementById('username').value;
+			var beforePass = document.getElementById('password').value;
+			
+			alert(beforeName);
+			alert(beforePass);
+			
+			var form = document.createElement('form');
+			form.setAttribute('method', 'post');
+			form.setAttribute('action', '/api/authenticate');
+			form.setAttribute('Content-Type', 'application/json')
+			document.charset = "utf-8";
+			
+			var hiddenField = document.createElement('input');
+			hiddenField.setAttribute('username', beforeName);
+			hiddenField.setAttribute('password', beforePass);
+			form.appendChild(hiddenField);
+			
+			document.body.appendChild(form);
+			
+			alert("submit 되기 전: " + hiddenField.getAttribute('username'));
+			
+			form.submit();
+
+		}
+	</script>
+</head>
+<body>
+	<form method="POST" action="/api/authenticate" id="testForm">
+		<input type="text" name="username" id="username">
+		<input type="text" name="password" id="password">
+		<input type="submit">
+		<button type="button" onclick="jsonTest()">json 변환</button>
+	</form>
+</body>
+</html>
