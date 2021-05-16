@@ -54,7 +54,7 @@ function FeedsBottom() {
                     </div>
                 </div>
                 <div className = "FeedsBottom2_timelines"></div>
-                <FeedsBottomFeeds />
+                <FeedsBottomFeeds className />
             </div>
         </div>
     )
