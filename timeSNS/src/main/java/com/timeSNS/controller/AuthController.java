@@ -32,7 +32,7 @@ public class AuthController {
 		this.tokenProvider = tokenProvider;
 		this.authenticationManagerBuilder = authenticationManagerBuilder;
 	}
-	
+	 
 //	로그인 경로는 '/api/authenticate'이고 Post요청을 받음
 	@PostMapping(path = "/authenticate")
 	public ResponseEntity<TokenDto> authorize(@RequestParam String username, @RequestParam String password) {
