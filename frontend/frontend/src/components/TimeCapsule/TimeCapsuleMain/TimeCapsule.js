@@ -12,8 +12,8 @@ const GlobalStyle = createGlobalStyle`
 function TimeCapsule() {
     return (
         <div className = "TimeCapsule">
-            <TimeCapsuleList />
             <TimeCapsuleNav />
+            <TimeCapsuleList />
         </div>
     )
 };
