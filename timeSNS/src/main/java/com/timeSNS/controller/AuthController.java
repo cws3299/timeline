@@ -12,10 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.timeSNS.domain.Member;
-import com.timeSNS.domain.TokenDto;
+import com.timeSNS.dto.TokenDto;
+import com.timeSNS.entity.Member;
 import com.timeSNS.jwt.JwtFilter;
 import com.timeSNS.jwt.TokenProvider;
 
@@ -34,7 +35,7 @@ public class AuthController {
 	
 //	로그인 경로는 '/api/authenticate'이고 Post요청을 받음
 	@PostMapping(path = "/authenticate")
-	public ResponseEntity<TokenDto> authorize(@Valid @RequestBody String username, @Valid @RequestBody String password) {
+	public ResponseEntity<TokenDto> authorize(@RequestParam String username, @RequestParam String password) {
 //		LoginDto의 username, password를 파라미터로 받고 이를 이용해 UsernamePasswordAuthenticationToken을 생성
 		UsernamePasswordAuthenticationToken authenticationToken = 
 				new UsernamePasswordAuthenticationToken(username, password);
