@@ -1,4 +1,6 @@
-package com.timeSNS.domain;
+package com.timeSNS.entity;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,23 +16,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "TAG")
+@Table(name = "STAYMEMORYREVIEW")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tag {
+public class Staymemoryreview {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "TIDX")
-	private Long tidx;
+	@Column(name = "SMRIDX")
+	private Long smridx;
 	
-	@Column(name = "PTIDX")
-	private int ptidx;
+	@Column(name = "SMIDX")
+	private int smidx;
 	
-	@Column(name = "TCONTENT")
-	private String tcontent;
+	@Column(name = "TLCIDX")
+	private int tlcidx;
+	
+	@Column(name = "SMRSTAYDATE")
+	private LocalDateTime smrstaydate;
 	
 }

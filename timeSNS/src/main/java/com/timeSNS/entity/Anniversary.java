@@ -1,4 +1,4 @@
-package com.timeSNS.domain;
+package com.timeSNS.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,23 +14,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "POSTTAG")
+@Table(name = "ANNIVERSARY")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Posttag {
-
+public class Anniversary {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PTIDX")
-	private Long ptidx;
+	@Column(name = "AIDX")
+	private Long aidx;
 	
-	@Column(name = "TLCIDX")
-	private int tlcidx;
+	@Column(name = "TLIDX")
+	private int tlidx;
 	
-	@Column(name = "TLCTAG")
-	private String tlctag;
+	@Column(name = "ATITLE")
+	private String atitle;
+	
+	@Column(name = "ACONTENT")
+	private String acontent;
 	
 }

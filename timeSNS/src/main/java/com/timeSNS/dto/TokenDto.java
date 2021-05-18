@@ -1,4 +1,4 @@
-package com.timeSNS.domain;
+package com.timeSNS.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

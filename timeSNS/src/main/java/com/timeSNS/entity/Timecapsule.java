@@ -1,4 +1,4 @@
-package com.timeSNS.domain;
+package com.timeSNS.entity;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.timeSNS.domain;
+package com.timeSNS.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,23 +14,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "STAYMEMORY")
+@Table(name = "POSTTAG")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Staymemory {
+public class Posttag {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "SMIDX")
-	private Long smidx;
-	
-	@Column(name = "MIDX")
-	private int midx;
+	@Column(name = "PTIDX")
+	private Long ptidx;
 	
 	@Column(name = "TLCIDX")
 	private int tlcidx;
+	
+	@Column(name = "TLCTAG")
+	private String tlctag;
 	
 }

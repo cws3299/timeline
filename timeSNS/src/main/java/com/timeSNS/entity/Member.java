@@ -1,12 +1,16 @@
-package com.timeSNS.domain;
+package com.timeSNS.entity;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,7 +36,7 @@ public class Member {
 	private Long midx;
 	
 	@Column(name = "MID")
-	private String mid;
+	private String username;
 	
 	@JsonIgnore
 	@Column(name = "MPWD")
@@ -55,5 +59,17 @@ public class Member {
 	
 	@Column(name = "MSECESSIONYN")
 	private String msecessionyn;
+	
+	@JsonIgnore
+	@Column(name = "ACTIVATED")
+	private boolean activated;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "user_authority",
+			joinColumns = {@JoinColumn(name = "MIDX", referencedColumnName = "MIDX")},
+			inverseJoinColumns = {@JoinColumn(name = "AUTHORITYNAME", referencedColumnName = "AUTHORITYNAME")}
+	)
+	private Set<Authority> authorities;
 	
 }

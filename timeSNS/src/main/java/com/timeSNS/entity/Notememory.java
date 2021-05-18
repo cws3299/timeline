@@ -1,4 +1,6 @@
-package com.timeSNS.domain;
+package com.timeSNS.entity;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,26 +16,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ANNIVERSARY")
+@Table(name = "NOTEMEMORY")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Anniversary {
-	
+public class Notememory {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "AIDX")
-	private Long aidx;
+	@Column(name = "NMIDX")
+	private Long nmidx;
 	
-	@Column(name = "TLIDX")
-	private int tlidx;
+	@Column(name = "TLCIDX")
+	private int tlcidx;
 	
-	@Column(name = "ATITLE")
-	private String atitle;
+	@Column(name = "MIDX")
+	private int midx;
 	
-	@Column(name = "ACONTENT")
-	private String acontent;
+	@Column(name = "NMCONTENT")
+	private String nmcontent;
+	
+	@Column(name = "NMREGDATE")
+	private LocalDateTime nmregdate;
 	
 }
