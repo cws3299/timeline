@@ -1,8 +1,11 @@
 package com.timeSNS.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.timeSNS.dto.UserDto;
 import com.timeSNS.entity.Member;
+import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.service.UserService;
+import com.timeSNS.util.SecurityUtil;
 
 @Controller
 @RequestMapping("/test")
@@ -21,6 +26,9 @@ public class TestController {
 
 	public static final String AUTHORIZATION_HEADER = "Authorization";
 	private final UserService userService;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 	
 	public TestController(UserService userService) {
 		this.userService = userService;
@@ -39,17 +47,11 @@ public class TestController {
 	}
 
 	@PostMapping("/id")
-	public String idTest(HttpServletRequest request) {
+	public String idTest() {
 		
-		String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-		String token = null;
-		if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-			token = bearerToken.substring(7);
-		}
+		Long midx = (memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx();
 		
-		System.out.println("token 값: " + token);
-		
-		String username = null;
+		System.out.println("midx: " + midx);
 		
 		return "Main";
 	}
