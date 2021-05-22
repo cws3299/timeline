@@ -38,6 +38,10 @@ public class TimeCapsuleController {
 		this.userService = userService;
 		this.timecapsuleService = timecapsuleService;
 	}
+
+	
+//----------------------------------------------------------------------------------------------------//	
+	
 	
 	@PostMapping("/main")
 	public String main(@RequestParam(defaultValue = "1") int page) {
@@ -51,6 +55,10 @@ public class TimeCapsuleController {
 		return "main";
 	}
 	
+	
+//----------------------------------------------------------------------------------------------------//	
+	
+	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int tcidx_) {
 		
@@ -63,12 +71,23 @@ public class TimeCapsuleController {
 		return "main";
 	}
 	
+	
+//----------------------------------------------------------------------------------------------------//	
+	
+	
 	@PostMapping("/write")
 	public void write(@RequestBody Timecapsule timecapsule) {
 		
+		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		
+		timecapsule.setMidx(midx);
 		timecapsuleService.getTcWrite(timecapsule);
 		
 	}
+	
+	
+//----------------------------------------------------------------------------------------------------//	
+	
 	
 	@PostMapping("/feedback")
 	public String feedback() {
