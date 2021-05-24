@@ -70,7 +70,13 @@ public class MailBoxController {
 //----------------------------------------------------------------------------------------------------//
 	
 	
+//	편지 보내기
+	@PostMapping("sending")
 	public String sending() {
+		
+		
+		
+		
 		return "sending";
 	}
 }
