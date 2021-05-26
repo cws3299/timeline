@@ -95,7 +95,6 @@ public class TimeCapsuleService {
 //	타임캡슐 글 쓰기
 	public void getTcWrite(Timecapsule timecapsule) {
 		
-	
 		timecapsuleRepository.save(timecapsule);
 		
 	}
