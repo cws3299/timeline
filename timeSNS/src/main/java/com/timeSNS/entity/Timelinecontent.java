@@ -59,4 +59,6 @@ public class Timelinecontent {
 	@Column(name = "TLCDELYN")
 	private String tlcdelyn;
 	
+	private String tlctag;
+	
 }

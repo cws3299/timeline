@@ -8,7 +8,7 @@ import com.timeSNS.entity.Staymemory;
 
 public interface StaymemoryRepository extends JpaRepository<Staymemory, Long>{
 
-	Long countByTlcidx(Long tlcidx);
-	Optional<Staymemory> findByTlcidx(Long tlcidx);
+	Long countByTlcidx(int tlcidx);
+	Optional<Staymemory> findByTlcidx(int tlcidx);
 
 }

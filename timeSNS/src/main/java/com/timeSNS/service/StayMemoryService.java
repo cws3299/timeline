@@ -23,7 +23,7 @@ public class StayMemoryService {
 
 	
 //	해당 게시글에 머무른 적 있는지 확인하는 메소드
-	public int getTlcidxCount(Long tlcidx) {
+	public int getTlcidxCount(int tlcidx) {
 		
 //		tlcidx값에 따라 값이 있는지 확인
 		Long tlccount_ = staymemoryRepository.countByTlcidx(tlcidx);
@@ -49,7 +49,7 @@ public class StayMemoryService {
 
 	
 //	머문 게시글 찾기
-	public Staymemory getSmDetail(Long tlcidx) {
+	public Staymemory getSmDetail(int tlcidx) {
 		
 		Optional<Staymemory> smDetail_ = staymemoryRepository.findByTlcidx(tlcidx);
 		Staymemory smDetail = smDetail_.get();
