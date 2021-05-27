@@ -23,14 +23,11 @@ public class PostTagService {
 	
 	public void getPtWrite(List tagIdx, int tlcidx) {
 		
-		Posttag postTag = new Posttag();
-		postTag.setTlcidx(tlcidx);
-		
 		for(int i = 0 ; i < tagIdx.size() ; i++) {
-			
+			Posttag postTag = new Posttag();
+			postTag.setTlcidx(tlcidx);
 			postTag.setTidx((int)(tagIdx.get(i)));
 			posttagRepository.save(postTag);
-			
 		}
 		
 	}
