@@ -2,11 +2,14 @@ package com.timeSNS.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.timeSNS.entity.Posttag;
 import com.timeSNS.entity.Tag;
+import com.timeSNS.repository.PosttagRepository;
 import com.timeSNS.repository.TagRepository;
 
 @Service
@@ -55,7 +58,29 @@ public class TagService {
 		
 		return tagList;
 	}
-	
-	//----------------------------------------------------------------------------------------------------//	
 
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	
+//	해당 게시글에 쓰인 태그 보내주기
+	public List<String> getTagCList(List tagIdxList) {
+		
+		List<String> tagList = new ArrayList<>();
+		
+		for(int i = 0 ; i < tagIdxList.size() ; i++) {
+			
+			Optional<Tag> tag_ = tagRepository.findByTidx((Long)(tagIdxList.get(i)));
+			Tag tag = tag_.get();
+			tagList.add(tag.getTcontent());
+			
+		}
+		
+		return tagList;
+	}
+	
+	
+	
+	
+	
 }

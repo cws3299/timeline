@@ -9,5 +9,6 @@ import com.timeSNS.entity.Tag;
 public interface TagRepository extends JpaRepository<Tag, Long>{
 
 	Optional<Tag> findByTcontent(String tag);
+	Optional<Tag> findByTidx(Long tidx);
 	
 }

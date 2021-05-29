@@ -28,7 +28,7 @@ public class TimeCapsuleController {
 	public static final String AUTHORIZATION_HEADER = "Authorization";
 	
 	private final UserService userService;
-	private TimeCapsuleService timecapsuleService;
+	private final TimeCapsuleService timecapsuleService;
 	
 	@Autowired
 	private MemberRepository memberRepository;

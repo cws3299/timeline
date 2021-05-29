@@ -1,5 +1,6 @@
 package com.timeSNS.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.EmotionCountDto;
+import com.timeSNS.dto.PostDto;
+import com.timeSNS.entity.Emotion;
 import com.timeSNS.entity.Notememory;
+import com.timeSNS.entity.Posttag;
 import com.timeSNS.entity.Staymemory;
 import com.timeSNS.entity.Staymemoryreview;
 import com.timeSNS.entity.Timelinecontent;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.repository.TimelinecontentRepository;
+import com.timeSNS.service.EmotionService;
 import com.timeSNS.service.NoteMemoryService;
 import com.timeSNS.service.PostTagService;
 import com.timeSNS.service.StayMemoryReviewService;
@@ -39,6 +45,7 @@ public class PostController {
 	private NoteMemoryService notememoryService;
 	private TagService tagService;
 	private PostTagService posttagService;
+	private EmotionService emotionService;
 	
 	@Autowired
 	private MemberRepository memberRepository;
@@ -50,13 +57,15 @@ public class PostController {
 			StayMemoryReviewService staymemoryreviewService,
 			NoteMemoryService notememoryService,
 			TagService tagService,
-			PostTagService posttagService) {
+			PostTagService posttagService,
+			EmotionService emotionService) {
 		this.timelinecontentService = timelinecontentService;
 		this.staymemoryService = staymemoryService;
 		this.staymemoryreviewService = staymemoryreviewService;
 		this.notememoryService = notememoryService;
 		this.tagService = tagService;
 		this.posttagService = posttagService;
+		this.emotionService = emotionService;
 	}
 	
 	
@@ -94,8 +103,6 @@ public class PostController {
 			posttagService.getPtWrite(tidxList, midx);
 		}
 		
-		
-		
 		timelinecontentRepository.save(tlContent);
 		
 	}
@@ -118,7 +125,7 @@ public class PostController {
 	
 //	특정 타임라인 게시글 가져오기
 	@PostMapping("/detail/{tlcidx}")
-	public Timelinecontent detail(@PathVariable int tlcidx) {
+	public PostDto detail(@PathVariable int tlcidx) {
 		
 		Long tlcidx_ = new Long(tlcidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
@@ -151,8 +158,7 @@ public class PostController {
 			LocalDateTime smrDate = staymemoryreviewService.getSmrDate(tlcidx);
 			
 //			확인한 게시글이 오늘 확인한 적이 없다면 확인 날짜 추가하기
-			if(smrDate == null || smrDate.isBefore(LocalDateTime.now())) {
-			
+			if(smrDate == null || (LocalDate.from(smrDate)).isBefore(LocalDate.now())) {
 				Staymemoryreview stayMemoryReview = new Staymemoryreview();
 				stayMemoryReview.setSmidx(smIdx);
 				stayMemoryReview.setTlcidx(tlcidx);
@@ -162,15 +168,32 @@ public class PostController {
 			}
 		}
 		
-		return tlcDetail;
-	}
-	
-	
-//----------------------------------------------------------------------------------------------------//	
-
 		
-	public String emotion() {
-		return "emotion";
+//		해당 게시글 감정 개수 가져오기
+		EmotionCountDto emotionCountDto = emotionService.getEmotionCount(tlcidx);
+		
+//		해당 게시글에 적용되는 태그 가져오기
+//		게시글에 적용되는 태그의 인덱스 번호 가져오기
+		List tagIdxList = posttagService.getTagIdxList(tlcidx);
+//		인덱스 번호에 해당하는 태그 내용 가져오기
+		List<String> tagList = tagService.getTagCList(tagIdxList);
+		
+//		Dto에 넣어주기
+		PostDto postDto = new PostDto();
+		postDto.builder()
+				.tlcidx(tlcDetail.getTlcidx())
+				.tlidx(tlcDetail.getTlidx())
+				.midx(tlcDetail.getMidx())
+				.tlcregdate(tlcDetail.getTlcregdate())
+				.tlcdate(tlcDetail.getTlcdate())
+				.tlcplace(tlcDetail.getTlcplace())
+				.tlcimage(tlcDetail.getTlcimage())
+				.tlcpubyn(tlcDetail.getTlcpubyn())
+				.tlcdelyn(tlcDetail.getTlcdelyn())
+				.emotioncountdto(emotionCountDto)
+				.tag(tagList);
+		
+		return postDto;
 	}
 	
 	
@@ -238,9 +261,81 @@ public class PostController {
 	
 //----------------------------------------------------------------------------------------------------//	
 
+	
+//	추억에 남겨둔 쪽지 수정하기
+	@PostMapping("/modifynote")
+	public String modifyNote(@RequestBody Notememory notememory) {
 		
-	public String modifyNote() {
+		
+		
 		return "modifyNote";
 	}
+
+	
+//----------------------------------------------------------------------------------------------------//	
+	
+	
+// 	게시글에 감정 표시하기(등록 안되어 있을 때, Y로 생성, 등록 되어있다면 삭제)
+	@PostMapping("/emotion/{tlcidx}")
+	public void writeEmotion(@PathVariable int tlcidx, @RequestParam String emotion) {
+		
+		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		Emotion emotionE = new Emotion();
+		
+//		해당 게시글에 감정 표시 한 적이 있는지 확인하기(숫자 1이면 체크한 적 있음, 0이면 한적 없음)
+		int emotionCheck = emotionService.getEmotionCheck(tlcidx, midx);
+		
+//		만약 체크한 적 없다면 감정 표시하기
+		if(emotionCheck == 0) {
+			emotionE.setTlcidx(tlcidx);
+			emotionE.setMidx(midx);
+			emotionE.setEregdate(LocalDateTime.now());
+			
+			if(emotion.equals("good")) {
+				emotionE.setEgoodyn("Y");
+			}else if(emotion.equals("fighting")) {
+				emotionE.setEfightingyn("Y");
+			}else if(emotion.equals("congratulation")) {
+				emotionE.setEcongratulationyn("Y");
+			}else if(emotion.equals("expect")) {
+				emotionE.setEexpectyn("Y");
+			}else if(emotion.equals("surprise")) {
+				emotionE.setEexpectyn("Y");
+			}else if(emotion.equals("sad")) {
+				emotionE.setEsadyn("Y");
+			}else if(emotion.equals("nice")) {
+				emotionE.setEniceyn("Y");
+			}
+			
+			emotionService.getEmotionWrite(emotionE);
+			
+//		만약 감정표시 한 적 있다면 삭제해주기
+		}else if(emotionCheck == 1) {
+			
+			Emotion existingEmotion = emotionService.getEmotionDetail(tlcidx, midx);
+			
+			if((existingEmotion.getEgoodyn()) != null && emotion.equals("good")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}else if((existingEmotion.getEfightingyn()) != null && emotion.equals("fight")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}else if((existingEmotion.getEcongratulationyn()) != null && emotion.equals("congratulation")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}else if((existingEmotion.getEexpectyn()) != null && emotion.equals("expect")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}else if((existingEmotion.getEsurpriseyn()) != null && emotion.equals("surprise")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}else if((existingEmotion.getEsadyn()) != null && emotion.equals("sad")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}else if((existingEmotion.getEniceyn()) != null && emotion.equals("nice")) {
+				emotionService.getEmotionDelete(tlcidx, midx);
+			}
+		
+		}
+		
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//	
+
 	
 }
