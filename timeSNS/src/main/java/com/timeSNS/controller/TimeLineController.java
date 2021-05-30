@@ -1,6 +1,7 @@
 package com.timeSNS.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timeSNS.entity.Timeline;
@@ -40,13 +42,15 @@ public class TimeLineController {
 	
 //----------------------------------------------------------------------------------------------------//	
 	
-	
+//	해당 회원 작성 타임라인 목록 가져오기
 	@PostMapping("/list")
-	public String list() {
+	public List<Timeline> list(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		return "list";
+		List<Timeline> tlList = timelineService.getTlList(midx, page);
+		
+		return tlList;
 	}
 	
 	

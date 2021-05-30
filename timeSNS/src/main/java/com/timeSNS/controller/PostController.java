@@ -2,6 +2,7 @@ package com.timeSNS.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,9 +72,52 @@ public class PostController {
 	
 //----------------------------------------------------------------------------------------------------//	
 
+//	해당 타임라인 게시글 목록 가져오기
+	@PostMapping("/list/{tlidx}")
+	public List<PostDto> postList(@PathVariable int tlidx, @RequestParam(defaultValue = "1") int page) {
 		
-	public String postList() {
-		return "postList";
+		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		
+//		해당 타임라인에 속하는 게시글 가져오기
+		List<Timelinecontent> tlcList = timelinecontentService.getTlcList(tlidx, page);
+
+//		각 게시글 넣어줄 PostDto 리스트
+		List<PostDto> postDtoList = new ArrayList<PostDto>();
+		
+		for(int i = 0 ; i < tlcList.size() ; i++) {
+			int tlcidx = ((tlcList.get(i)).getTlcidx()).intValue();
+
+//			각 게시글에 해당되는 감정 개수
+			EmotionCountDto emotionCountDto = emotionService.getEmotionCount(tlcidx);
+
+//			해당 게시글에 적용되는 태그 가져오기
+//			게시글에 적용되는 태그의 인덱스 번호 가져오기
+			List tagIdxList = posttagService.getTagIdxList(tlcidx);
+//			인덱스 번호에 해당하는 태그 내용 가져오기
+			List<String> tagList = tagService.getTagCList(tagIdxList);
+			
+//			PostDto에 게시글 내용, 감정, 태그 합쳐주기
+			PostDto postDto = PostDto.builder()
+					.tlcidx((tlcList.get(i)).getTlcidx())
+					.tlidx((tlcList.get(i)).getTlidx())
+					.midx(midx)
+					.tlcregdate((tlcList.get(i)).getTlcregdate())
+					.tlcdate((tlcList.get(i)).getTlcdate())
+					.tlcplace((tlcList.get(i)).getTlcplace())
+					.tlcimage((tlcList.get(i)).getTlcimage())
+					.tlccontent((tlcList.get(i)).getTlccontent())
+					.tlcemotion((tlcList.get(i)).getTlcemotion())
+					.tlcpubyn((tlcList.get(i)).getTlcpubyn())
+					.tlcdelyn((tlcList.get(i)).getTlcdelyn())
+					.emotioncountdto(emotionCountDto)
+					.tag(tagList)
+					.build();
+			
+//			목록에 PostDto 넣어주기
+			postDtoList.add(postDto);
+		}
+		
+		return postDtoList;
 	}
 	
 		
@@ -85,7 +129,6 @@ public class PostController {
 	public void writePost(@PathVariable int tlidx, @RequestBody Timelinecontent tlContent) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
-		
 		
 //		타임라인 인덱스, 회원 인덱스, 작성시각, 삭제여부 저장해주기 
 		tlContent.setTlidx(tlidx);
@@ -179,19 +222,21 @@ public class PostController {
 		List<String> tagList = tagService.getTagCList(tagIdxList);
 		
 //		Dto에 넣어주기
-		PostDto postDto = new PostDto();
-		postDto.builder()
+		PostDto postDto = PostDto.builder()
 				.tlcidx(tlcDetail.getTlcidx())
 				.tlidx(tlcDetail.getTlidx())
-				.midx(tlcDetail.getMidx())
+				.midx(midx)
 				.tlcregdate(tlcDetail.getTlcregdate())
 				.tlcdate(tlcDetail.getTlcdate())
 				.tlcplace(tlcDetail.getTlcplace())
 				.tlcimage(tlcDetail.getTlcimage())
+				.tlccontent(tlcDetail.getTlccontent())
+				.tlcemotion(tlcDetail.getTlcemotion())
 				.tlcpubyn(tlcDetail.getTlcpubyn())
 				.tlcdelyn(tlcDetail.getTlcdelyn())
 				.emotioncountdto(emotionCountDto)
-				.tag(tagList);
+				.tag(tagList)
+				.build();
 		
 		return postDto;
 	}
@@ -230,17 +275,14 @@ public class PostController {
 	
 //----------------------------------------------------------------------------------------------------//	
 
-	
-	public String noteList() {
-		return "noteList";
-	}
-
-	
-//----------------------------------------------------------------------------------------------------//	
-
-	
-	public String noteListAdd() {
-		return "noteListAdd";
+//	추억에 남긴 쪽지 목록 가져오기
+	@PostMapping("/note/list/{tlcidx}")
+	public List<Notememory> noteList(@PathVariable int tlcidx, @RequestParam(defaultValue = "1") int page) {
+		
+		List<Notememory> nmList = notememoryService.getNmList(tlcidx, page);
+		
+		return nmList;
+		
 	}
 
 	
@@ -337,5 +379,21 @@ public class PostController {
 	
 //----------------------------------------------------------------------------------------------------//	
 
+	
+//	타임라인 게시글 삭제하기
+	@PostMapping("deletePost/{tlcidx}")
+	public void deletePost(@PathVariable int tlcidx) {
+		
+		Long tlcidx_ = new Long(tlcidx);
+		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		
+		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
+		Timelinecontent tlcDetail = tlcDetail_.get();
+		
+		tlcDetail.setTlcdelyn("Y");
+		
+		timelinecontentRepository.save(tlcDetail);
+	
+	}
 	
 }

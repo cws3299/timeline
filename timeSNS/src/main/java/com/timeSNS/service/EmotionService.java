@@ -68,9 +68,7 @@ public class EmotionService {
 //	게시글 받은 감정 개수 확인하기
 	public EmotionCountDto getEmotionCount(int tlcidx) {
 		
-		EmotionCountDto emotionCountDto = new EmotionCountDto();
-		
-		emotionCountDto.builder()
+		EmotionCountDto emotionCountDto = EmotionCountDto.builder()
 					.tlcidx(tlcidx)
 					.egoodyn(emotionRepository.countByTlcidxAndEgoodyn(tlcidx, "Y"))
 					.efightingyn(emotionRepository.countByTlcidxAndEfightingyn(tlcidx, "Y"))
@@ -78,8 +76,13 @@ public class EmotionService {
 					.eexpectyn(emotionRepository.countByTlcidxAndEexpectyn(tlcidx, "Y"))
 					.esurpriseyn(emotionRepository.countByTlcidxAndEsurpriseyn(tlcidx, "Y"))
 					.esadyn(emotionRepository.countByTlcidxAndEsadyn(tlcidx, "Y"))
-					.eniceyn(emotionRepository.countByTlcidxAndEniceyn(tlcidx, "Y"));
+					.eniceyn(emotionRepository.countByTlcidxAndEniceyn(tlcidx, "Y"))
+					.build();
 		
 		return emotionCountDto;
 	}
+	
+	
+//----------------------------------------------------------------------------------------------------//	
+
 }
