@@ -78,9 +78,18 @@ public class TagService {
 		
 		return tagList;
 	}
+
+	
+//----------------------------------------------------------------------------------------------------//	
 	
 	
-	
+//	검색한 태그 인덱스 검색
+	public int getTagSearchIdx(String tag) {
+		
+		int tagIdx = (((tagRepository.findByTcontent(tag)).get()).getTidx()).intValue();
+		
+		return tagIdx;
+	}
 	
 	
 }

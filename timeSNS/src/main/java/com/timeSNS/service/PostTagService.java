@@ -12,11 +12,46 @@ import com.timeSNS.repository.PosttagRepository;
 @Service
 public class PostTagService {
 
+//	페이지가 많아질 경우, 한번에 보이는 페이지 선택지 수
+	private static final int BLOCK_PAGE_NUM_COUNT = 5;
+//	한 페이지에 들어갈 게시글 수
+	private static final int PAGE_POST_COUNT = 10;
+	
 	@Autowired
 	private PosttagRepository posttagRepository;
 	
 	public PostTagService(PosttagRepository posttagRepository) {
 		this.posttagRepository = posttagRepository;
+	}
+
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	
+//	페이징 처리를 위한 페이지 갯수
+	public int[] getPageList(int tidx, int page) {
+		int [] pageList = new int[BLOCK_PAGE_NUM_COUNT];
+
+//		총 게시글 수
+		Double postsTotalCount = Double.valueOf(posttagRepository.countByTidx(tidx));
+		
+//		총 게시글 수를 기준으로 계산한 마지막 페이지 번호 계산
+		int totalLastPageNum = (int)(Math.ceil((postsTotalCount/PAGE_POST_COUNT)));
+		
+//		현재 페이지를 기준으로 블록의 마지막 페이지 번호 계산
+		int blockLastPageNum = (totalLastPageNum > page + BLOCK_PAGE_NUM_COUNT)
+				? page + BLOCK_PAGE_NUM_COUNT
+						:totalLastPageNum;
+		
+//		페이지 시작 번호 조정
+		page = (page<=3) ? 1 : page-2;
+		
+//		페이지 번호 할당
+		for(int val = page, i = 0 ; val <= blockLastPageNum ; val++, i++) {
+			pageList[i] = val;
+		}
+		
+		return pageList;
 	}
 	
 //----------------------------------------------------------------------------------------------------//	
@@ -52,4 +87,19 @@ public class PostTagService {
 		
 	}
 	
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	
+	public int[] getPtidxSearchList(int tidx) {
+		
+		int[] ptidxList = new int[(posttagRepository.findByTidx(tidx)).size()];
+		
+		for(int i = 0 ; i < ptidxList.length ; i++) {
+			ptidxList[i] = (((posttagRepository.findByTidx(tidx)).get(i)).getPtidx()).intValue();
+		}
+		
+		return ptidxList;
+		
+	}
 }

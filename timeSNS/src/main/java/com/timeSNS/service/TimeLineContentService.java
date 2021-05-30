@@ -78,6 +78,25 @@ public class TimeLineContentService {
 	
 //----------------------------------------------------------------------------------------------------//
 
+
+//	현재 페이지에 따른 게시글 검색 목록 불러오기
+	public List<Timelinecontent> getTlcSearchList(String content, int page) {
+		
+		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTlccontentContainingAndTlcpubynAndTlcdelyn(content, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "tlcregdate")));
+		List<Timelinecontent> tlcList_ = tlcPage.getContent();
+		List<Timelinecontent> tlcList = new ArrayList<>();
+		
+		for(int i = 0 ; i < tlcList_.size() ; i++) {
+			tlcList.add(tlcList_.get(i));
+		}
+		
+		return tlcList;
+		
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//
+
 	
 //	특정 포스트 가져오기
 	public Optional<Timelinecontent> getTlcDetail(Long tlcidx) {

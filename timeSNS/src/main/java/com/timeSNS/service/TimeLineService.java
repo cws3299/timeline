@@ -78,6 +78,24 @@ public class TimeLineService {
 //----------------------------------------------------------------------------------------------------//	
 
 	
+//	현재 페이지에 따른 타임라인 검색 목록 불러오기
+	public List<Timeline> getTlSearchList(String timeline, int page) {
+		
+		Page<Timeline> tlPage = timelineRepository.findByTltitleContainingAndTlpubynAndTldelyn(timeline, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "tlregdate")));
+		List<Timeline> tlList_ = tlPage.getContent();
+		List<Timeline> tlList = new ArrayList<>();
+		
+		for(int i = 0 ; i < tlList_.size() ; i++) {
+			tlList.add(tlList_.get(i));
+		}
+		
+		return tlList;
+		
+	}
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	
 //	타임라인 작성 메소드
 	public void getTlWrite(Timeline timeline) {
 		

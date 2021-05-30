@@ -136,6 +136,8 @@ public class PostController {
 		tlContent.setTlcregdate(LocalDateTime.now());
 		tlContent.setTlcdelyn("N");
 		
+		timelinecontentRepository.save(tlContent);
+		
 		String tlcTag_ = tlContent.getTlctag();
 		
 //		태그 테이블에 입력해주기
@@ -143,10 +145,12 @@ public class PostController {
 			String[] tlcTag = tlcTag_.split("#");
 			tagService.getTagWrite(tlcTag);
 			List tidxList = tagService.getTagList(tlcTag);
+			
+			
+		
+//			midx가 아니라 tlcidx 넣어야 함 수정 필요
 			posttagService.getPtWrite(tidxList, midx);
 		}
-		
-		timelinecontentRepository.save(tlContent);
 		
 	}
 	

@@ -11,7 +11,11 @@ import com.timeSNS.entity.Timelinecontent;
 
 public interface TimelinecontentRepository extends JpaRepository<Timelinecontent, Long>{
 	
+//	페이징 처리를 위한 쿼리
 	Page<Timelinecontent> findByTlidxAndTlcpubynAndTlcdelyn(int tlidx, String tlcpubyn, String tlcdelyn, Pageable pageable);
 	int countByTlidx(int tlidx);
+	
+//	검색 내역 페이징 처리를 위한 쿼리
+	Page<Timelinecontent> findByTlccontentContainingAndTlcpubynAndTlcdelyn(String content, String tlcpubyn, String tlcdelyn, Pageable pageable);
 	
 }
