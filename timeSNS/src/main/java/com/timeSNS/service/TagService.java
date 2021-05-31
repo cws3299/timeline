@@ -70,7 +70,10 @@ public class TagService {
 		
 		for(int i = 0 ; i < tagIdxList.size() ; i++) {
 			
-			Optional<Tag> tag_ = tagRepository.findByTidx((Long)(tagIdxList.get(i)));
+			int tidx_ = (int)tagIdxList.get(i);
+			Long tidx = new Long(tidx_);
+			
+			Optional<Tag> tag_ = tagRepository.findByTidx(tidx);
 			Tag tag = tag_.get();
 			tagList.add(tag.getTcontent());
 			

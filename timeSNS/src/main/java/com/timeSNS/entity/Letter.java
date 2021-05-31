@@ -54,6 +54,6 @@ public class Letter {
 	private String lcategory;
 	
 	@Column(name = "LPHOTO")
-	private String lphto;
+	private String lphoto;
 	
 }

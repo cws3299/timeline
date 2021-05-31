@@ -57,6 +57,7 @@ public class PostTagService {
 //----------------------------------------------------------------------------------------------------//	
 
 	
+//	게시글에 쓰인 태그 인덱스 번호 등록
 	public void getPtWrite(List tagIdx, int tlcidx) {
 		
 		for(int i = 0 ; i < tagIdx.size() ; i++) {

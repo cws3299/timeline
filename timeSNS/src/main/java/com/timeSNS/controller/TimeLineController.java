@@ -86,9 +86,6 @@ public class TimeLineController {
 		
 		timeline.setTlidx(tlidx_);
 		
-		System.out.println("modify title: " + timeline.getTltitle());
-		System.out.println("modify introduce: " + timeline.getTlintroduce());
-		
 		timelineRepository.save(timeline);
 		
 	}

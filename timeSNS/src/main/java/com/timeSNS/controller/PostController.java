@@ -146,10 +146,10 @@ public class PostController {
 			tagService.getTagWrite(tlcTag);
 			List tidxList = tagService.getTagList(tlcTag);
 			
+//			바로 직전에 저정한 게시글 인덱스 번호 가져오기
+			int tlcidx = timelinecontentService.getTlcIdx();
 			
-		
-//			midx가 아니라 tlcidx 넣어야 함 수정 필요
-			posttagService.getPtWrite(tidxList, midx);
+			posttagService.getPtWrite(tidxList, tlcidx);
 		}
 		
 	}

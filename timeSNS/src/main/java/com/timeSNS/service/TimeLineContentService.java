@@ -110,4 +110,16 @@ public class TimeLineContentService {
 	
 //----------------------------------------------------------------------------------------------------//
 
+	
+//	가장 최근에 등록한 포스트 인덱스 번호 가져오기
+	public int getTlcIdx() {
+		
+		Optional<Timelinecontent> tlcDetail_ = timelinecontentRepository.findByTlcidxMax();
+		Timelinecontent tlcDetail = tlcDetail_.get();
+		
+		int tlcidx = (tlcDetail.getTlcidx()).intValue();
+		
+		return tlcidx;
+	}
+	
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timeSNS.dto.EmotionCountDto;
+import com.timeSNS.dto.MemberSearchDto;
 import com.timeSNS.dto.PostDto;
 import com.timeSNS.entity.Timeline;
 import com.timeSNS.entity.Timelinecontent;
@@ -19,6 +20,7 @@ import com.timeSNS.service.PostTagService;
 import com.timeSNS.service.TagService;
 import com.timeSNS.service.TimeLineContentService;
 import com.timeSNS.service.TimeLineService;
+import com.timeSNS.service.UserService;
 import com.timeSNS.util.SecurityUtil;
 
 @RestController
@@ -32,6 +34,7 @@ public class SearchController {
 	private TagService tagService;
 	private PostTagService posttagService;
 	private EmotionService emotionService;
+	private UserService userService;
 	
 	@Autowired
 	private MemberRepository memberRepository;
@@ -40,13 +43,15 @@ public class SearchController {
 							TimeLineContentService timelinecontentService,
 							TagService tagService,
 							PostTagService posttagService,
-							EmotionService emotionService) {
+							EmotionService emotionService,
+							UserService userService) {
 		
 		this.timelineService = timelineService;
 		this.timelinecontentService = timelinecontentService;
 		this.tagService = tagService;
 		this.posttagService = posttagService;
 		this.emotionService = emotionService;
+		this.userService = userService;
 		
 	}
 	
@@ -55,12 +60,13 @@ public class SearchController {
 
 //	유저 아이디 검색
 	@GetMapping("/user")
-	public String user(@RequestParam String user) {
+	public List<MemberSearchDto> user(@RequestParam String user, @RequestParam int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
+		List<MemberSearchDto> memberList = userService.getUserList(user, page);
 		
-		return "user";
+		return memberList;
 	}
 	
 	

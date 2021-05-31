@@ -16,22 +16,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timeSNS.dto.TokenDto;
+import com.timeSNS.dto.UserDto;
 import com.timeSNS.entity.Member;
 import com.timeSNS.jwt.JwtFilter;
 import com.timeSNS.jwt.TokenProvider;
+import com.timeSNS.service.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
 public class AuthController {
 
 	private final TokenProvider tokenProvider;
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
+	private final UserService userService;
 	
 //	AuthController는 TokenProvider, AuthenticationManagerBuilder를 주입받음
-	public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+	public AuthController(TokenProvider tokenProvider,
+						AuthenticationManagerBuilder authenticationManagerBuilder,
+						UserService userService) {
 		this.tokenProvider = tokenProvider;
 		this.authenticationManagerBuilder = authenticationManagerBuilder;
+		this.userService = userService;
 	}
+	
+//----------------------------------------------------------------------------------------------------//	
+
 	
 //	로그인 경로는 '/api/authenticate'이고 Post요청을 받음
 	@PostMapping(path = "/authenticate")
@@ -55,6 +64,15 @@ public class AuthController {
 
 //		TokenDto를 이용해서 Response Body에도 넣어서 리턴하게 됨
 		return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	@PostMapping("/signup")
+	public ResponseEntity<Member> signup(@Valid @RequestBody UserDto userDto){
+		System.out.println(userDto);
+		return ResponseEntity.ok(userService.signup(userDto));
 	}
 	
 }
