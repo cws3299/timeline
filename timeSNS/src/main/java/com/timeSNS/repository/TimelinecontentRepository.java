@@ -21,6 +21,29 @@ public interface TimelinecontentRepository extends JpaRepository<Timelinecontent
 	Page<Timelinecontent> findByTlccontentContainingAndTlcpubynAndTlcdelyn(String content, String tlcpubyn, String tlcdelyn, Pageable pageable);
 	
 //	가장 최근에 등록한 게시글 가져오기
-	@Query("SELECT * FROM TIMELINECONTENT ORDER BY TLCREGDATE DESC LIMIT 1")
-	Optional<Timelinecontent> findByTlcidxMax();
+	Optional<Timelinecontent> findTop1ByTlidxOrderByTlcregdateDesc(int tlidx);
+	
+//	메인 피드 내용 가져오기
+	@Query(value = 
+			"SELECT TIMELINECONTENT.TLCIDX, TIMELINECONTENT.TLIDX, TIMELINECONTENT.MIDX, TIMELINECONTENT.TLCREGDATE, "
+			+ "TIMELINECONTENT.TLCDATE, TIMELINECONTENT.TLCPLACE, TIMELINECONTENT.TLCIMAGE, TIMELINECONTENT.TLCCONTENT, "
+			+ "TIMELINECONTENT.TLCEMOTION, TIMELINECONTENT.TLCPUBYN, TIMELINECONTENT.TLCDELYN, TIMELINECONTENT.TLCTAG "
+			+ "FROM TIMELINECONTENT "
+			+ "JOIN FOLLOW "
+			+ "ON TIMELINECONTENT.TLIDX = FOLLOW.TLIDX "
+			+ "WHERE FOLLOW.FLWRMIDX = ?1 "
+			+ "AND TIMELINECONTENT.TLCDELYN = 'N' "
+			+ "AND TIMELINECONTENT.TLCPUBYN  = 'Y' "
+			+ "ORDER BY TIMELINECONTENT.TLCREGDATE DESC", 
+			countQuery =
+			"SELECT COUNT(*) "
+			+ "FROM TIMELINECONTENT "
+			+ "JOIN FOLLOW "
+			+ "ON TIMELINECONTENT.TLIDX = FOLLOW.TLIDX "
+			+ "WHERE FOLLOW.FLWRMIDX = 2 "
+			+ "AND TIMELINECONTENT.TLCDELYN = 'N' "
+			+ "AND TIMELINECONTENT.TLCPUBYN  = 'Y'",
+			nativeQuery = true)
+	Page<Timelinecontent> findByTlidx(int midx, Pageable pageable);
+	
 }

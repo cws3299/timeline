@@ -43,6 +43,7 @@ public class MailBoxController {
 
 //----------------------------------------------------------------------------------------------------//
 	
+	
 //	받은 편지함 현재 페이지에 맞게 목록 불러오기
 	@PostMapping("/reception")
 	public List<Letter> reception(@RequestParam int rmidx, @RequestParam(defaultValue = "1") int page) {

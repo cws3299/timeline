@@ -112,9 +112,9 @@ public class TimeLineContentService {
 
 	
 //	가장 최근에 등록한 포스트 인덱스 번호 가져오기
-	public int getTlcIdx() {
+	public int getTlcIdx(int tlidx) {
 		
-		Optional<Timelinecontent> tlcDetail_ = timelinecontentRepository.findByTlcidxMax();
+		Optional<Timelinecontent> tlcDetail_ = timelinecontentRepository.findTop1ByTlidxOrderByTlcregdateDesc(tlidx);
 		Timelinecontent tlcDetail = tlcDetail_.get();
 		
 		int tlcidx = (tlcDetail.getTlcidx()).intValue();
@@ -122,4 +122,20 @@ public class TimeLineContentService {
 		return tlcidx;
 	}
 	
+	
+//----------------------------------------------------------------------------------------------------//
+
+//	메인 페이지 피드 게시글 가져오기
+	public List<Timelinecontent> getMainFeed(int midx, int page) {
+		
+		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTlidx(midx, PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<Timelinecontent> tlcList_ = tlcPage.getContent();
+		List<Timelinecontent> tlcList = new ArrayList<Timelinecontent>();
+		
+		for(int i = 0 ; i < tlcList_.size() ; i++) {
+			tlcList.add(tlcList_.get(i));
+		}
+		
+		return tlcList;
+	}
 }
