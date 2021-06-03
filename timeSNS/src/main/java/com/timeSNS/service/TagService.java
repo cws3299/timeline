@@ -5,21 +5,35 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.timeSNS.dto.PostDto;
 import com.timeSNS.entity.Posttag;
 import com.timeSNS.entity.Tag;
+import com.timeSNS.entity.Timelinecontent;
 import com.timeSNS.repository.PosttagRepository;
 import com.timeSNS.repository.TagRepository;
+import com.timeSNS.repository.TimelinecontentRepository;
 
 @Service
 public class TagService {
 
+//	페이지가 많아질 경우, 한번에 보이는 페이지 선택지 수
+	private static final int BLOCK_PAGE_NUM_COUNT = 5;
+//	한 페이지에 들어갈 게시글 수
+	private static final int PAGE_POST_COUNT = 10;
+	
 	@Autowired
 	private final TagRepository tagRepository;
+	@Autowired
+	private final TimelinecontentRepository timelinecontentRepository;
 	
-	public TagService(TagRepository tagRepository) {
+	public TagService(TagRepository tagRepository,
+				TimelinecontentRepository timelinecontentRepository) {
 		this.tagRepository = tagRepository;
+		this.timelinecontentRepository = timelinecontentRepository;
 	}
 	
 	
@@ -89,9 +103,29 @@ public class TagService {
 //	검색한 태그 인덱스 검색
 	public int getTagSearchIdx(String tag) {
 		
-		int tagIdx = (((tagRepository.findByTcontent(tag)).get()).getTidx()).intValue();
+		int tagIdx = tagRepository.findByTcontent(tag).get().getTidx().intValue();
 		
 		return tagIdx;
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	
+//	태그 인덱스 번호를 기준으로 해당 태그를 사용한 게시글  가져오기
+	public List<Timelinecontent> getPostTagSearch(int tagIdx, int page) {
+		
+		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTidx(tagIdx, PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<Timelinecontent> tlcList_ = tlcPage.getContent();
+		List<Timelinecontent> tlcList = new ArrayList<>();
+		
+		if(tlcList_.size() != 0) {
+			for(int i = 0 ; i < tlcList_.size() ; i++) {
+				tlcList.add(tlcList_.get(i));
+			}
+		}
+		
+		return tlcList; 
 	}
 	
 	

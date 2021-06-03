@@ -1,17 +1,23 @@
 package com.timeSNS.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+
+import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.LetterDto;
 import com.timeSNS.entity.Letter;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.service.LetterService;
@@ -46,11 +52,11 @@ public class MailBoxController {
 	
 //	받은 편지함 현재 페이지에 맞게 목록 불러오기
 	@PostMapping("/reception")
-	public List<Letter> reception(@RequestParam int rmidx, @RequestParam(defaultValue = "1") int page) {
+	public List<Letter> reception(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Letter> rlList = letterService.getRlList(rmidx, page);
+		List<Letter> rlList = letterService.getRlList(midx, page);
 		
 		
 		return rlList;
@@ -62,11 +68,11 @@ public class MailBoxController {
 	
 //	보낸 편지함 현재 페이지에 맞게 목록 불러오기
 	@PostMapping("/send")
-	public List<Letter> send(@RequestParam int smidx, @RequestParam(defaultValue = "1") int page) {
+	public List<Letter> send(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Letter> slList = letterService.getSlList(smidx, page);
+		List<Letter> slList = letterService.getSlList(midx, page);
 		
 		
 		return slList;
@@ -98,12 +104,26 @@ public class MailBoxController {
 	
 //	편지 보내기
 	@PostMapping("/sending")
-	public void sending(@RequestParam int tlcidx, @RequestBody Letter letter) {
+	public void sending(@RequestParam int tlcidx, @ModelAttribute LetterDto letterDto) throws Exception {
 		
 //		이때 midx는 smidx(보낸사람 인덱스)
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		Long tlcidx_ = new Long(tlcidx);
 			
+//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+		UUID uuid = UUID.randomUUID();
+//		이미지 파일 이름 저장(uuid + _ + 파일이름)
+		String savedName = uuid.toString() + "_" + letterDto.getLphoto().getOriginalFilename();
+		
+//		기본 파일 저장 장소
+		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+		String filePath = rootPath + "/" + savedName;
+		
+//		파일 업로드 작업 수행
+		File file = new File(filePath);
+		File dest = file;
+		letterDto.getLphoto().transferTo(dest);
+		
 //		편지 받는 사람 인덱스
 		int rmidx = ((timelinecontentService.getTlcDetail(tlcidx_)).get()).getMidx();
 		
@@ -112,10 +132,10 @@ public class MailBoxController {
 			.smidx(midx)
 			.rmidx(rmidx)
 			.lregdate(LocalDateTime.now())
-			.lcontent(letter.getLcontent())
+			.lcontent(letterDto.getLcontent())
 			.lreadyn("N")
-			.lcategory(letter.getLcategory())
-			.lphoto(letter.getLphoto())
+			.lcategory(letterDto.getLcategory())
+			.lphoto(savedName)
 			.build();
 
 //		편지 보내기
@@ -131,7 +151,7 @@ public class MailBoxController {
 	
 //	답장 보내기
 	@PostMapping("/reply")
-	public void reply(@RequestParam int lidx, @RequestBody Letter letter) {
+	public void reply(@RequestParam int lidx, @ModelAttribute LetterDto letterDto) throws IllegalStateException, IOException {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
@@ -142,16 +162,32 @@ public class MailBoxController {
 		int tlcidx = letter_.getTlcidx();
 		int rmidx = letter_.getRmidx();
 		
+
+//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+		UUID uuid = UUID.randomUUID();
+//		이미지 파일 이름 저장(uuid + _ + 파일이름)
+		String savedName = uuid.toString() + "_" + letterDto.getLphoto().getOriginalFilename();
+		
+//		기본 파일 저장 장소
+		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+		String filePath = rootPath + "/" + savedName;
+		
+//		파일 업로드 작업 수행
+		File file = new File(filePath);
+		File dest = file;
+		letterDto.getLphoto().transferTo(dest);
+		
+		
 		Letter letter_2 = Letter.builder()
 			.tlcidx(tlcidx)
 			.lidx_2(lidx)
 			.smidx(midx)
 			.rmidx(rmidx)
 			.lregdate(LocalDateTime.now())
-			.lcontent(letter.getLcontent())
+			.lcontent(letterDto.getLcontent())
 			.lreadyn("N")
-			.lcategory(letter.getLcategory())
-			.lphoto(letter.getLphoto())
+			.lcategory(letterDto.getLcategory())
+			.lphoto(savedName)
 			.build();
 		
 //		편지 보내기

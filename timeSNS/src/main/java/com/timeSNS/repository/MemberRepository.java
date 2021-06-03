@@ -19,4 +19,5 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 //	회원 검색 내역 페이징 처리를 위한 쿼리
 	Page<Member> findByUsernameContainingOrMnicknameContainingAndMsecessionyn(String username, String nickname, String msecsssionyn, Pageable pageable);
 	int countByUsernameContainingOrMnicknameContaining(String username, String nickname);
+	
 }

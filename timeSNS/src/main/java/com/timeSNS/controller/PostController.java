@@ -385,7 +385,7 @@ public class PostController {
 
 	
 //	타임라인 게시글 삭제하기
-	@PostMapping("deletePost/{tlcidx}")
+	@PostMapping("/deletepost/{tlcidx}")
 	public void deletePost(@PathVariable int tlcidx) {
 		
 		Long tlcidx_ = new Long(tlcidx);

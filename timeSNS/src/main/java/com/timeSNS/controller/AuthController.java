@@ -1,5 +1,12 @@
 package com.timeSNS.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileSystemView;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpHeaders;
@@ -9,12 +16,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.timeSNS.dto.MemberModifySignDto;
 import com.timeSNS.dto.TokenDto;
 import com.timeSNS.dto.UserDto;
 import com.timeSNS.entity.Member;
@@ -69,9 +79,34 @@ public class AuthController {
 	
 //----------------------------------------------------------------------------------------------------//	
 
+//	회원 가입하기
 	@PostMapping("/signup")
-	public ResponseEntity<Member> signup(@Valid @RequestBody UserDto userDto){
-		System.out.println(userDto);
+	public ResponseEntity<Member> signup(@ModelAttribute MemberModifySignDto memberDto,
+			HttpServletRequest request) throws Exception {
+		
+//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+		UUID uuid = UUID.randomUUID();
+//		이미지 파일 이름 저장(uuid + _ + 파일이름)
+		String savedName = uuid.toString() + "_" + memberDto.getMphoto().getOriginalFilename();
+		
+//		기본 파일 저장 장소
+		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+		String filePath = rootPath + "/" + savedName;
+		
+//		파일 업로드 작업 수행
+		File file = new File(filePath);
+		File dest = file;
+		memberDto.getMphoto().transferTo(dest);
+		
+		UserDto userDto = UserDto.builder()
+				.mid(memberDto.getMid())
+				.mpwd(memberDto.getMpwd())
+				.mnickname(memberDto.getMnickname())
+				.mphoto(savedName)
+				.mbirthday(memberDto.getMbirthday())
+				.mproduce(memberDto.getMproduce())
+				.build();
+		
 		return ResponseEntity.ok(userService.signup(userDto));
 	}
 	

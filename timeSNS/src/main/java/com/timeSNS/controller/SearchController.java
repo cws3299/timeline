@@ -60,7 +60,7 @@ public class SearchController {
 
 //	유저 아이디 검색
 	@GetMapping("/user")
-	public List<MemberSearchDto> user(@RequestParam String user, @RequestParam int page) {
+	public List<MemberSearchDto> user(@RequestParam String user, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
@@ -75,7 +75,7 @@ public class SearchController {
 	
 //	타임라인 검색
 	@GetMapping("/timeline")
-	public List<Timeline> timeline(@RequestParam String timeline, @RequestParam int page) {
+	public List<Timeline> timeline(@RequestParam String timeline, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
@@ -91,7 +91,7 @@ public class SearchController {
 	
 //	게시물 검색
 	@GetMapping("/post")
-	public List<PostDto> post(@RequestParam String content, @RequestParam int page) {
+	public List<PostDto> post(@RequestParam String content, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 
@@ -143,17 +143,52 @@ public class SearchController {
 	
 //	태그 검색
 	@GetMapping("/tag")
-	public String tag(@RequestParam String tag) {
+	public List<PostDto> tag(@RequestParam String tag, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		검색 태그 인덱스 번호 가져오기
 		int tidx = tagService.getTagSearchIdx(tag);
-//		검색 태그 인덱스 기준으로 해당 태그 사용한 게시글 인덱스 받아오기
+//		해당 태그 사용한 게시글 목록 불러오기
+		List<Timelinecontent> tagSearchList = tagService.getPostTagSearch(tidx, page);
 		
+//		각 게시글 넣어줄 PostDto 리스트
+		List<PostDto> postDtoList = new ArrayList<PostDto>();
 		
+		for(int i = 0 ; i < tagSearchList.size() ; i++) {
+			int tlcidx = ((tagSearchList.get(i)).getTlcidx()).intValue();
+
+//			각 게시글에 해당되는 감정 개수
+			EmotionCountDto emotionCountDto = emotionService.getEmotionCount(tlcidx);
+
+//			해당 게시글에 적용되는 태그 가져오기
+//			게시글에 적용되는 태그의 인덱스 번호 가져오기
+			List tagIdxList = posttagService.getTagIdxList(tlcidx);
+//			인덱스 번호에 해당하는 태그 내용 가져오기
+			List<String> tagList = tagService.getTagCList(tagIdxList);
+			
+//			PostDto에 게시글 내용, 감정, 태그 합쳐주기
+			PostDto postDto = PostDto.builder()
+					.tlcidx((tagSearchList.get(i)).getTlcidx())
+					.tlidx((tagSearchList.get(i)).getTlidx())
+					.midx((tagSearchList.get(i)).getMidx())
+					.tlcregdate((tagSearchList.get(i)).getTlcregdate())
+					.tlcdate((tagSearchList.get(i)).getTlcdate())
+					.tlcplace((tagSearchList.get(i)).getTlcplace())
+					.tlcimage((tagSearchList.get(i)).getTlcimage())
+					.tlccontent((tagSearchList.get(i)).getTlccontent())
+					.tlcemotion((tagSearchList.get(i)).getTlcemotion())
+					.tlcpubyn((tagSearchList.get(i)).getTlcpubyn())
+					.tlcdelyn((tagSearchList.get(i)).getTlcdelyn())
+					.emotioncountdto(emotionCountDto)
+					.tag(tagList)
+					.build();
+			
+//			목록에 PostDto 넣어주기
+			postDtoList.add(postDto);
+		}
 		
-		return "tag";
+		return postDtoList;
 	}
 	
 	
