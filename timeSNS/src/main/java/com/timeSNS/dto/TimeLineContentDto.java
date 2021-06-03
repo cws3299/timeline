@@ -1,8 +1,8 @@
 package com.timeSNS.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,21 +15,13 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDto {
+public class TimeLineContentDto {
 
-	private Long tlcidx;
-	
-	private int tlidx;
-	
-	private int midx;
-	
-	private LocalDateTime tlcregdate;
-	
 	private LocalDate tlcdate;
 	
 	private String tlcplace;
 	
-	private String tlcimage;
+	private MultipartFile tlcimage;
 	
 	private String tlccontent;
 	
@@ -37,10 +29,6 @@ public class PostDto {
 	
 	private String tlcpubyn;
 	
-	private String tlcdelyn;
-	
-	private EmotionCountDto emotioncountdto;
-	
-	private List<String> tag;
+	private String tlctag;
 	
 }

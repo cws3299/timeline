@@ -1,13 +1,19 @@
 package com.timeSNS.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
+import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.timeSNS.dto.EmotionCountDto;
 import com.timeSNS.dto.PostDto;
+import com.timeSNS.dto.TimeLineContentDto;
 import com.timeSNS.entity.Emotion;
 import com.timeSNS.entity.Notememory;
-import com.timeSNS.entity.Posttag;
 import com.timeSNS.entity.Staymemory;
 import com.timeSNS.entity.Staymemoryreview;
 import com.timeSNS.entity.Timelinecontent;
@@ -126,15 +132,43 @@ public class PostController {
 	
 //	타임라인 글 작성
 	@PostMapping("/writepost/{tlidx}")
-	public void writePost(@PathVariable int tlidx, @RequestBody Timelinecontent tlContent) {
+	public void writePost(@PathVariable int tlidx, @ModelAttribute TimeLineContentDto tlcDto) throws IllegalStateException, IOException {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-//		타임라인 인덱스, 회원 인덱스, 작성시각, 삭제여부 저장해주기 
-		tlContent.setTlidx(tlidx);
-		tlContent.setMidx(midx);
-		tlContent.setTlcregdate(LocalDateTime.now());
-		tlContent.setTlcdelyn("N");
+//		받아온 이미지가 있다면 이미지 저장해주기
+		String savedName = null;
+		if(tlcDto.getTlcimage() != null) {
+	
+//			UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+			UUID uuid = UUID.randomUUID();
+//			이미지 파일 이름 저장(uuid + _ + 파일이름)
+			savedName = uuid.toString() + "_" + tlcDto.getTlcimage().getOriginalFilename();
+			
+//			기본 파일 저장 장소
+			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+			String filePath = rootPath + "/" + savedName;
+			
+//			파일 업로드 작업 수행
+			File file = new File(filePath);
+			File dest = file;
+			tlcDto.getTlcimage().transferTo(dest);
+		}
+		
+//		Timelinecontent 엔티티에 타임라인 인덱스, 회원 인덱스, 작성시각, 삭제여부와 받아온 값 저장해주기 
+		Timelinecontent tlContent = Timelinecontent.builder()
+				.tlidx(tlidx)
+				.midx(midx)
+				.tlcregdate(LocalDateTime.now())
+				.tlcdate(tlcDto.getTlcdate())
+				.tlcplace(tlcDto.getTlcplace())
+				.tlcimage(savedName)
+				.tlccontent(tlcDto.getTlccontent())
+				.tlcemotion(tlcDto.getTlcemotion())
+				.tlcpubyn(tlcDto.getTlcpubyn())
+				.tlcdelyn("N")
+				.tlctag(tlcDto.getTlctag())
+				.build();
 		
 		timelinecontentRepository.save(tlContent);
 		
@@ -160,9 +194,73 @@ public class PostController {
 		
 //	타임라인 글 수정
 	@PostMapping("/modifypost/{tlcidx}")
-	public void modifyPost(@PathVariable int tlcidx, @RequestBody Timelinecontent tlContent) {
+	public void modifyPost(@PathVariable int tlcidx, @ModelAttribute TimeLineContentDto tlcDto) throws IllegalStateException, IOException {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		Long tlcidx_ = new Long(tlcidx);
+		
+//		수정할 기존 게시글 가져오기
+		Optional<Timelinecontent> tlContent_ = timelinecontentService.getTlcDetail(tlcidx_);
+		Timelinecontent tlContent = tlContent_.get();
+		
+//		받아온 값을 확인해서 수정한 정보가 있다면 저장하기
+		if(!tlcDto.getTlcdate().equals(tlContent.getTlcdate())) {
+			tlContent.setTlcdate(tlcDto.getTlcdate());	
+		}
+		if(!tlcDto.getTlcplace().equals(tlContent.getTlcplace())) {
+			tlContent.setTlcplace(tlcDto.getTlcplace());		
+		}
+		if(!tlcDto.getTlccontent().equals(tlContent.getTlccontent())) {
+			tlContent.setTlccontent(tlcDto.getTlccontent());
+		}
+		if(!tlcDto.getTlcemotion().equals(tlContent.getTlcemotion())) {
+			tlContent.setTlcemotion(tlcDto.getTlcemotion());
+		}
+		if(!tlcDto.getTlcpubyn().equals(tlContent.getTlcpubyn())) {
+			tlContent.setTlcpubyn(tlcDto.getTlcpubyn());
+		}
+		if(!tlcDto.getTlctag().equals(tlContent.getTlctag())) {
+			tlContent.setTlctag(tlcDto.getTlctag());
+		}
+		
+//		받아온 이미지가 있다면 이미지 저장해주기
+		String savedName = null;
+		if(tlcDto.getTlcimage() != null) {
+	
+//			UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+			UUID uuid = UUID.randomUUID();
+//			이미지 파일 이름 저장(uuid + _ + 파일이름)
+			savedName = uuid.toString() + "_" + tlcDto.getTlcimage().getOriginalFilename();
+			
+//			기본 파일 저장 장소
+			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+			String filePath = rootPath + "/" + savedName;
+			
+//			파일 업로드 작업 수행
+			File file = new File(filePath);
+			File dest = file;
+			tlcDto.getTlcimage().transferTo(dest);
+			
+			tlContent.setTlcimage(savedName);
+		}
+		
+//		태그 비교하기
+		String tlcTag_ = tlContent.getTlctag();
+		
+//		태그 테이블에 입력해주기
+		if(tlcTag_ != null) {
+
+//			기존에 있던 게시글에 등록된 태그 삭제해주기
+			posttagService.getPtDelete(tlcidx);
+			
+			String[] tlcTag = tlcTag_.split("#");
+			tagService.getTagWrite(tlcTag);
+			List tidxList = tagService.getTagList(tlcTag);
+			
+			
+//			태그 등록해주기
+			posttagService.getPtWrite(tidxList, tlcidx);
+		}
 		
 	}
 	
@@ -183,6 +281,11 @@ public class PostController {
 		
 //		해당 타임라인에 게시글을 몇개나 작성했는지 확인
 		int tlcCount = staymemoryService.getTlcidxCount(tlcidx);
+		
+		System.out.println("tlcCount: " + tlcCount);
+		System.out.println("midx: " + midx);
+		System.out.println("tlcDetail.getMidx: " + tlcDetail.getMidx());
+		
 		
 //		staymemoryService의 인덱스 변수 값 초기 설정
 		int smIdx = 0;
@@ -309,12 +412,22 @@ public class PostController {
 
 	
 //	추억에 남겨둔 쪽지 수정하기
-	@PostMapping("/modifynote")
-	public String modifyNote(@RequestBody Notememory notememory) {
+	@PostMapping("/modifynote/{nmidx}")
+	public void modifyNote(@PathVariable int nmidx, @RequestBody Notememory notememory) {
 		
+		Long nmidx_ = new Long(nmidx);
 		
+//		기존 추억에 남겨둔 쪽지 가져오기
+		Optional<Notememory> nmDetail_ = notememoryService.getNmDetail(nmidx_);
+		Notememory nmDetail = nmDetail_.get();
 		
-		return "modifyNote";
+//		기존 쪽지와 새로 등록한 쪽지가 다르면 수정하기
+		if(!notememory.getNmcontent().equals(nmDetail.getNmcontent())) {
+			nmDetail.setNmcontent(notememory.getNmcontent());
+		}
+		
+//		수정내용 변경하기
+		notememoryService.getNmWrite(nmDetail);
 	}
 
 	

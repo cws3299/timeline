@@ -1,5 +1,6 @@
 package com.timeSNS.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class Timelinecontent {
 	private LocalDateTime tlcregdate;
 	
 	@Column(name = "TLCDATE")
-	private LocalDateTime tlcdate;
+	private LocalDate tlcdate;
 	
 	@Column(name = "TLCPLACE")
 	private String tlcplace;
