@@ -17,4 +17,7 @@ public interface PosttagRepository extends JpaRepository<Posttag, Long>{
 //	페이징 처리를 위한 쿼리
 	int countByTidx(int tidx);
 	
+//	게시글 인덱스 번호 기준으로 기존 연결 태그 삭제해주기
+	int deleteByTlcidx(int tlcidx);
+	
 }

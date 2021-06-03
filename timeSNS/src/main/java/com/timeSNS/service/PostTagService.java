@@ -72,6 +72,16 @@ public class PostTagService {
 	
 //----------------------------------------------------------------------------------------------------//	
 
+
+//	게시글에 쓰인 태그 인덱스 번호 삭제
+	public void getPtDelete(int tlcidx) {
+		
+		posttagRepository.deleteByTlcidx(tlcidx);
+		
+	}
+	
+//----------------------------------------------------------------------------------------------------//	
+
 	
 //	게시글에 사용된 태그 인덱스번호 가져오기
 	public List getTagIdxList(int tlcidx) {
