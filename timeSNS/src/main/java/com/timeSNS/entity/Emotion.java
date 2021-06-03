@@ -41,8 +41,8 @@ public class Emotion {
 	@Column(name = "EFIGHTINGYN")
 	private String efightingyn;
 	
-	@Column(name = "ECONGRATURATIONYN")
-	private String econgraturationyn;
+	@Column(name = "ECONGRATUlATIONYN")
+	private String econgratulationyn;
 	
 	@Column(name = "EEXPECTYN")
 	private String eexpectyn;

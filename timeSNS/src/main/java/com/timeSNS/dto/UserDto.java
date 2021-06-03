@@ -1,5 +1,7 @@
 package com.timeSNS.dto;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -30,5 +32,11 @@ public class UserDto {
 	@NotNull
 	@Size(min = 3, max = 50)
 	private String mnickname;
+	
+	private String mphoto;
+	
+	private LocalDate mbirthday;
+	
+	private String mproduce;
 	
 }

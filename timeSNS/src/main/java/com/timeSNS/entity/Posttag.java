@@ -30,7 +30,7 @@ public class Posttag {
 	@Column(name = "TLCIDX")
 	private int tlcidx;
 	
-	@Column(name = "TLCTAG")
-	private String tlctag;
+	@Column(name = "TIDX")
+	private int tidx;
 	
 }

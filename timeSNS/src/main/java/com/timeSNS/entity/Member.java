@@ -1,5 +1,6 @@
 package com.timeSNS.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -55,7 +56,7 @@ public class Member {
 	private String mproduce;
 	
 	@Column(name = "MBIRTHDAY")
-	private LocalDateTime mbirthday;
+	private LocalDate mbirthday;
 	
 	@Column(name = "MSECESSIONYN")
 	private String msecessionyn;
