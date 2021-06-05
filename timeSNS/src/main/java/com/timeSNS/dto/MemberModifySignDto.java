@@ -17,10 +17,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberModifySignDto {
-
-	private String mid;
 	
-	private String username;
+	private String mid;
 	
 	private String mpwd;
 	
