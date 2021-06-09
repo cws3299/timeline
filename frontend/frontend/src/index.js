@@ -1,20 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-// import TimeCapsule from './components/TimeCapsule/TimeCapsuleMain/TimeCapsule'
-// import Main from './components/NoLogin/Main'
-// import FeedsBox from './components/Feeds/FeedsBox'
-// import VirtualScroller from './components/exercise/VirtualScroller'
-// import Apps from './components/Apps'
-import Boxx from './components/capsule_css/index'
-// import App from './components/capsule_css/App'
+import App from "./shared/App";
+import store from "./redux/configureStore";
 import reportWebVitals from './reportWebVitals';
+import axios from "axios";
+import { Provider } from "react-redux";
+
+
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Boxx />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 

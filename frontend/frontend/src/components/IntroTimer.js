@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TimeFormat from "hh-mm-ss";
-import './Timer.css'
+import './IntroTimer.css'
 
 const Timer = () => {
   let mainTime;
@@ -49,18 +49,18 @@ const Timer = () => {
         className="flex flex-column justify-center items-center"
         style={{ height: "100%" }}
       >
-        <h1 className="flex flex-column" style={{ marginRight: "20px" ,color:'white'}}>당신의 오늘 하루</h1>
+        <h1 className="flex flex-column" style={{ marginRight: "20px" ,color:'black'}}>당신의 오늘 하루</h1>
 
         <div className="flex ">
-          <div className="flex flex-column" style={{ marginRight: "20px" ,color:'white'}}>
+          <div className="flex flex-column" style={{ marginRight: "20px" ,color:'black', fontSize:'0.5rem'}}>
             <h1>{h}</h1>
             <span>HRS</span>
           </div>
-          <div className="flex flex-column" style={{ marginRight: "20px" ,color:'white'}}>
+          <div className="flex flex-column" style={{ marginRight: "20px" ,color:'black' , fontSize:'0.5rem'}}>
             <h1>{m}</h1>
             <span>MIN</span>
           </div>
-          <div className="flex flex-column" style={{ marginRight: "20px" ,color:'white'}}>
+          <div className="flex flex-column" style={{ marginRight: "20px" ,color:'black' , fontSize:'0.5rem'}}>
             <h1>{s}</h1>
             <span>SEC</span>
           </div>

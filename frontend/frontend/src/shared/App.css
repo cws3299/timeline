@@ -1,0 +1,27 @@
+.App{
+    width:100vw;
+    height:100vh;
+}
+.App2{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+}
+.App3{
+    width:100%;
+    height:90%;
+    /* background-color: black; */
+    display:grid;
+    grid-template-columns: 2fr 12fr;
+}
+.TopNavigator{
+    width:100%;
+    height:10%;
+    background-color: green;
+}
+.SideNavigator{
+    width:100%;
+    height:100%;
+    /* background-color:red; */
+}
