@@ -10,7 +10,7 @@ import NotFound from "./NotFound";
 import Intro from "./Intro";
 // import UseInfo from "./UseInfo";
 import Intro2 from "./Intro2";
-import Post from "./post";
+import Post from "./Post";
 
 export {
 //   Analysis,

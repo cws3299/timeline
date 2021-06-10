@@ -15,13 +15,3 @@
     display:grid;
     grid-template-columns: 2fr 12fr;
 }
-.TopNavigator{
-    width:100%;
-    height:10%;
-    background-color: green;
-}
-.SideNavigator{
-    width:100%;
-    height:100%;
-    /* background-color:red; */
-}

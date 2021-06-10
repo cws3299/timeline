@@ -1,10 +1,7 @@
 import React from 'react';
 
 
-function SideNavigator(props) {
-    if (!props.nav) {
-        return null;
-      }
+function SideNavigator() {
     return (
         <dic className="SideNavigator">
             <div>side</div>

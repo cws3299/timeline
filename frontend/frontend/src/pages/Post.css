@@ -1,4 +1,21 @@
 .Post{
     display:flex;
     flex-direction: column;
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-rows: 1fr 9fr;
+}
+.PostTop{
+    width:100%;
+    height:100%;
+    /* background-color: red; */
+}
+.TopNavigator{
+    width:100%;
+    height:100%;
+}
+.PostBottom{
+    width:100%;
+    height:100%; 
 }
