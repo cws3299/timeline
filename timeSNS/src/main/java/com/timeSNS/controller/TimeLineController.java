@@ -42,8 +42,24 @@ public class TimeLineController {
 	
 //----------------------------------------------------------------------------------------------------//	
 	
+	
 //	해당 회원 작성 타임라인 목록 가져오기
 	@PostMapping("/list")
+	public List<Timeline> list(@RequestParam(defaultValue = "1") int page) {
+		
+		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		
+		List<Timeline> tlList = timelineService.getTlList(midx, page);
+		
+		return tlList;
+	}
+	
+
+//----------------------------------------------------------------------------------------------------//	
+	
+	
+//	해당 회원 작성 타임라인 목록 가져오기
+	@PostMapping("/tllist")
 	public List<Timeline> list(@RequestParam int midx, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx_ = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
