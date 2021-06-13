@@ -1,0 +1,38 @@
+.ButtonBox{
+    /* position:relative; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width:100%;
+    height:5%;
+}
+.Box{
+    display:flex;
+    /* flex-direction: column; */
+    justify-content: flex-end;
+    align-items: center;
+    width:20%;
+}
+.Button_siginin{
+    /* display:block; */
+    /* position:absolute; */
+    /* right:10%; */
+    width:20%;
+    margin-right:20%;
+    box-sizing: border-box;
+    /* height:50%; */
+}
+.Button_signup{
+    /* display:block; */
+    /* position:absolute; */
+    /* left:5%; */
+    width:30%;
+    /* height:50%; */
+}
+
+@media screen and (max-width: 768px) {
+    /* 모바일 */
+
+
+}

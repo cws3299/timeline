@@ -3,32 +3,44 @@ import styled from "styled-components";
 import useScroll from "./useScroll";
 import Item from "./Items";
 import { fetchItem } from "./api";
+import './style.css'
 
-const VirtualScroller = () => {
+const VirtualScroller =  React.memo (function VirtualScroller() {
   const [scrollTop, ref] = useScroll();
   const [page, setPage] = useState(0);
-  const [itemList, setItemList] = useState([]);
+  const [itemList, setItemList] = useState(() => JSON.parse(window.sessionStorage.getItem("itemList")) || []);
 
   useEffect(() => {
     getData();
   }, [page]);
 
+  useEffect(()=>{
+    setDataSession(itemList)
+  },[itemList])
+
   useEffect(() => {
     if (scrollTop + scrollViewPortHeight >= scrollContainerHeight) {
       setPage((page) => page + 1);
     }
-  }, [scrollTop]);
+  },);
+
+  // useEffect(()=>{
+  //   console.log('--')
+  // },[scrollViewPortHeight ,itemHeight , totalItemCount , scrollContainerHeight , startIdx, offsetY ,visibleNodes ]);
 
   const getData = useCallback(async () => {
     const data = await fetchItem(page);
     setItemList(itemList.concat(data));
-  }, [page]);
+  }, [page,itemList]);
+
+  const setDataSession = data =>(
+    window.sessionStorage.setItem("itemList", JSON.stringify(data)))
 
   // scroll variables
   const NODE_PADDING = 5;
 
-  const scrollViewPortHeight = 400;
-  const itemHeight = 200;
+  const scrollViewPortHeight = 600;
+  const itemHeight = 300;
   const totalItemCount = (page + 1);
   const scrollContainerHeight = Math.max(
     scrollViewPortHeight,
@@ -41,8 +53,10 @@ const VirtualScroller = () => {
     startIdx + scrollViewPortHeight / itemHeight
   );
 
+  console.log(scrollViewPortHeight,visibleNodes,page)
+
   return (
-    <ScrollViewport ref={ref} height={scrollViewPortHeight}>
+    <ScrollViewport ref={ref} height={scrollViewPortHeight} className="Scroll">
       <ScrollContainer height={scrollContainerHeight}>
         <VisibleNodesWrapper offsetY={offsetY}>
           {visibleNodes.map((item) => (
@@ -52,7 +66,7 @@ const VirtualScroller = () => {
       </ScrollContainer>
     </ScrollViewport>
   );
-};
+});
 
 /* 
   Styled-components
