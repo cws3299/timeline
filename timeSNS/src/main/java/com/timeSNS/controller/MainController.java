@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.ContentDto;
 import com.timeSNS.dto.EmotionCountDto;
 import com.timeSNS.dto.PostDto;
-import com.timeSNS.entity.Timelinecontent;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.service.EmotionService;
 import com.timeSNS.service.PostTagService;
@@ -54,7 +54,7 @@ public class MainController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		메인에 들어갈 게시글 가져오기
-		List<Timelinecontent> tlcList = timelinecontentService.getMainFeed(midx, page);
+		List<ContentDto> tlcList = timelinecontentService.getMainFeed(midx, page);
 		
 //		각 게시글 넣어줄 PostDto 리스트 만들어주기
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
@@ -76,6 +76,9 @@ public class MainController {
 					.tlcidx((tlcList.get(i)).getTlcidx())
 					.tlidx((tlcList.get(i)).getTlidx())
 					.midx(midx)
+					.mid(tlcList.get(i).getMid())
+					.mnickname(tlcList.get(i).getMnickname())
+					.mphoto(tlcList.get(i).getMphoto())
 					.tlcregdate((tlcList.get(i)).getTlcregdate())
 					.tlcdate((tlcList.get(i)).getTlcdate())
 					.tlcplace((tlcList.get(i)).getTlcplace())

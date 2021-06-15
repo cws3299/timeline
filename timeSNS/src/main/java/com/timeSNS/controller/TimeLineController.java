@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.TimeLineMemberDto;
 import com.timeSNS.entity.Timeline;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.repository.TimelineRepository;
@@ -43,13 +43,13 @@ public class TimeLineController {
 //----------------------------------------------------------------------------------------------------//	
 	
 	
-//	해당 회원 작성 타임라인 목록 가져오기
+//	본인 작성 타임라인 목록 가져오기
 	@PostMapping("/list")
-	public List<Timeline> list(@RequestParam(defaultValue = "1") int page) {
+	public List<TimeLineMemberDto> list(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Timeline> tlList = timelineService.getTlList(midx, page);
+		List<TimeLineMemberDto> tlList = timelineService.getTlList(midx, page);
 		
 		return tlList;
 	}
@@ -60,11 +60,11 @@ public class TimeLineController {
 	
 //	해당 회원 작성 타임라인 목록 가져오기
 	@PostMapping("/tllist")
-	public List<Timeline> list(@RequestParam int midx, @RequestParam(defaultValue = "1") int page) {
+	public List<TimeLineMemberDto> list(@RequestParam int midx, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx_ = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Timeline> tlList = timelineService.getTlList(midx, page);
+		List<TimeLineMemberDto> tlList = timelineService.getTlList(midx, page);
 		
 		return tlList;
 	}

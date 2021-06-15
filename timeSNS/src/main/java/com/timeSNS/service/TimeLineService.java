@@ -10,7 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.timeSNS.dto.TimeLineMemberDto;
+import com.timeSNS.entity.Member;
 import com.timeSNS.entity.Timeline;
+import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.repository.TimelineRepository;
 
 @Service
@@ -23,9 +26,13 @@ public class TimeLineService {
 	
 	@Autowired
 	private final TimelineRepository timelineRepository;
+	@Autowired
+	private final MemberRepository memberRepository;
 
-	public TimeLineService(TimelineRepository timelineRepository) {
+	public TimeLineService(TimelineRepository timelineRepository,
+							MemberRepository memberRepository) {
 		this.timelineRepository = timelineRepository;
+		this.memberRepository = memberRepository;
 	}
 	
 //----------------------------------------------------------------------------------------------------//	
@@ -62,14 +69,31 @@ public class TimeLineService {
 
 	
 //	현재 페이지에 따른 타임라인 목록 불러오기
-	public List<Timeline> getTlList(int midx, int page) {
+	public List<TimeLineMemberDto> getTlList(int midx, int page) {
 		
 		Page<Timeline> tlPage = timelineRepository.findByMidxAndTlpubynAndTldelyn(midx, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "tlregdate")));
 		List<Timeline> tlList_ = tlPage.getContent();
-		List<Timeline> tlList = new ArrayList<>();
+		List<TimeLineMemberDto> tlList = new ArrayList<>();
 		
 		for(int i = 0 ; i < tlList_.size() ; i++) {
-			tlList.add(tlList_.get(i));
+			Long midx_ = new Long(midx);
+			Member member = (memberRepository.findById(midx_)).get();
+			
+			TimeLineMemberDto tlmDto = TimeLineMemberDto.builder()
+					.tlidx(tlList_.get(i).getTlidx())
+					.midx(tlList_.get(i).getMidx())
+					.mid(member.getUsername())
+					.mnickname(member.getMnickname())
+					.mphoto(member.getMphoto())
+					.tltitle(tlList_.get(i).getTltitle())
+					.tlcategory(tlList_.get(i).getTlcategory())
+					.tlintroduce(tlList_.get(i).getTlintroduce())
+					.tlregdate(tlList_.get(i).getTlregdate())
+					.tlpubyn(tlList_.get(i).getTlpubyn())
+					.tldelyn(tlList_.get(i).getTlpubyn())
+					.build();
+			
+			tlList.add(tlmDto);
 		}
 		
 		return tlList;

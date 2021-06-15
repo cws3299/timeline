@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.timeSNS.dto.FollowDto;
 import com.timeSNS.dto.MemberSearchDto;
+import com.timeSNS.dto.TimeLineMemberDto;
 import com.timeSNS.entity.Follow;
 import com.timeSNS.entity.Member;
 import com.timeSNS.entity.Timeline;
@@ -166,17 +167,40 @@ public class FollowService {
 
 	
 //	내가 팔로우 한 타임라인 목록 가져오기
-	public List<Timeline> getTlFollowList(int flwrmidx, int page) {
+	public List<TimeLineMemberDto> getTlFollowList(int flwrmidx, int page) {
 		
 		Page<Follow> tlfPage = followRepository.findByFlwrmidxAndTlidxNotAndFlwmidx(flwrmidx, 0, 0, PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "flregdate")));
 		List<Follow> tlfList_ = tlfPage.getContent();
-		List<Timeline> tlfList = new ArrayList<Timeline>();
+		List<TimeLineMemberDto> tlfList = new ArrayList<TimeLineMemberDto>();
 		
 		if(tlfList_.size() != 0) {
 			for(int i = 0 ; i < tlfList_.size() ; i++) {
+				
 				Long tlidx = new Long((tlfList_.get(i)).getTlidx());
-				tlfList.add((timelineRepository.findById(tlidx)).get());	
+				Timeline tlDetail = (timelineRepository.findById(tlidx)).get();
+				Long midx = new Long(tlDetail.getMidx());
+				Member member = (memberRepository.findById(midx)).get();
+				
+				if((tlDetail.getTlpubyn()).equals("Y") && (tlDetail.getTldelyn()).equals("N")) {
+					TimeLineMemberDto tlmDto = TimeLineMemberDto.builder()
+							.tlidx(tlDetail.getTlidx())
+							.midx(tlDetail.getMidx())
+							.mid(member.getUsername())
+							.mnickname(member.getMnickname())
+							.mphoto(member.getMphoto())
+							.tltitle(tlDetail.getTltitle())
+							.tlcategory(tlDetail.getTlcategory())
+							.tlintroduce(tlDetail.getTlintroduce())
+							.tlregdate(tlDetail.getTlregdate())
+							.tlpubyn(tlDetail.getTlpubyn())
+							.tldelyn(tlDetail.getTldelyn())
+							.build();
+					
+					tlfList.add(tlmDto);
+				}
+				
 			}
+			
 		}
 		
 		return tlfList;

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.ContentDto;
 import com.timeSNS.dto.EmotionCountDto;
 import com.timeSNS.dto.PostDto;
 import com.timeSNS.dto.TimeLineContentDto;
@@ -85,7 +86,7 @@ public class PostController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		해당 타임라인에 속하는 게시글 가져오기
-		List<Timelinecontent> tlcList = timelinecontentService.getTlcList(tlidx, page);
+		List<ContentDto> tlcList = timelinecontentService.getTlcList(tlidx, page);
 
 //		각 게시글 넣어줄 PostDto 리스트
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
@@ -107,6 +108,9 @@ public class PostController {
 					.tlcidx((tlcList.get(i)).getTlcidx())
 					.tlidx((tlcList.get(i)).getTlidx())
 					.midx(midx)
+					.mid((tlcList.get(i)).getMid())
+					.mnickname((tlcList.get(i)).getMnickname())
+					.mphoto((tlcList.get(i)).getMphoto())
 					.tlcregdate((tlcList.get(i)).getTlcregdate())
 					.tlcdate((tlcList.get(i)).getTlcdate())
 					.tlcplace((tlcList.get(i)).getTlcplace())
@@ -200,7 +204,7 @@ public class PostController {
 		Long tlcidx_ = new Long(tlcidx);
 		
 //		수정할 기존 게시글 가져오기
-		Optional<Timelinecontent> tlContent_ = timelinecontentService.getTlcDetail(tlcidx_);
+		Optional<Timelinecontent> tlContent_ = timelinecontentService.getTlcModify(tlcidx_);
 		Timelinecontent tlContent = tlContent_.get();
 		
 //		받아온 값을 확인해서 수정한 정보가 있다면 저장하기
@@ -276,8 +280,8 @@ public class PostController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		tlcidx 값에 따라 데이터 가져오기
-		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
-		Timelinecontent tlcDetail = tlcDetail_.get();
+		Optional<ContentDto> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
+		ContentDto tlcDetail = tlcDetail_.get();
 		
 //		해당 타임라인에 게시글을 몇개나 작성했는지 확인
 		int tlcCount = staymemoryService.getTlcidxCount(tlcidx);
@@ -333,6 +337,9 @@ public class PostController {
 				.tlcidx(tlcDetail.getTlcidx())
 				.tlidx(tlcDetail.getTlidx())
 				.midx(midx)
+				.mid(tlcDetail.getMid())
+				.mnickname(tlcDetail.getMnickname())
+				.mphoto(tlcDetail.getMphoto())
 				.tlcregdate(tlcDetail.getTlcregdate())
 				.tlcdate(tlcDetail.getTlcdate())
 				.tlcplace(tlcDetail.getTlcplace())
@@ -504,7 +511,7 @@ public class PostController {
 		Long tlcidx_ = new Long(tlcidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
+		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcModify(tlcidx_);
 		Timelinecontent tlcDetail = tlcDetail_.get();
 		
 		tlcDetail.setTlcdelyn("Y");

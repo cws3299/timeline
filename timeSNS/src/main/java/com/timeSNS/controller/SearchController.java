@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.ContentDto;
 import com.timeSNS.dto.EmotionCountDto;
 import com.timeSNS.dto.MemberSearchDto;
 import com.timeSNS.dto.PostDto;
@@ -96,7 +97,7 @@ public class SearchController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 
 //		타임라인 게시글 검색 결과 게시글 목록 가져오기
-		List<Timelinecontent> tlcSearchList = timelinecontentService.getTlcSearchList(content, page);
+		List<ContentDto> tlcSearchList = timelinecontentService.getTlcSearchList(content, page);
 		
 //		각 게시글 넣어줄 PostDto 리스트
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
@@ -118,6 +119,9 @@ public class SearchController {
 					.tlcidx((tlcSearchList.get(i)).getTlcidx())
 					.tlidx((tlcSearchList.get(i)).getTlidx())
 					.midx((tlcSearchList.get(i)).getMidx())
+					.mid((tlcSearchList.get(i)).getMid())
+					.mnickname((tlcSearchList.get(i)).getMnickname())
+					.mphoto((tlcSearchList.get(i)).getMphoto())
 					.tlcregdate((tlcSearchList.get(i)).getTlcregdate())
 					.tlcdate((tlcSearchList.get(i)).getTlcdate())
 					.tlcplace((tlcSearchList.get(i)).getTlcplace())
@@ -150,7 +154,7 @@ public class SearchController {
 //		검색 태그 인덱스 번호 가져오기
 		int tidx = tagService.getTagSearchIdx(tag);
 //		해당 태그 사용한 게시글 목록 불러오기
-		List<Timelinecontent> tagSearchList = tagService.getPostTagSearch(tidx, page);
+		List<ContentDto> tagSearchList = tagService.getPostTagSearch(tidx, page);
 		
 //		각 게시글 넣어줄 PostDto 리스트
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
@@ -172,6 +176,9 @@ public class SearchController {
 					.tlcidx((tagSearchList.get(i)).getTlcidx())
 					.tlidx((tagSearchList.get(i)).getTlidx())
 					.midx((tagSearchList.get(i)).getMidx())
+					.mid((tagSearchList.get(i)).getMid())
+					.mnickname((tagSearchList.get(i)).getMnickname())
+					.mphoto((tagSearchList.get(i)).getMphoto())
 					.tlcregdate((tagSearchList.get(i)).getTlcregdate())
 					.tlcdate((tagSearchList.get(i)).getTlcdate())
 					.tlcplace((tagSearchList.get(i)).getTlcplace())

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timeSNS.dto.MemberSearchDto;
+import com.timeSNS.dto.TimeLineMemberDto;
 import com.timeSNS.entity.Follow;
 import com.timeSNS.entity.Timeline;
 import com.timeSNS.repository.MemberRepository;
@@ -100,11 +101,11 @@ public class FollowController {
 	
 //	내가 팔로우 한 타임라인 목록 가져오기
 	@GetMapping("/followtl/list")
-	public List<Timeline> tlFollowList(@RequestParam(defaultValue = "1") int page) {
+	public List<TimeLineMemberDto> tlFollowList(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Timeline> tlFollowList = followService.getTlFollowList(midx, page);
+		List<TimeLineMemberDto> tlFollowList = followService.getTlFollowList(midx, page);
 		
 		return tlFollowList;
 		
