@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -149,14 +151,31 @@ public class PostController {
 //			이미지 파일 이름 저장(uuid + _ + 파일이름)
 			savedName = uuid.toString() + "_" + tlcDto.getTlcimage().getOriginalFilename();
 			
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			ZonedDateTime current = ZonedDateTime.now();
+			
 //			기본 파일 저장 장소
 			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-			String filePath = rootPath + "/" + savedName;
+			String filePath = rootPath + "/timelineSNS";
 			
 //			파일 업로드 작업 수행
 			File file = new File(filePath);
-			File dest = file;
+			
+			if (!file.exists()) {
+				try{
+				    file.mkdir(); //폴더 없을 시 폴더 생성
+				    System.out.println("폴더가 생성되었습니다.");
+			        } 
+			        catch(Exception e){
+				    e.getStackTrace();
+				}        
+		         }else {
+				System.out.println("이미 폴더가 생성되어 있습니다.");
+			}
+			
+			File dest = new File(file + "/" + savedName);
 			tlcDto.getTlcimage().transferTo(dest);
+			System.out.println("폴더 경로: " + dest);
 		}
 		
 //		Timelinecontent 엔티티에 타임라인 인덱스, 회원 인덱스, 작성시각, 삭제여부와 받아온 값 저장해주기 
@@ -208,23 +227,35 @@ public class PostController {
 		Timelinecontent tlContent = tlContent_.get();
 		
 //		받아온 값을 확인해서 수정한 정보가 있다면 저장하기
-		if(!tlcDto.getTlcdate().equals(tlContent.getTlcdate())) {
-			tlContent.setTlcdate(tlcDto.getTlcdate());	
+		if(tlcDto.getTlcdate() != null) {
+			if(!tlcDto.getTlcdate().equals(tlContent.getTlcdate())) {
+				tlContent.setTlcdate(tlcDto.getTlcdate());	
+			}
 		}
-		if(!tlcDto.getTlcplace().equals(tlContent.getTlcplace())) {
-			tlContent.setTlcplace(tlcDto.getTlcplace());		
+		if(tlcDto.getTlcplace() != null) {
+			if(!tlcDto.getTlcplace().equals(tlContent.getTlcplace())) {
+				tlContent.setTlcplace(tlcDto.getTlcplace());		
+			}
 		}
-		if(!tlcDto.getTlccontent().equals(tlContent.getTlccontent())) {
-			tlContent.setTlccontent(tlcDto.getTlccontent());
+		if(tlcDto.getTlccontent() != null) {
+			if(!tlcDto.getTlccontent().equals(tlContent.getTlccontent())) {
+				tlContent.setTlccontent(tlcDto.getTlccontent());
+			}
 		}
-		if(!tlcDto.getTlcemotion().equals(tlContent.getTlcemotion())) {
-			tlContent.setTlcemotion(tlcDto.getTlcemotion());
+		if(tlcDto.getTlcemotion() != null) {
+			if(!tlcDto.getTlcemotion().equals(tlContent.getTlcemotion())) {
+				tlContent.setTlcemotion(tlcDto.getTlcemotion());
+			}
 		}
-		if(!tlcDto.getTlcpubyn().equals(tlContent.getTlcpubyn())) {
-			tlContent.setTlcpubyn(tlcDto.getTlcpubyn());
+		if(tlcDto.getTlcpubyn() != null) {
+			if(!tlcDto.getTlcpubyn().equals(tlContent.getTlcpubyn())) {
+				tlContent.setTlcpubyn(tlcDto.getTlcpubyn());
+			}
 		}
-		if(!tlcDto.getTlctag().equals(tlContent.getTlctag())) {
-			tlContent.setTlctag(tlcDto.getTlctag());
+		if(tlcDto.getTlctag() != null) {
+			if(!tlcDto.getTlctag().equals(tlContent.getTlctag())) {
+				tlContent.setTlctag(tlcDto.getTlctag());
+			}
 		}
 		
 //		받아온 이미지가 있다면 이미지 저장해주기
@@ -238,7 +269,7 @@ public class PostController {
 			
 //			기본 파일 저장 장소
 			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-			String filePath = rootPath + "/" + savedName;
+			String filePath = rootPath + "/timelineSNS/" + savedName;
 			
 //			파일 업로드 작업 수행
 			File file = new File(filePath);
