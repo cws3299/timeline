@@ -79,6 +79,20 @@ public class AuthController {
 	
 //----------------------------------------------------------------------------------------------------//	
 
+	
+//	로그아웃
+	@PostMapping()
+	public void logout() {
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.remove("Authorization");
+		
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//	
+
+	
 //	회원 가입하기
 	@PostMapping("/signup")
 	public ResponseEntity<Member> signup(@ModelAttribute MemberModifySignDto memberDto,
@@ -91,12 +105,26 @@ public class AuthController {
 		
 //		기본 파일 저장 장소
 		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-		String filePath = rootPath + "/" + savedName;
+		String filePath = rootPath + "/timelineSNS";
 		
 //		파일 업로드 작업 수행
 		File file = new File(filePath);
+		
+		if (!file.exists()) {
+			try{
+			    file.mkdir(); //폴더 없을 시 폴더 생성
+			    System.out.println("폴더가 생성되었습니다.");
+		        } 
+		        catch(Exception e){
+			    e.getStackTrace();
+			}        
+	         }else {
+			System.out.println("이미 폴더가 생성되어 있습니다.");
+		}
+		
 		File dest = file;
 		memberDto.getMphoto().transferTo(dest);
+		System.out.println("폴더 경로: " + dest);
 		
 		UserDto userDto = UserDto.builder()
 				.mid(memberDto.getMid())
