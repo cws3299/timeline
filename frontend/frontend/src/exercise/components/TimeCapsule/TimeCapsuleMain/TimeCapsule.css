@@ -1,0 +1,9 @@
+.TimeCapsule {
+    width:100vw;
+    height:100vh;
+    display:grid;
+    grid-template-rows: 1fr 11fr;
+    row-gap: 5%;
+    box-sizing: border-box;
+    background-color: black;
+}

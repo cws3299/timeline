@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.ContentDto;
 import com.timeSNS.dto.EmotionCountDto;
 import com.timeSNS.dto.PostDto;
 import com.timeSNS.dto.TimeLineContentDto;
@@ -85,7 +88,7 @@ public class PostController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		해당 타임라인에 속하는 게시글 가져오기
-		List<Timelinecontent> tlcList = timelinecontentService.getTlcList(tlidx, page);
+		List<ContentDto> tlcList = timelinecontentService.getTlcList(tlidx, page);
 
 //		각 게시글 넣어줄 PostDto 리스트
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
@@ -107,6 +110,9 @@ public class PostController {
 					.tlcidx((tlcList.get(i)).getTlcidx())
 					.tlidx((tlcList.get(i)).getTlidx())
 					.midx(midx)
+					.mid((tlcList.get(i)).getMid())
+					.mnickname((tlcList.get(i)).getMnickname())
+					.mphoto((tlcList.get(i)).getMphoto())
 					.tlcregdate((tlcList.get(i)).getTlcregdate())
 					.tlcdate((tlcList.get(i)).getTlcdate())
 					.tlcplace((tlcList.get(i)).getTlcplace())
@@ -145,14 +151,31 @@ public class PostController {
 //			이미지 파일 이름 저장(uuid + _ + 파일이름)
 			savedName = uuid.toString() + "_" + tlcDto.getTlcimage().getOriginalFilename();
 			
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			ZonedDateTime current = ZonedDateTime.now();
+			
 //			기본 파일 저장 장소
 			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-			String filePath = rootPath + "/" + savedName;
+			String filePath = rootPath + "/timelineSNS";
 			
 //			파일 업로드 작업 수행
 			File file = new File(filePath);
-			File dest = file;
+			
+			if (!file.exists()) {
+				try{
+				    file.mkdir(); //폴더 없을 시 폴더 생성
+				    System.out.println("폴더가 생성되었습니다.");
+			        } 
+			        catch(Exception e){
+				    e.getStackTrace();
+				}        
+		         }else {
+				System.out.println("이미 폴더가 생성되어 있습니다.");
+			}
+			
+			File dest = new File(file + "/" + savedName);
 			tlcDto.getTlcimage().transferTo(dest);
+			System.out.println("폴더 경로: " + dest);
 		}
 		
 //		Timelinecontent 엔티티에 타임라인 인덱스, 회원 인덱스, 작성시각, 삭제여부와 받아온 값 저장해주기 
@@ -200,27 +223,39 @@ public class PostController {
 		Long tlcidx_ = new Long(tlcidx);
 		
 //		수정할 기존 게시글 가져오기
-		Optional<Timelinecontent> tlContent_ = timelinecontentService.getTlcDetail(tlcidx_);
+		Optional<Timelinecontent> tlContent_ = timelinecontentService.getTlcModify(tlcidx_);
 		Timelinecontent tlContent = tlContent_.get();
 		
 //		받아온 값을 확인해서 수정한 정보가 있다면 저장하기
-		if(!tlcDto.getTlcdate().equals(tlContent.getTlcdate())) {
-			tlContent.setTlcdate(tlcDto.getTlcdate());	
+		if(tlcDto.getTlcdate() != null) {
+			if(!tlcDto.getTlcdate().equals(tlContent.getTlcdate())) {
+				tlContent.setTlcdate(tlcDto.getTlcdate());	
+			}
 		}
-		if(!tlcDto.getTlcplace().equals(tlContent.getTlcplace())) {
-			tlContent.setTlcplace(tlcDto.getTlcplace());		
+		if(tlcDto.getTlcplace() != null) {
+			if(!tlcDto.getTlcplace().equals(tlContent.getTlcplace())) {
+				tlContent.setTlcplace(tlcDto.getTlcplace());		
+			}
 		}
-		if(!tlcDto.getTlccontent().equals(tlContent.getTlccontent())) {
-			tlContent.setTlccontent(tlcDto.getTlccontent());
+		if(tlcDto.getTlccontent() != null) {
+			if(!tlcDto.getTlccontent().equals(tlContent.getTlccontent())) {
+				tlContent.setTlccontent(tlcDto.getTlccontent());
+			}
 		}
-		if(!tlcDto.getTlcemotion().equals(tlContent.getTlcemotion())) {
-			tlContent.setTlcemotion(tlcDto.getTlcemotion());
+		if(tlcDto.getTlcemotion() != null) {
+			if(!tlcDto.getTlcemotion().equals(tlContent.getTlcemotion())) {
+				tlContent.setTlcemotion(tlcDto.getTlcemotion());
+			}
 		}
-		if(!tlcDto.getTlcpubyn().equals(tlContent.getTlcpubyn())) {
-			tlContent.setTlcpubyn(tlcDto.getTlcpubyn());
+		if(tlcDto.getTlcpubyn() != null) {
+			if(!tlcDto.getTlcpubyn().equals(tlContent.getTlcpubyn())) {
+				tlContent.setTlcpubyn(tlcDto.getTlcpubyn());
+			}
 		}
-		if(!tlcDto.getTlctag().equals(tlContent.getTlctag())) {
-			tlContent.setTlctag(tlcDto.getTlctag());
+		if(tlcDto.getTlctag() != null) {
+			if(!tlcDto.getTlctag().equals(tlContent.getTlctag())) {
+				tlContent.setTlctag(tlcDto.getTlctag());
+			}
 		}
 		
 //		받아온 이미지가 있다면 이미지 저장해주기
@@ -234,7 +269,7 @@ public class PostController {
 			
 //			기본 파일 저장 장소
 			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-			String filePath = rootPath + "/" + savedName;
+			String filePath = rootPath + "/timelineSNS/" + savedName;
 			
 //			파일 업로드 작업 수행
 			File file = new File(filePath);
@@ -276,8 +311,8 @@ public class PostController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		tlcidx 값에 따라 데이터 가져오기
-		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
-		Timelinecontent tlcDetail = tlcDetail_.get();
+		Optional<ContentDto> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
+		ContentDto tlcDetail = tlcDetail_.get();
 		
 //		해당 타임라인에 게시글을 몇개나 작성했는지 확인
 		int tlcCount = staymemoryService.getTlcidxCount(tlcidx);
@@ -333,6 +368,9 @@ public class PostController {
 				.tlcidx(tlcDetail.getTlcidx())
 				.tlidx(tlcDetail.getTlidx())
 				.midx(midx)
+				.mid(tlcDetail.getMid())
+				.mnickname(tlcDetail.getMnickname())
+				.mphoto(tlcDetail.getMphoto())
 				.tlcregdate(tlcDetail.getTlcregdate())
 				.tlcdate(tlcDetail.getTlcdate())
 				.tlcplace(tlcDetail.getTlcplace())
@@ -504,7 +542,7 @@ public class PostController {
 		Long tlcidx_ = new Long(tlcidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcDetail(tlcidx_);
+		Optional<Timelinecontent> tlcDetail_ = timelinecontentService.getTlcModify(tlcidx_);
 		Timelinecontent tlcDetail = tlcDetail_.get();
 		
 		tlcDetail.setTlcdelyn("Y");

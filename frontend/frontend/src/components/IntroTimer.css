@@ -1,0 +1,21 @@
+.Timer {
+    font-family: sans-serif;
+    text-align: center;
+    width:100%;
+    height:95%;
+}
+  
+.flex {
+display: flex;
+}
+
+.flex-column {
+flex-direction: column;
+}
+.items-center {
+align-items: center;
+}
+
+.justify-center {
+justify-content: center;
+}

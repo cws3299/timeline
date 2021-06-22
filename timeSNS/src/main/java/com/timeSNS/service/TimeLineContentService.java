@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.timeSNS.dto.ContentDto;
 import com.timeSNS.entity.Timelinecontent;
 import com.timeSNS.repository.TimelinecontentRepository;
 
@@ -62,11 +62,11 @@ public class TimeLineContentService {
 
 	
 //	현재 페이지에 따른 게시글 불러오기
-	public List<Timelinecontent> getTlcList(int tlidx, int page) {
+	public List<ContentDto> getTlcList(int tlidx, int page) {
 		
-		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTlidxAndTlcpubynAndTlcdelyn(tlidx, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "tlcregdate")));
-		List<Timelinecontent> tlcList_ = tlcPage.getContent();
-		List<Timelinecontent> tlcList = new ArrayList<>();
+		Page<ContentDto> tlcPage = timelinecontentRepository.findByTlidxAndTlcpubynAndTlcdelyn(tlidx, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<ContentDto> tlcList_ = tlcPage.getContent();
+		List<ContentDto> tlcList = new ArrayList<>();
 		
 		for(int i = 0 ; i < tlcList_.size() ; i++) {
 			tlcList.add(tlcList_.get(i));
@@ -80,11 +80,11 @@ public class TimeLineContentService {
 
 
 //	현재 페이지에 따른 게시글 검색 목록 불러오기
-	public List<Timelinecontent> getTlcSearchList(String content, int page) {
+	public List<ContentDto> getTlcSearchList(String content, int page) {
 		
-		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTlccontentContainingAndTlcpubynAndTlcdelyn(content, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "tlcregdate")));
-		List<Timelinecontent> tlcList_ = tlcPage.getContent();
-		List<Timelinecontent> tlcList = new ArrayList<>();
+		Page<ContentDto> tlcPage = timelinecontentRepository.findByTlccontentContainingAndTlcpubynAndTlcdelyn(content, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<ContentDto> tlcList_ = tlcPage.getContent();
+		List<ContentDto> tlcList = new ArrayList<>();
 		
 		for(int i = 0 ; i < tlcList_.size() ; i++) {
 			tlcList.add(tlcList_.get(i));
@@ -98,8 +98,21 @@ public class TimeLineContentService {
 //----------------------------------------------------------------------------------------------------//
 
 	
-//	특정 포스트 가져오기
-	public Optional<Timelinecontent> getTlcDetail(Long tlcidx) {
+//	특정 포스트 가져오기(읽기용)
+	public Optional<ContentDto> getTlcDetail(Long tlcidx) {
+		
+		Optional<ContentDto> tlcDetail = timelinecontentRepository.findByTlcidx(tlcidx);
+		
+		return tlcDetail;
+		
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//
+
+	
+//	특정 포스트 가져오기(수정용)
+	public Optional<Timelinecontent> getTlcModify(Long tlcidx) {
 		
 		Optional<Timelinecontent> tlcDetail = timelinecontentRepository.findById(tlcidx);
 		
@@ -110,6 +123,7 @@ public class TimeLineContentService {
 	
 //----------------------------------------------------------------------------------------------------//
 
+	
 	
 //	가장 최근에 등록한 포스트 인덱스 번호 가져오기
 	public int getTlcIdx(int tlidx) {
@@ -126,11 +140,11 @@ public class TimeLineContentService {
 //----------------------------------------------------------------------------------------------------//
 
 //	메인 페이지 피드 게시글 가져오기
-	public List<Timelinecontent> getMainFeed(int midx, int page) {
+	public List<ContentDto> getMainFeed(int midx, int page) {
 		
-		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTlidx(midx, PageRequest.of(page-1, PAGE_POST_COUNT));
-		List<Timelinecontent> tlcList_ = tlcPage.getContent();
-		List<Timelinecontent> tlcList = new ArrayList<Timelinecontent>();
+		Page<ContentDto> tlcPage = timelinecontentRepository.findByTlidx(midx, PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<ContentDto> tlcList_ = tlcPage.getContent();
+		List<ContentDto> tlcList = new ArrayList<ContentDto>();
 		
 		for(int i = 0 ; i < tlcList_.size() ; i++) {
 			tlcList.add(tlcList_.get(i));

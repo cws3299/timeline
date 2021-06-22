@@ -23,6 +23,12 @@ public class PostDto {
 	
 	private int midx;
 	
+	private String mid;
+	
+	private String mnickname;
+	
+	private String mphoto;
+	
 	private LocalDateTime tlcregdate;
 	
 	private LocalDate tlcdate;

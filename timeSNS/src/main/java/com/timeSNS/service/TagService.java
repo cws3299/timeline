@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.timeSNS.dto.ContentDto;
 import com.timeSNS.dto.PostDto;
 import com.timeSNS.entity.Posttag;
 import com.timeSNS.entity.Tag;
@@ -113,11 +114,11 @@ public class TagService {
 
 	
 //	태그 인덱스 번호를 기준으로 해당 태그를 사용한 게시글  가져오기
-	public List<Timelinecontent> getPostTagSearch(int tagIdx, int page) {
+	public List<ContentDto> getPostTagSearch(int tagIdx, int page) {
 		
-		Page<Timelinecontent> tlcPage = timelinecontentRepository.findByTidx(tagIdx, PageRequest.of(page-1, PAGE_POST_COUNT));
-		List<Timelinecontent> tlcList_ = tlcPage.getContent();
-		List<Timelinecontent> tlcList = new ArrayList<>();
+		Page<ContentDto> tlcPage = timelinecontentRepository.findByTidx(tagIdx, PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<ContentDto> tlcList_ = tlcPage.getContent();
+		List<ContentDto> tlcList = new ArrayList<>();
 		
 		if(tlcList_.size() != 0) {
 			for(int i = 0 ; i < tlcList_.size() ; i++) {

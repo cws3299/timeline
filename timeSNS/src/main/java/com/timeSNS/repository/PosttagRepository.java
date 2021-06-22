@@ -3,6 +3,7 @@ package com.timeSNS.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.timeSNS.entity.Posttag;
 
@@ -18,6 +19,7 @@ public interface PosttagRepository extends JpaRepository<Posttag, Long>{
 	int countByTidx(int tidx);
 	
 //	게시글 인덱스 번호 기준으로 기존 연결 태그 삭제해주기
+	@Transactional
 	int deleteByTlcidx(int tlcidx);
 	
 }

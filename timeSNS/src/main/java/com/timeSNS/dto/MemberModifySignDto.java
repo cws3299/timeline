@@ -30,6 +30,6 @@ public class MemberModifySignDto {
 	
 	private String mproduce;
 	
-	private LocalDate mbirthday;
+	private String mbirthday;
 	
 }

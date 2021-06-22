@@ -1,5 +1,7 @@
 package com.timeSNS.repository;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,9 +12,11 @@ import com.timeSNS.entity.Member;
 public interface FollowRepository extends JpaRepository<Follow, Long>{
 
 //	타임라인 팔로우 삭제
+	@Transactional
 	int deleteByFlwrmidxAndTlidx(int flrmidx, int tlidx);
 	
 //	회원 팔로우 삭제
+	@Transactional
 	int deleteByFlwrmidxAndFlwmidx(int flwrmidx, int flwmidx);
 	
 //	내가 팔로우 한 타임라인 페이징 처리를 위한 갯수 확인
