@@ -7,6 +7,7 @@ import PostBox from './PostBox'
 import Search from './Search'
 import TimeCapsule from './TimeCapsule'
 import TimeLine from './TimeLine'
+import NotFound from './NotFound'
 
 
 export {
@@ -19,4 +20,5 @@ export {
     Search,
     TimeCapsule,
     TimeLine,
+    NotFound,
 };

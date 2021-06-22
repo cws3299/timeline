@@ -1,0 +1,24 @@
+.IntroButtonBox{
+    /* position:relative; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+.Box{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* width:20%; */
+}
+/* .Button_siginin{
+    width:20%;
+}
+.Button_signup{
+    width:35%;
+} */
+
+@media screen and (max-width: 768px) {
+    /* 모바일 */
+
+}
