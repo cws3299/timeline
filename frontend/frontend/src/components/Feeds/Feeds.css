@@ -1,9 +1,0 @@
-.Feeds{
-    width:90%;
-    height:90%;
-    background-color: white;
-    display: grid;
-    grid-template-rows: 2fr 15fr;
-    border:0px solid white;
-    border-radius: 3rem;
-}
