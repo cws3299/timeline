@@ -1,0 +1,12 @@
+.Home{
+    width:100%;
+    position: relative;
+}
+.HomeBox{
+    width:100%;
+    position:absolute;
+    top:60px;
+    left:0px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}

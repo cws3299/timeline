@@ -1,0 +1,16 @@
+.HomeList{
+    width:100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.HomeListImage1{
+    width:100%;
+    /* height:300px; */
+    /* background-color: red; */
+}
+.HomeListContent1{
+    width:100%;
+    /* height:300px; */
+    /* background-color: red; */
+}
