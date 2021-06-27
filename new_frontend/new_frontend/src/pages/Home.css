@@ -10,3 +10,11 @@
     display:grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.HomeList1{
+    width:100%;
+}
+
+.HomeFeed1{
+    width:100%;
+}

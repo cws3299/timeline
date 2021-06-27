@@ -25,7 +25,7 @@ function IntroButtonBox() {
         <div className="Box">
             <Button  className={classes.text} 
             onClick={() => {
-                        history.push("/login");
+                        history.push("/intro/login");
                         }}
             >로그인</Button>  
         </div>

@@ -4,7 +4,8 @@ import './HomeListContent.css'
 function HomeListContent({props}) {
     return(
         <div className="HomeListContent">
-            {props.tlcidx}
+            {props.tlccontent}
+            {props.tlcplace}
         </div>
     )
 }

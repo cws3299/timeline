@@ -6,6 +6,7 @@ import { config } from "../../shared/config";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { rest } from "lodash-es";
+import { history } from "../configureStore";
 
 const SET_USER = "SET_USER"; // 로그인
 
@@ -20,7 +21,7 @@ const initialState = {
   };
 
   const loginSV = (email, pwd) => {
-      return function (dispatch, getState, { history }) {
+      return function (dispatch, getState) {
         console.log(config.api,'000000')
 
       axios({
@@ -41,7 +42,8 @@ const initialState = {
           ] = `Bearer ${token}`;
   
           dispatch(setUser());
-          await history.push("/");
+          console.log('222222222222222222222222222222')
+          history.push("/main/Home");
         })
         .catch((err) => {
           Swal.fire({

@@ -4,11 +4,13 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
+import Home from "./modules/home";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
   user: User,
+  home: Home,
 });
 
 const middlewares = [thunk.withExtraArgument({ history: history })];

@@ -38,6 +38,7 @@ function HomeList() {
       {/* <input type="text" value={query} onChange={handleChange} /> */}
       <div className="HomeListImage1">
         {list.map((item, i) => (
+          // console.log('1111111',item),
           <HomeListImage key={i} props={item}/>
         ))}
       </div>
