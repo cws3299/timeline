@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Nav, Logo, Hamburger, Menu, MenuLink , SearchBox } from "../style/navbar";
+import { Nav, Logo, Menu, MenuLink , SearchBox } from "../style/navbar";
 import { history } from "../redux/configureStore";
 import './NavBar.css';
 

@@ -5,12 +5,14 @@ import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
 import Home from "./modules/home";
+import Timeline from "./modules/timeline";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
   user: User,
   home: Home,
+  timeline: Timeline,
 });
 
 const middlewares = [thunk.withExtraArgument({ history: history })];

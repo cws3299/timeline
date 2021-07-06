@@ -1,0 +1,14 @@
+.TimeLine{
+    width:100%;
+    position:relative;
+}
+
+.TimeLineBox{
+    width:100%;
+    position:absolute;
+    top:60px;
+    left:0px;
+    height: calc(100vh - 60px);
+    display:grid;
+    grid-template-rows: 1fr 6fr;
+}

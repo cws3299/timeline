@@ -12,7 +12,7 @@ function PrivateRoute({ component: Component, ...parentProps }) {
       <Route
         {...parentProps}
         render={(props) =>
-          is_login ? <Component {...props} /> : <Redirect to="/" />
+          is_login ? <Component {...props} /> : <Redirect to="/intro/intro" />
         }
       />
     </>

@@ -5,7 +5,7 @@ import { Redirect, Route } from "react-router-dom";
 function PrivateRoute({ component: Component, ...parentProps }) {
   const status = localStorage.getItem("token");
 
-  // 토큰없으면 false(비로그인)
+  
   const is_login = status === null ? true : false;
   return (
     <>
