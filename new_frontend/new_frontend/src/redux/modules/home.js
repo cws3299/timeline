@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { rest } from "lodash-es";
 import { history } from "../configureStore";
 
+// 액션 함수정의
 const SET_FEED = "SET_FEED"
 
 const setFeed = createAction(SET_FEED, (items)=>({items}));
