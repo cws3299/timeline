@@ -1,0 +1,30 @@
+.IntroTimer {
+    font-family: sans-serif;
+    text-align: center;
+    width:100%;
+    height:95%;
+}
+  
+.IntroBox {
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-rows: 3fr,7fr;
+
+}
+.IntroBoxString{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width:100%;
+    height:100%;
+
+}
+.IntroBoxTime{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width:100%;
+    height:100%;
+    font-size: 1.5rem;
+}

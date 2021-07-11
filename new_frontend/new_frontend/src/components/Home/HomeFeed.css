@@ -1,0 +1,11 @@
+.HomeFeedBox{
+    width:100%;
+    position:relative;
+}
+
+.HomeFeed{
+    position:fixed;
+    /* background-color: red; */
+    width:100%;
+    height: calc(100vh - 60px);
+}
