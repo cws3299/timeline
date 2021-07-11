@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +139,7 @@ public class PostController {
 	
 //	타임라인 글 작성
 	@PostMapping("/writepost/{tlidx}")
-	public void writePost(@PathVariable int tlidx, @ModelAttribute TimeLineContentDto tlcDto) throws IllegalStateException, IOException {
+	public void writePost(@PathVariable int tlidx, @ModelAttribute TimeLineContentDto tlcDto, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
@@ -154,9 +155,12 @@ public class PostController {
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
 			ZonedDateTime current = ZonedDateTime.now();
 			
+			System.out.println("경로: " + request.getSession().getServletContext().getRealPath("/resources"));
+			
 //			기본 파일 저장 장소
-			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-			String filePath = rootPath + "/timelineSNS";
+//			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+			String rootPath = request.getSession().getServletContext().getRealPath("/resources");
+			String filePath = rootPath;
 			
 //			파일 업로드 작업 수행
 			File file = new File(filePath);
