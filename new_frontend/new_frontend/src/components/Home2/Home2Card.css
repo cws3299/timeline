@@ -1,0 +1,51 @@
+.Home2Card{
+    position: absolute;
+    height:300px;
+    width:300px;
+    margin:15px;
+    display: inline-block;
+}
+
+.Home2CardImageOffImage1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.Home2CardImageOffImage2In{
+    position: absolute;
+    background-color:black;
+    opacity: 0.5;
+    width:300px;
+    height:300px;
+    color:white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.Home2CardImageOn{
+    height:300px;
+    width:300px;
+    margin:15px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.Home2CardImageOnImage2In{
+    position: absolute;
+    background-color:black;
+    opacity: 0.5;
+    width:300px;
+    height:300px;
+    color:white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

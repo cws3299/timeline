@@ -1,0 +1,56 @@
+.NewNav{
+    position:fixed;
+    width:100vw;
+    min-width:1000px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:60px;
+    border:solid gray;
+    border-top-width:1px;
+    border-left-width:0px;
+    border-right-width:0px;
+    border-bottom-width:1px;
+    box-sizing: border-box;
+    z-index: 9999;
+    background-color: white;
+}
+.NewNav2{
+    width:1000px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.NewNavHomeBox{
+    width:40%;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 9999;
+}
+.NewNavSearchBox{
+    width:20%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.NewNavButtonBox{
+    width:40%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 9999;
+}
+.NewNavHome{
+    font-size: 2rem;
+    z-index: 9999;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+}

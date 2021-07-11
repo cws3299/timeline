@@ -4,13 +4,13 @@ import './HomeFeed.css'
 
 function HomeFeed() {
     const todos = useSelector(state => state.home.homefeed);
-    console.log('12312321321321321321321123123123123112312',todos)
+    console.log('11111111111111111111111111')
     
     useEffect(()=>{
-        console.log('1')
+        console.log('22222222222')
         console.log(todos)
         return () =>{
-            console.log('2')
+            console.log('3333333333333333333333333')
             console.log(todos)
         };
     },[])

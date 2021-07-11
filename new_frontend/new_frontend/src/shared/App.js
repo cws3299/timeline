@@ -2,6 +2,7 @@ import React from "react";
 // import styled from "styled-components";
 import {
     Home,
+    Home2,
     Intro,
     Login,
     Mypage,
@@ -34,6 +35,7 @@ function App() {
 
           <Route path="/main">
               <PrivateRoute path="/main/home" exact component={Home} />
+              <PrivateRoute path="/main/home2" exact component={Home2} />
               <PrivateRoute path="/main/mypage" exact component={Mypage} />
               <PrivateRoute path="/main/post" exact component={Post} />
               <PrivateRoute path="/main/postbox" exact component={PostBox} />
