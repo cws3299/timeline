@@ -177,7 +177,6 @@ function Home2Card({props}){
     if (props.tlcimage === null){
         return(
             <div className="Home2Card"
-
             >
                 {
                 isListHover2 ?
@@ -186,11 +185,12 @@ function Home2Card({props}){
                 onClick={handleOpen}
                 onMouseEnter={()=>setIsListHover2(false)}
                 style={{
-                    width:'100%',
-                    height:'100%',
+                    width:'300px',
+                    height:'300px',
                     boxSizing:'border-box',
                     backgroundColor:'black',
                     color:'white',
+                    position:'absolute',
                 }}>
                     {place}
                 </div> :

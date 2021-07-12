@@ -1,9 +1,10 @@
 .Home2Card{
-    position: absolute;
+    /* position: absolute; */
     height:300px;
     width:300px;
     margin:15px;
     display: inline-block;
+    box-sizing: border-box;
 }
 
 .Home2CardImageOffImage1{
