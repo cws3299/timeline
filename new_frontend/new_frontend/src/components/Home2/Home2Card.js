@@ -177,6 +177,7 @@ function Home2Card({props}){
     if (props.tlcimage === null){
         return(
             <div className="Home2Card"
+
             >
                 {
                 isListHover2 ?

@@ -1,7 +1,6 @@
 .TimeLine{
-    width:100vw;
-    min-width: 1000px;
-    position: relative;
+    width:100%;
+    position:relative;
 }
 
 .TimeLineBox{
@@ -10,10 +9,6 @@
     top:60px;
     left:0px;
     height: calc(100vh - 60px);
-    display: flex;
-    /* display:grid;
-    grid-template-rows: 1fr 6fr; */
-} 
-
-@media screen and (max-width: 768px) {
+    display:grid;
+    grid-template-rows: 1fr 6fr;
 }
