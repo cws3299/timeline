@@ -12,6 +12,7 @@ import {
     TimeCapsule,
     TimeLine,
     NotFound,
+    TimeLineFeed,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -42,6 +43,7 @@ function App() {
               <PrivateRoute path="/main/search" exact component={Search} />
               <PrivateRoute path="/main/timecapsule" exact component={TimeCapsule} />
               <PrivateRoute path="/main/timeline" exact component={TimeLine} />
+              <PrivateRoute path="/main/TimeLineFeed" exact component={TimeLineFeed} />
          
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>

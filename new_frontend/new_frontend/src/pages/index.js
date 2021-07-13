@@ -7,6 +7,7 @@ import PostBox from './PostBox'
 import Search from './Search'
 import TimeCapsule from './TimeCapsule'
 import TimeLine from './TimeLine'
+import TimeLineFeed from './TimeLineFeed'
 import NotFound from './NotFound'
 import Home2 from './Home2'
 
@@ -23,4 +24,5 @@ export {
     TimeCapsule,
     TimeLine,
     NotFound,
+    TimeLineFeed,
 };

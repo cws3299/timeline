@@ -6,6 +6,7 @@ import { connectRouter } from "connected-react-router";
 import User from "./modules/user";
 import Home from "./modules/home";
 import Timeline from "./modules/timeline";
+import TimelineFeed from "./modules/timelinefeed";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   user: User,
   home: Home,
   timeline: Timeline,
+  timelinefeed:TimelineFeed,
 });
 
 const middlewares = [thunk.withExtraArgument({ history: history })];

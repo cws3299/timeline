@@ -1,0 +1,7 @@
+.TimeLineList{
+    width:100%;
+    height:300px;
+    margin-bottom: 30px;
+    display:grid;
+    grid-template-columns: 2fr 4fr;
+}
