@@ -129,7 +129,7 @@ public class AuthController {
 			File dest = new File(file + "/" + savedName);
 			memberDto.getMphoto().transferTo(dest);
 			System.out.println("폴더 경로: " + dest);
-		}
+		} 
 		
 		
 		LocalDate mbirthDay = LocalDate.parse(memberDto.getMbirthday());
