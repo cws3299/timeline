@@ -1,5 +1,5 @@
-import React, {useState} from'react'
-import './Home2Card.css'
+import React, {useState} from 'react'
+import './TimeLineFeedListCard'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import LinesEllipsis from 'react-lines-ellipsis'
@@ -19,7 +19,7 @@ import LinesEllipsis from 'react-lines-ellipsis'
 //     };
 //   }
   
-  const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     paper: {
       position: 'absolute',
       top:100,
@@ -33,7 +33,7 @@ import LinesEllipsis from 'react-lines-ellipsis'
     },
   }));
 
-function Home2Card({props}){
+function TimeLineFeedListCard({props}){
     const classes = useStyles();
     // const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
@@ -273,4 +273,4 @@ function Home2Card({props}){
     }
 }
 
-export default Home2Card;
+export default TimeLineFeedListCard;

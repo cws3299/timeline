@@ -1,0 +1,13 @@
+
+.App {
+  font-family: sans-serif;
+  background: #f6f6f6 !important;
+}
+
+.headroom--unpinned {
+    transition: none !important;
+}
+body {
+  background: #f6f6f6 !important;
+  margin: 0;
+}
