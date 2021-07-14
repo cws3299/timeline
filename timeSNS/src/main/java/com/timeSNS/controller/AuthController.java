@@ -107,8 +107,9 @@ public class AuthController {
 			savedName = uuid.toString() + "_" + memberDto.getMphoto().getOriginalFilename();
 			
 //			기본 파일 저장 장소
-			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-			String filePath = rootPath + "/timelineSNS";
+//			String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+			String rootPath = request.getSession().getServletContext().getRealPath("/resources");
+			String filePath = rootPath;
 			
 //			파일 업로드 작업 수행
 			File file = new File(filePath);
