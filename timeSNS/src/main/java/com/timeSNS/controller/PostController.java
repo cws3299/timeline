@@ -187,7 +187,7 @@ public class PostController {
 				.tlidx(tlidx)
 				.midx(midx)
 				.tlcregdate(LocalDateTime.now())
-				.tlcdate(tlcDto.getTlcdate())
+				.tlcdate(LocalDate.parse(tlcDto.getTlcdate()))
 				.tlcplace(tlcDto.getTlcplace())
 				.tlcimage(savedName)
 				.tlccontent(tlcDto.getTlccontent())
@@ -232,8 +232,8 @@ public class PostController {
 		
 //		받아온 값을 확인해서 수정한 정보가 있다면 저장하기
 		if(tlcDto.getTlcdate() != null) {
-			if(!tlcDto.getTlcdate().equals(tlContent.getTlcdate())) {
-				tlContent.setTlcdate(tlcDto.getTlcdate());	
+			if(!LocalDate.parse(tlcDto.getTlcdate()).equals(tlContent.getTlcdate())) {
+				tlContent.setTlcdate(LocalDate.parse(tlcDto.getTlcdate()));	
 			}
 		}
 		if(tlcDto.getTlcplace() != null) {
