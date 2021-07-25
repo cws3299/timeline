@@ -1,6 +1,6 @@
 import React , {useState , useRef, useCallback, useEffect} from "react";
 import useFetch from "./TimeCapsuleuseFetch";
-// import './Home2List.css';
+import './TimeCapsuleList.css';
 import TimeCapsuleCard from "./TimeCapsuleCard";
 
 
@@ -33,7 +33,6 @@ function TimeCapsuleList() {
 
   return (
     <div className="TimeCapsuleList">
-        
         {list.map((item, i) => (
           <TimeCapsuleCard key={i} props={item}/>
         ))}
