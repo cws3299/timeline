@@ -1,10 +1,10 @@
 import React , {useState , useRef, useCallback, useEffect} from "react";
-import useFetch from "./Home2useFetch";
-import './Home2List.css';
-import Home2Card from "./Home2Card";
+import useFetch from "./TimeCapsuleuseFetch";
+// import './Home2List.css';
+import TimeCapsuleCard from "./TimeCapsuleCard";
 
 
-function Home2List() {
+function TimeCapsuleList() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const { loading, error, list } = useFetch(query, page);
@@ -32,14 +32,14 @@ function Home2List() {
   }, [handleObserver]);
 
   return (
-    <div className="Home2List">
+    <div className="TimeCapsuleList">
         
         {list.map((item, i) => (
-          <Home2Card key={i} props={item}/>
+          <TimeCapsuleCard key={i} props={item}/>
         ))}
       <div ref={loader} />
     </div>
   );
 }
 
-export default Home2List;
+export default TimeCapsuleList;

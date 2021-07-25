@@ -57,7 +57,7 @@ function TimeLineFeedListCard({props}){
             <div className="Home2ImageModal">
                 <div className="Home2ImageModalImage"
                     style={{
-                        backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg/250px-Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg)`,
+                        backgroundImage: `url(https://img1.yna.co.kr/etc/inner/KR/2020/10/26/AKR20201026050600017_03_i_P2.jpg)`,
                         backgroundSize:'cover',
                         width:'100%',
                         height:'100%',
@@ -66,7 +66,7 @@ function TimeLineFeedListCard({props}){
                 ></div>
                 <div className="Home2ImageModalContent">
                     <div className="Home2ImageModalContentUser">
-                        <img src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/11/PS20112100014.jpg" className="Home2avatarImage" />
+                        <img src="https://img1.yna.co.kr/etc/inner/KR/2020/10/26/AKR20201026050600017_03_i_P2.jpg" className="Home2avatarImage" />
                         {data.mnickname}
                     </div>
                     <div className="Home2ImageModalContentContent">
@@ -121,7 +121,7 @@ function TimeLineFeedListCard({props}){
         <div className={classes.paper}>
             <div className="Home2ImageModal2">
                 <div className="Home2ImageModal2ContentUser">
-                    <img src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/11/PS20112100014.jpg" className="Home2avatarImage" />
+                    <img src="https://img1.yna.co.kr/etc/inner/KR/2020/10/26/AKR20201026050600017_03_i_P2.jpg" className="Home2avatarImage" />
                     {data.mnickname}
                 </div>
                 <div className="Home2ImageModal2ContentBox">
@@ -233,7 +233,7 @@ function TimeLineFeedListCard({props}){
                 onClick={handleOpen}
                 onMouseEnter={()=>setIsListHover(false)}
                 style={{
-                    backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg/250px-Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg)`,
+                    backgroundImage: `url(https://img1.yna.co.kr/etc/inner/KR/2020/10/26/AKR20201026050600017_03_i_P2.jpg)`,
                     backgroundSize:'cover',
                     width:'100%',
                     height:'100%',
@@ -244,7 +244,7 @@ function TimeLineFeedListCard({props}){
                 
                 onMouseLeave={()=>setIsListHover(true)}
                 style={{
-                    backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg/250px-Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg)`,
+                    backgroundImage: `url(https://img1.yna.co.kr/etc/inner/KR/2020/10/26/AKR20201026050600017_03_i_P2.jpg)`,
                     backgroundSize:'cover',
                     width:'100%',
                     height:'100%',
