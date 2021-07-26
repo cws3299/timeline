@@ -81,7 +81,7 @@ public class AuthController {
 
 	
 //	로그아웃
-	@PostMapping()
+	@PostMapping("/logout")
 	public void logout() {
 		
 		HttpHeaders httpHeaders = new HttpHeaders();

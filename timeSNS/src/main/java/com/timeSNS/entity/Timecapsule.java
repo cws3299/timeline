@@ -1,5 +1,6 @@
 package com.timeSNS.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class Timecapsule {
 	private int midx;
 	
 	@Column(name = "TCTERM")
-	private LocalDateTime tcterm;
+	private LocalDate tcterm;
 	
 	@Column(name = "TCTITLE")
 	private String tctitle;
