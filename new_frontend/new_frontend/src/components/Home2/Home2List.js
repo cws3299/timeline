@@ -31,7 +31,6 @@ function Home2List() {
     if (loader.current) observer.observe(loader.current);
   }, [handleObserver]);
 
-  console.log('list',list)
   return (
     <div className="Home2List">
         

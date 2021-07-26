@@ -1,5 +1,4 @@
 import React ,{ useState, useEffect, useCallback } from 'react'
-import Carousel from '../components/TimeLine/carousel'
 import TimeLineList from '../components/TimeLine/TimeLineList'
 import NewNav from '../components/NewNav.js';
 import './TimeLine.css'

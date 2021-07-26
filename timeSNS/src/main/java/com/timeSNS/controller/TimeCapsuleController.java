@@ -1,6 +1,7 @@
 package com.timeSNS.controller;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timeSNS.dto.TimeCapsuleDto;
 import com.timeSNS.entity.Timecapsule;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.repository.TimecapsuleRepository;
@@ -85,14 +87,22 @@ public class TimeCapsuleController {
 	
 //	타임캡슐 작성 메소드
 	@PostMapping("/write")
-	public void write(@RequestBody Timecapsule timecapsule) {
+	public void write(@RequestBody TimeCapsuleDto timecapsuleDto) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		받아온 timecapsule json 파일에 작성자 인덱스와 작성시간, 확인여부(기본값 N) 넣어주기
-		timecapsule.setMidx(midx);
-		timecapsule.setTcregdate(LocalDateTime.now());
-		timecapsule.setTccheckyn("N");
+		
+		Timecapsule timecapsule = Timecapsule.builder()
+			.midx(midx)
+			.tcterm(LocalDate.parse(timecapsuleDto.getTcterm()))
+			.tctitle(timecapsuleDto.getTctitle())
+			.tccontent(timecapsuleDto.getTctitle())
+			.tcthink(timecapsuleDto.getTcthink())
+			.tccheckyn("N")
+			.tcfeedback(timecapsuleDto.getTcfeedback())
+			.tcregdate(LocalDateTime.now())
+			.build();
 		
 //		내용 저장하기
 		timecapsuleService.getTcWrite(timecapsule);
@@ -105,7 +115,7 @@ public class TimeCapsuleController {
 	
 //	피드백 작성 메소드
 	@PostMapping("/feedback/{tcidx}")
-	public void feedback(@PathVariable int tcidx, @RequestBody String feedback) {
+	public void feedback(@PathVariable int tcidx, @RequestBody TimeCapsuleDto timecapsuleDto) {
 		
 		Long tcidx_ = new Long(tcidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
@@ -115,7 +125,7 @@ public class TimeCapsuleController {
 		Timecapsule tcDetail = tcDetail_.get();
 		
 //		feedback 내용 넣어주기
-		tcDetail.setTcfeedback(feedback);
+		tcDetail.setTcfeedback(timecapsuleDto.getTcfeedback());
 		
 //		변경내용 저장하기
 		timecapsuleRepository.save(tcDetail);

@@ -3,21 +3,7 @@ import './Home2Card.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import LinesEllipsis from 'react-lines-ellipsis'
-
-// function rand() {
-//     return Math.round(Math.random() * 20) - 10;
-//   }
-  
-//   function getModalStyle() {
-//     const top = 100
-//     const left = 100
-  
-//     return {
-//       top: `${top}px`,
-//       left: `${left}px`,
-//       transform: `translate(-${top}px, -${left}px)`,
-//     };
-//   }
+import { config } from '../../shared/config'
   
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,6 +22,7 @@ import LinesEllipsis from 'react-lines-ellipsis'
 function Home2Card({props}){
     const classes = useStyles();
     // const [modalStyle] = useState(getModalStyle);
+    const url = config.api
     const [open, setOpen] = useState(false);
     const [data, setData] = useState(props)
     const [useElipsis, setUseElipsis] = useState(true);

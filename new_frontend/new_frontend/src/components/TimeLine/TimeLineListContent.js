@@ -7,12 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 function TimeLineListContent({props}) {
     const dispatch = useDispatch();
     const feedidx= (props) =>{
-        console.log('123123',props.tlidx)
         dispatch(timeActions.settimeFeedSV(props.tlidx));
       }
 
     const goTimeLineFeed = () => {
-        console.log('-----------------------',props.tlidx)
         feedidx(props)
         history.push({
             pathname: '/main/timelinefeed',
@@ -21,16 +19,17 @@ function TimeLineListContent({props}) {
       } 
 
     return (
-        <div className="TimeLineListContent">
-            <div className="TimeLineListContentInfo1">
+        <div className = 'TimeLineListContent'>
+            <div className = "TimeLineListContentTitle">
                 {props.tltitle}
-                {props.tlcategory}
             </div>
-            <div className="TimeLineListContentInfo2">
-                {props.tlintroduce}
-            </div>
-            <div className="TimeLineListContentInfo3">
-                <button className = "TimeLineListButton" onClick={goTimeLineFeed}></button>
+            <div className = "TimeLineListContentContent">
+                <div className = "TimeLineListContentContent1">
+                    {props.tlintroduce}
+                </div>
+                <button className = "TimeLineListContentContent2" onClick={goTimeLineFeed}>
+                    타임라인으로 이동하기
+                </button>
             </div>
         </div>
     )

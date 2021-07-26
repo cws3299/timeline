@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TimeLineContentDto {
 
-	private LocalDate tlcdate;
+	private String tlcdate;
 	
 	private String tlcplace;
 	
