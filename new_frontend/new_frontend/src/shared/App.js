@@ -21,11 +21,12 @@ import { history } from "../redux/configureStore";
 // import OAuth2RedirectHandler from "./OAuth2RedirectHandler";
 import PrivateRoute from "./PrivateRoute";
 import NoLoginRoute from "./NoLoginRoute";
+// import './App.css'
 
 
 function App() {
   return (
-    <>
+    <div className="App">
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/intro">
@@ -51,7 +52,7 @@ function App() {
         </Switch>
       </ConnectedRouter>
     
-    </>
+    </div>
   );
 }
 
