@@ -64,12 +64,31 @@
 .CapsuleModal3{
     width:100%;
     height:10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .CapsuleModal4{
     width:100%;
     height:40%;
+    display:grid;
+    grid-template-rows: 4fr 1fr;
+}
+
+.CapsuleModal4Feedback{
+    width:100%;
+    height:100%;
     display:flex;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
+}
+
+.CapsuleModal4FeedbackButton{
+    width:100%;
+    height:100%;
+}
+.CapsuleModal4FeedbackButton1{
+    width:100%;
+    height:100%;
 }

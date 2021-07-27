@@ -2,6 +2,7 @@ import React ,{ useState, useEffect, useCallback } from 'react'
 import NewNav from '../components/NewNav.js';
 import TimeCapsuleList from '../components/TimeCapsule/TimeCapsuleList';
 import './TimeCapsule.css'
+import PostButton from '../components/PostButton'
 
 function TimeCapsule() {
     return(
@@ -10,6 +11,7 @@ function TimeCapsule() {
             <div className = "TimeCapsuleBox">
                 <TimeCapsuleList />
             </div>
+            < PostButton />
         </div>
     )
 }

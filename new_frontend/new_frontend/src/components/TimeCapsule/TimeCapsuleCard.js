@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import LinesEllipsis from 'react-lines-ellipsis'
 import { config } from '../../shared/config'
+import TimeCapsuleTimer from './TimeCapsuleTimer';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -20,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function TimeCapsuleCard({props}) {
+
+    const setDate = new Date(props.tcterm)
+    const now = new Date()
+    const distance = setDate.getTime() - now.getTime() - 32400000;
+    const dday = Math.floor(distance/(1000*60*60*24));
+
     const classes = useStyles();
     const url = config.api
     const [open, setOpen] = useState(false);
@@ -60,36 +67,54 @@ function TimeCapsuleCard({props}) {
                 )}
             </div>
             <div className="CapsuleModal3">
-
+                {props.tcthink}
             </div>
             <div className="CapsuleModal4">
-                {props.tcfeedback}
-            </div>
-        </div>
-    )
-
-    return(
-        <div className='TimeCapsuleCard'>
-            <div className ="TimeCapsuleCardContent">
-                <div className ="TimeCapsuleCardContentTitle">
-                    {props.tctitle}
+                <div className="CapsuleModal4Feedback">{props.tcfeedback}</div>
+                <div className="CapsuleModal4FeedbackButton">
+                    <button className="CapsuleModal4FeedbackButton1">피드백 수정</button>
                 </div>
             </div>
-            <div className = "TimeCapsuleCardRemain" onClick={handleOpen}>
-                24Day 16:08:13
-            </div>
-            <Modal
-                props={props}
-                open={open}
-                onClose={handleClose}
-                // onClose={()=>setIsListHover(true)}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-            >
-                {body}
-            </Modal>
         </div>
     )
+    if (dday>=0){
+        return(
+            <div className='TimeCapsuleCard'>
+                <div className ="TimeCapsuleCardContent">
+                    <div className ="TimeCapsuleCardContentTitle">
+                        {props.tctitle}
+                    </div>
+                </div>
+                <div className = "TimeCapsuleCardRemain" onClick={handleOpen}>
+                    <TimeCapsuleTimer props={props}/>
+                </div>
+            </div>
+        )
+    }else{
+        return(
+            <div className='TimeCapsuleCard'>
+                <div className ="TimeCapsuleCardContent">
+                    <div className ="TimeCapsuleCardContentTitle">
+                        {props.tctitle}
+                    </div>
+                </div>
+                <div className = "TimeCapsuleCardRemain" onClick={handleOpen}>
+                    <TimeCapsuleTimer props={props}/>
+                </div>
+                <Modal
+                    props={props}
+                    open={open}
+                    onClose={handleClose}
+                    // onClose={()=>setIsListHover(true)}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
+                    {body}
+                </Modal>
+            </div>
+        )   
+    }
+
 }
 
 export default TimeCapsuleCard;
