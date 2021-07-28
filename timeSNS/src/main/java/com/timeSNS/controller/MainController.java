@@ -75,7 +75,7 @@ public class MainController {
 			PostDto postDto = PostDto.builder()
 					.tlcidx((tlcList.get(i)).getTlcidx())
 					.tlidx((tlcList.get(i)).getTlidx())
-					.midx(midx)
+					.midx((tlcList.get(i)).getMidx())
 					.mid(tlcList.get(i).getMid())
 					.mnickname(tlcList.get(i).getMnickname())
 					.mphoto(tlcList.get(i).getMphoto())

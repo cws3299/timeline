@@ -49,7 +49,7 @@ public class TimeLineController {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<TimeLineMemberDto> tlList = timelineService.getTlList(midx, page);
+		List<TimeLineMemberDto> tlList = timelineService.getMyTlList(midx, page);
 		
 		return tlList;
 	}
@@ -100,6 +100,11 @@ public class TimeLineController {
 		Long tlidx_ = new Long(tlidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();	
 		
+		Timeline findTl = (timelineRepository.findById(tlidx_)).get();
+		
+		timeline.setMidx(midx);
+		timeline.setTlregdate(findTl.getTlregdate());
+		timeline.setTldelyn(findTl.getTldelyn());
 		timeline.setTlidx(tlidx_);
 		
 		timelineRepository.save(timeline);
