@@ -3,6 +3,7 @@ import NewNav from '../components/NewNav.js';
 import TimeCapsuleList from '../components/TimeCapsule/TimeCapsuleList';
 import './TimeCapsule.css'
 import PostButton from '../components/PostButton'
+import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
 
 function TimeCapsule() {
     return(
@@ -11,6 +12,7 @@ function TimeCapsule() {
             <div className = "TimeCapsuleBox">
                 <TimeCapsuleList />
             </div>
+            < TimeCapsulebutton />
             < PostButton />
         </div>
     )

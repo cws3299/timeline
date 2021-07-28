@@ -5,6 +5,8 @@ import Modal from '@material-ui/core/Modal';
 import LinesEllipsis from 'react-lines-ellipsis'
 import { config } from '../../shared/config'
 import TimeCapsuleTimer from './TimeCapsuleTimer';
+import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -18,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: theme.shadows[5],
     //   padding: theme.spacing(2, 4, 3),
     },
+    roots: {
+        '& .MuiTextField-root': {
+          margin: theme.spacing(1),
+          width: '850px',
+        },
+      },
   }));
 
 function TimeCapsuleCard({props}) {
@@ -30,7 +38,13 @@ function TimeCapsuleCard({props}) {
     const classes = useStyles();
     const url = config.api
     const [open, setOpen] = useState(false);
+    const [back, setBack] = useState('');
     const [useElipsis, setUseElipsis] = useState(true);
+    const _token = localStorage.getItem("token");
+    let token = {
+      headers: { Authorization: `Bearer ${_token}` },
+    };
+
     const handleOpen = () => {
         setOpen(true);
       };
@@ -38,6 +52,21 @@ function TimeCapsuleCard({props}) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const feedbackChange = (e) => {
+        setBack(e.target.value)
+        console.log(e.target.value)
+    }
+
+    const feedback1= async() => {
+
+
+        const feedback = {
+            feedback:back
+        }
+        const res = await axios.post(`${url}/timecapsule/feedback/${props.tcidx}`, feedback, token);
+        console.log(res)
+    } 
 
     const body = (
         <div className={classes.paper}>
@@ -72,7 +101,19 @@ function TimeCapsuleCard({props}) {
             <div className="CapsuleModal4">
                 <div className="CapsuleModal4Feedback">{props.tcfeedback}</div>
                 <div className="CapsuleModal4FeedbackButton">
-                    <button className="CapsuleModal4FeedbackButton1">피드백 수정</button>
+                    <form className={classes.roots} noValidate autoComplete="off">
+                        <div>
+                        <TextField
+                            onChange={feedbackChange}
+                            id="outlined-multiline-static"
+                            multiline
+                            rows={1}
+                            placeholder = "피드백을 수정해주세요"
+                            variant="outlined"
+                            />
+                        </div>
+                    </form>
+                    <button className="CapsuleModal4FeedbackButton1" onClick={feedback1}>피드백 수정</button>
                 </div>
             </div>
         </div>

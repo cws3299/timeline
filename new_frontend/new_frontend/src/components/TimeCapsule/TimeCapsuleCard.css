@@ -1,5 +1,5 @@
 .TimeCapsuleCard{
-    width:100%;
+    width:1000px;
     height:300px;
     background-color: white;
     margin-top:30px;
@@ -9,17 +9,21 @@
     grid-template-columns: 6fr 1fr;
 }
 .TimeCapsuleCardContent{
-    width:100%;
+    width:850px;
     height:100%;
+    margin:0;
+    box-sizing: border-box;
 }
 
 .TimeCapsuleCardContentTitle{
-    width:100%;
+    width:850px;
     height:100%;
+    margin:0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Jua', sans-serif;
+    box-sizing: border-box;
 }
 .TimeCapsuleCardContentFeedback{
     display: flex;
@@ -87,6 +91,8 @@
 .CapsuleModal4FeedbackButton{
     width:100%;
     height:100%;
+    display:grid;
+    grid-template-columns: 9fr 1fr;
 }
 .CapsuleModal4FeedbackButton1{
     width:100%;
