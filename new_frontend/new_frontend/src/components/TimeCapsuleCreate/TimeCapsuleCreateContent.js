@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   function TimeCapsuleCreateContent() {
     
     const goTimeCapsule = () => {
+      console.log('-----')
       history.push({
         pathname: '/main/TimeCapsule',
         })

@@ -15,6 +15,7 @@ import MomentLocaleUtils from "react-day-picker/moment";
 import "react-day-picker/lib/style.css";
 import "moment/locale/de";
 import LinesEllipsis from 'react-lines-ellipsis'
+import { history } from "../../redux/configureStore";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -40,6 +41,13 @@ function PostContent() {
     let token = {
       headers: { Authorization: `Bearer ${_token}` },
     };
+
+    const goTimeline = ({props}) => {
+      console.log('props',props)
+      history.push({
+        pathname: `/post/list/${props}`,
+        })
+    } 
 
     const sendQuery = useCallback(async () =>{
         try{
@@ -81,15 +89,18 @@ function PostContent() {
       formData.append('tlcplace', tlcplace)
       formData.append('tlccontent', tlccontent)
       // formData.append('tlcemotion', null)
-      // formData.append('tlcpubyn', 'y')
+      formData.append('tlcpubyn', "Y")
       formData.append('tlctag', tlctag)
       formData.append('tlcimage', tlcimage);
       console.log(formData)
       console.log(tlcimage)
       // 서버의 upload API 호출
-      const res = await axios.post(`${url}/post/writepost/${choice_timeline_idx}`, formData, token);
-      console.log(res)
-      console.log(choice_timeline_idx);
+      const res = await axios.post(`${url}/post/writepost/${choice_timeline_idx}`, formData, token)
+      // .then(()=>{
+      //   goTimeline(choice_timeline_idx)
+      // }).catch(()=>{
+      //   alert('날짜 확인 버튼을 한 번 더 눌러주세요')
+      // })
     }
 
     const [state, setState] = React.useState('');

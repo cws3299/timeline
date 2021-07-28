@@ -45,6 +45,7 @@ function TimeCapsuleCard({props}) {
       headers: { Authorization: `Bearer ${_token}` },
     };
 
+    console.log('rrrrrr',props) 
     const handleOpen = () => {
         setOpen(true);
       };
@@ -55,17 +56,16 @@ function TimeCapsuleCard({props}) {
 
     const feedbackChange = (e) => {
         setBack(e.target.value)
-        console.log(e.target.value)
     }
 
     const feedback1= async() => {
 
 
-        const feedback = {
-            feedback:back
+        const tcfeedback = {
+            tcfeedback:back
         }
-        const res = await axios.post(`${url}/timecapsule/feedback/${props.tcidx}`, feedback, token);
-        console.log(res)
+        const res = await axios.post(`${url}/timecapsule/feedback/${props.tcidx}`, tcfeedback, token);
+        console.log('rrrrrrrrrrr', res)
     } 
 
     const body = (
