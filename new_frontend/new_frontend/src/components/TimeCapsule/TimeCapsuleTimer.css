@@ -1,0 +1,54 @@
+.TimeCapsuleTimer{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center
+}
+
+.TimeCapsuleTimerBox{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center
+}
+
+.TimeCapsuleTimerBoxTime{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.TimeCapsuleTimerBoxTimeDay{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.TimeCapsuleTimerBoxTimeHour{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.TimeCapsuleTimerBoxTime2{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center
+}
+
+.TimeCapsuleTimerBoxTime3{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center
+}

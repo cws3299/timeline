@@ -10,6 +10,7 @@ import TimeLine from './TimeLine'
 import TimeLineFeed from './TimeLineFeed'
 import NotFound from './NotFound'
 import Home2 from './Home2'
+import TimeCapsuleCreate from './TimeCapsuleCreate'
 
 
 export {
@@ -25,4 +26,5 @@ export {
     TimeLine,
     NotFound,
     TimeLineFeed,
+    TimeCapsuleCreate,
 };

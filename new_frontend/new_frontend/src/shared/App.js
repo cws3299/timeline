@@ -13,6 +13,7 @@ import {
     TimeLine,
     NotFound,
     TimeLineFeed,
+    TimeCapsuleCreate,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -21,11 +22,12 @@ import { history } from "../redux/configureStore";
 // import OAuth2RedirectHandler from "./OAuth2RedirectHandler";
 import PrivateRoute from "./PrivateRoute";
 import NoLoginRoute from "./NoLoginRoute";
+// import './App.css'
 
 
 function App() {
   return (
-    <>
+    <div className="App">
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/intro">
@@ -44,6 +46,7 @@ function App() {
               <PrivateRoute path="/main/timecapsule" exact component={TimeCapsule} />
               <PrivateRoute path="/main/timeline" exact component={TimeLine} />
               <PrivateRoute path="/main/TimeLineFeed" exact component={TimeLineFeed} />
+              <PrivateRoute path="/main/TimeCapsuleCreate" exact component={TimeCapsuleCreate} />
          
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
@@ -51,7 +54,7 @@ function App() {
         </Switch>
       </ConnectedRouter>
     
-    </>
+    </div>
   );
 }
 

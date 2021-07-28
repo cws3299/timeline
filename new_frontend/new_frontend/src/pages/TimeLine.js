@@ -4,6 +4,8 @@ import NewNav from '../components/NewNav.js';
 import './TimeLine.css'
 import axios from "axios";
 import { config } from '../shared/config'
+import PostButton from '../components/PostButton'
+import TimeCasulebutton from '../components/TimeCapsulebutton';
 
 function TimeLine() {
     const [timeline,setTimeline] = useState([])
@@ -39,6 +41,8 @@ function TimeLine() {
                     ))}
                 </div>
             </div>
+            <TimeCasulebutton />
+            <PostButton />
         </div>
     )
 }

@@ -1,0 +1,34 @@
+.PostButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:75px;
+    height:75px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.PostButton:hover{
+    background-color: gray;
+    color:white
+}
+
+
+
+@media screen and (max-width: 1250px) {
+    .PostButton{
+        position:fixed;
+        right:20px;
+        bottom:20px;
+        width:75px;
+        height:75px;
+        border-radius: 50%;
+        background-color: black;
+        display:none;
+    }
+}

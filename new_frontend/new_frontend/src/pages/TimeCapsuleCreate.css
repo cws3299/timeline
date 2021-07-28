@@ -1,10 +1,10 @@
-.TimeLine{
+.TimeCapsuleCreate{
     width:100vw;
     min-width: 1000px;
     position: relative;
 }
 
-.TimeLineBox{
+.TimeCapsuleCreateBox{
     width:100%;
     position: absolute;
     top:110px;
@@ -12,7 +12,6 @@
     justify-content: center;
 }
 
-.TimeLineBox2{
+.TimeCapsuleCreateBox2{
     width:1000px;
 }
-
