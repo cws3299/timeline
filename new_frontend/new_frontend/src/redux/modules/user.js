@@ -28,21 +28,21 @@ const initialState = {
         method: "POST",
         url: `${config.api}/auth/authenticate?username=${email}&password=${pwd}`,
       })
-        .then(async (res) => {
-          console.log(res)
+        .then((res) => {
+          console.log('-----------------------------------------------',email)
+          const id = email
           const token = res.data.token
-          console.log('------------------------------------------------------------------',token)
   
-          await setCookie("is_login", token);
+          setCookie("is_login", token);
   
-          await localStorage.setItem("token", token);
+          localStorage.setItem("token", token);;
+          localStorage.setItem("id", id);
   
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${token}`;
   
           dispatch(setUser());
-          console.log('222222222222222222222222222222')
           history.push("/main/Home");
         })
         .catch((err) => {

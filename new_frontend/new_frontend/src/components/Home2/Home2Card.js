@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import LinesEllipsis from 'react-lines-ellipsis'
 import { config } from '../../shared/config'
+import { history } from "../../redux/configureStore"
   
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,6 +27,14 @@ function Home2Card({props}){
     const [open, setOpen] = useState(false);
     const [data, setData] = useState(props)
     const [useElipsis, setUseElipsis] = useState(true);
+    const u = data.tlcidx
+
+    const goLetter = () => {
+        history.push({
+            pathname: "/main/letter",
+            state: {tlcidx: data.tlcidx}
+          })
+      } 
 
     const handleOpen = () => {
         setOpen(true);
@@ -53,8 +62,13 @@ function Home2Card({props}){
                 ></div>
                 <div className="Home2ImageModalContent">
                     <div className="Home2ImageModalContentUser">
-                        <img src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/11/PS20112100014.jpg" className="Home2avatarImage" />
-                        {data.mnickname}
+                        <div className="Home2ImageModalContentUser1">
+                            <img src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/11/PS20112100014.jpg" className="Home2avatarImage" />
+                            {data.mnickname}
+                        </div>
+                        <div className="Home2ImageModalContentUser2" onClick={goLetter}>
+                            <i class="far fa-envelope"></i>
+                        </div>
                     </div>
                     <div className="Home2ImageModalContentContent">
                     {useElipsis ? (
@@ -108,8 +122,13 @@ function Home2Card({props}){
         <div className={classes.paper}>
             <div className="Home2ImageModal2">
                 <div className="Home2ImageModal2ContentUser">
-                    <img src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/11/PS20112100014.jpg" className="Home2avatarImage" />
-                    {data.mnickname}
+                    <div>
+                        <img src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/11/PS20112100014.jpg" className="Home2avatarImage" />
+                        {data.mnickname}
+                    </div>
+                    <div className="Home2ImageModal2ContentUser2" onClick={goLetter}>
+                        <i class="far fa-envelope"></i>
+                    </div>
                 </div>
                 <div className="Home2ImageModal2ContentBox">
                     <div className="Home2ImageModal2ContentContent">

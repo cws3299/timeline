@@ -11,6 +11,8 @@ import TimeLineFeed from './TimeLineFeed'
 import NotFound from './NotFound'
 import Home2 from './Home2'
 import TimeCapsuleCreate from './TimeCapsuleCreate'
+import Letter from './Letter'
+import ReceiveLetter from './ReceiveLetter'
 
 
 export {
@@ -27,4 +29,6 @@ export {
     NotFound,
     TimeLineFeed,
     TimeCapsuleCreate,
+    Letter,
+    ReceiveLetter,
 };

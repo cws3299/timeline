@@ -3,21 +3,6 @@ import './TimeLineFeedListCard'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import LinesEllipsis from 'react-lines-ellipsis'
-
-// function rand() {
-//     return Math.round(Math.random() * 20) - 10;
-//   }
-  
-//   function getModalStyle() {
-//     const top = 100
-//     const left = 100
-  
-//     return {
-//       top: `${top}px`,
-//       left: `${left}px`,
-//       transform: `translate(-${top}px, -${left}px)`,
-//     };
-//   }
   
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function TimeLineFeedListCard({props}){
+
+    const id = localStorage.getItem("id");
+
+
     const classes = useStyles();
     // const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);

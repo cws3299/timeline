@@ -45,7 +45,6 @@ function TimeCapsuleCard({props}) {
       headers: { Authorization: `Bearer ${_token}` },
     };
 
-    console.log('rrrrrr',props) 
     const handleOpen = () => {
         setOpen(true);
       };
