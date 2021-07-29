@@ -53,7 +53,7 @@ public class TimeCapsuleController {
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 		List<Timecapsule> tcList = timecapsuleService.getTcList(midx, page);
-		int[] pageList = timecapsuleService.getPageList(midx, page);
+//		int[] pageList = timecapsuleService.getPageList(midx, page);
 		System.out.println("tcList: " + tcList);
 		
 		return tcList;

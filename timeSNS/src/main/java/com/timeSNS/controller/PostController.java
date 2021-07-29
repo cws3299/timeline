@@ -32,6 +32,7 @@ import com.timeSNS.entity.Emotion;
 import com.timeSNS.entity.Notememory;
 import com.timeSNS.entity.Staymemory;
 import com.timeSNS.entity.Staymemoryreview;
+import com.timeSNS.entity.Timeline;
 import com.timeSNS.entity.Timelinecontent;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.repository.TimelinecontentRepository;
@@ -42,6 +43,7 @@ import com.timeSNS.service.StayMemoryReviewService;
 import com.timeSNS.service.StayMemoryService;
 import com.timeSNS.service.TagService;
 import com.timeSNS.service.TimeLineContentService;
+import com.timeSNS.service.TimeLineService;
 import com.timeSNS.util.SecurityUtil;
 
 @RestController
@@ -51,6 +53,7 @@ public class PostController {
 	public static final String AUTHORIZATION_HEADER = "Authorization";
 	
 	private TimeLineContentService timelinecontentService;
+	private TimeLineService timelineService;
 	private StayMemoryService staymemoryService;
 	private StayMemoryReviewService staymemoryreviewService;
 	private NoteMemoryService notememoryService;
@@ -63,7 +66,8 @@ public class PostController {
 	@Autowired
 	private TimelinecontentRepository timelinecontentRepository;
 	
-	public PostController(TimeLineContentService timelinecontentService, 
+	public PostController(TimeLineContentService timelinecontentService,
+			TimeLineService timelineService,
 			StayMemoryService staymemoryService,
 			StayMemoryReviewService staymemoryreviewService,
 			NoteMemoryService notememoryService,
@@ -71,6 +75,7 @@ public class PostController {
 			PostTagService posttagService,
 			EmotionService emotionService) {
 		this.timelinecontentService = timelinecontentService;
+		this.timelineService = timelineService;
 		this.staymemoryService = staymemoryService;
 		this.staymemoryreviewService = staymemoryreviewService;
 		this.notememoryService = notememoryService;
@@ -87,6 +92,8 @@ public class PostController {
 	public List<PostDto> postList(@PathVariable int tlidx, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
+		
+		Optional<Timeline> tlDetail = timelineService.getTlDetail(new Long(tlidx));
 		
 //		해당 타임라인에 속하는 게시글 가져오기
 		List<ContentDto> tlcList = timelinecontentService.getTlcList(tlidx, page);

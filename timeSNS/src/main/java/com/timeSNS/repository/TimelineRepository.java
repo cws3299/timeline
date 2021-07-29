@@ -12,6 +12,10 @@ public interface TimelineRepository extends JpaRepository<Timeline, Long>{
 	Page<Timeline> findByMidxAndTlpubynAndTldelyn(int midx, String tlpubyn, String tldelyn, Pageable pageable);
 	int countByMidx(int midx);
 	
+//	내 타임라인 페이징 처리를 위한 쿼리
+	Page<Timeline> findByMidxAndTldelyn(int midx, String tldelyn, Pageable pageable);
+	int countByMidxAndTlpubyn(int midx, String tlpubyn);
+	
 //	검색 내역 페이징 처리를 위한 쿼리
 	Page<Timeline> findByTltitleContainingAndTlpubynAndTldelyn(String tltitle, String tlpubyn, String tldelyn, Pageable pageable);
 	
