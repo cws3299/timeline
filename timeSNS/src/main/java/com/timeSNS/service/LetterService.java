@@ -10,7 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.timeSNS.dto.LetterMemberDto;
+import com.timeSNS.dto.LetterMemberDtoInterface;
 import com.timeSNS.entity.Letter;
+import com.timeSNS.entity.Member;
 import com.timeSNS.repository.LetterRepository;
 
 @Service
@@ -92,15 +95,35 @@ public class LetterService {
 
 	
 //	현재 페이지에 따른 받은 편지 목록 불러오기
-	public List<Letter> getRlList(int rmidx, int page) {
+	public List<LetterMemberDto> getRlList(int rmidx, int page) {
 		
-		Page<Letter> rlPage = letterRepository.findByRmidx(rmidx, PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "lregdate")));
-		List<Letter> rlList_ = rlPage.getContent();
-		List<Letter> rlList = new ArrayList<Letter>();
+		Page<LetterMemberDtoInterface> rlPage = letterRepository.findByRmidx(rmidx, PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<LetterMemberDtoInterface> rlList_ = rlPage.getContent();
+
+		List<LetterMemberDto> rlList = new ArrayList<LetterMemberDto>();
 		
 		for(int i = 0 ; i < rlList_.size() ; i++) {
-			rlList.add(rlList_.get(i));
+			
+			LetterMemberDto rlDetail = LetterMemberDto.builder()
+				.lidx((rlList_.get(i)).getLidx())
+				.tlcidx((rlList_.get(i)).getTlcidx())
+				.lidx_2((rlList_.get(i)).getLidx_2())
+				.smidx((rlList_.get(i)).getSmidx())
+				.smid((rlList_.get(i)).getSmid())
+				.smnickname((rlList_.get(i)).getSmnickname())
+				.smphoto((rlList_.get(i)).getSmphoto())
+				.rmidx((rlList_.get(i)).getRmidx())
+				.lregdate((rlList_.get(i)).getLregdate())
+				.lcontent((rlList_.get(i)).getLcontent())
+				.lreadyn((rlList_.get(i)).getLreadyn())
+				.lcategory((rlList_.get(i)).getLcategory())
+				.lphoto((rlList_.get(i)).getLphoto())
+				.build();
+			
+			rlList.add(rlDetail);
+			
 		}
+		
 		
 		return rlList;
 	}
@@ -110,14 +133,33 @@ public class LetterService {
 
 	
 //	현재 페이지에 따른 보낸 편지 목록 불러오기
-	public List<Letter> getSlList(int rmidx, int page) {
+	public List<LetterMemberDto> getSlList(int rmidx, int page) {
 		
-		Page<Letter> slPage = letterRepository.findBySmidx(rmidx, PageRequest.of(page-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "lregdate")));
-		List<Letter> slList_ = slPage.getContent();
-		List<Letter> slList = new ArrayList<Letter>();
+		Page<LetterMemberDtoInterface> slPage = letterRepository.findBySmidx(rmidx, PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<LetterMemberDtoInterface> slList_ = slPage.getContent();
+		
+		List<LetterMemberDto> slList = new ArrayList<LetterMemberDto>();
 		
 		for(int i = 0 ; i < slList_.size() ; i++) {
-			slList.add(slList_.get(i));
+			
+			LetterMemberDto slDetail = LetterMemberDto.builder()
+				.lidx((slList_.get(i)).getLidx())
+				.tlcidx((slList_.get(i)).getTlcidx())
+				.lidx_2((slList_.get(i)).getLidx_2())
+				.smidx((slList_.get(i)).getSmidx())
+				.rmidx((slList_.get(i)).getRmidx())
+				.rmid((slList_.get(i)).getRmid())
+				.rmnickname((slList_.get(i)).getRmnickname())
+				.rmphoto((slList_.get(i)).getRmphoto())
+				.lregdate((slList_.get(i)).getLregdate())
+				.lcontent((slList_.get(i)).getLcontent())
+				.lreadyn((slList_.get(i)).getLreadyn())
+				.lcategory((slList_.get(i)).getLcategory())
+				.lphoto((slList_.get(i)).getLphoto())
+				.build();
+			
+			slList.add(slDetail);
+			
 		}
 		
 		return slList;
@@ -125,6 +167,22 @@ public class LetterService {
 
 //----------------------------------------------------------------------------------------------------//	
 
+	
+//	인덱스 번호로 편지 정보와 회원정보 불러오기
+	public Letter getLetterMemberDetail(int lidx) {
+		
+//		편지 인덱스 번호 불러오기
+		Long lidx_ = new Long(lidx);
+//		인덱스 번호로 Optional<Letter> 찾아오기
+		Optional<Letter> letterDetail_ = letterRepository.findById(lidx_);
+//		Letter 엔티티로 변환해주기
+		Letter letterDetail = letterDetail_.get();
+		
+		return letterDetail;
+		
+	}
+
+//----------------------------------------------------------------------------------------------------//	
 	
 //	인덱스 번호로 편지 정보 불러오기
 	public Letter getLetterDetail(int lidx) {
@@ -139,7 +197,6 @@ public class LetterService {
 		return letterDetail;
 		
 	}
-
 	
 //----------------------------------------------------------------------------------------------------//	
 

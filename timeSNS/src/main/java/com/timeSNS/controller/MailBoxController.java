@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timeSNS.dto.LetterDto;
+import com.timeSNS.dto.LetterMemberDto;
 import com.timeSNS.entity.Letter;
+import com.timeSNS.entity.Member;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.service.LetterService;
 import com.timeSNS.service.TimeLineContentService;
@@ -52,12 +54,18 @@ public class MailBoxController {
 	
 //	받은 편지함 현재 페이지에 맞게 목록 불러오기
 	@PostMapping("/reception")
-	public List<Letter> reception(@RequestParam(defaultValue = "1") int page) {
+	public List<LetterMemberDto> reception(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Letter> rlList = letterService.getRlList(midx, page);
-		
+		List<LetterMemberDto> rlList = letterService.getRlList(midx, page);
+		Member member = (memberRepository.findById(new Long(midx))).get();
+
+		for(int i = 0 ; i < rlList.size() ; i++) {
+			(rlList.get(i)).setRmid(member.getUsername());
+			(rlList.get(i)).setRmnickname(member.getMnickname());
+			(rlList.get(i)).setRmphoto(member.getMphoto());
+		}
 		
 		return rlList;
 	}
@@ -68,12 +76,18 @@ public class MailBoxController {
 	
 //	보낸 편지함 현재 페이지에 맞게 목록 불러오기
 	@PostMapping("/send")
-	public List<Letter> send(@RequestParam(defaultValue = "1") int page) {
+	public List<LetterMemberDto> send(@RequestParam(defaultValue = "1") int page) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<Letter> slList = letterService.getSlList(midx, page);
-		
+		List<LetterMemberDto> slList = letterService.getSlList(midx, page);
+		Member member = (memberRepository.findById(new Long(midx))).get();
+
+		for(int i = 0 ; i < slList.size() ; i++) {
+			(slList.get(i)).setSmid(member.getUsername());
+			(slList.get(i)).setSmnickname(member.getMnickname());
+			(slList.get(i)).setSmphoto(member.getMphoto());
+		}
 		
 		return slList;
 	}
@@ -84,18 +98,42 @@ public class MailBoxController {
 	
 //	편지 선택 후 자세히 보기(읽기)
 	@GetMapping("/detail")
-	public Letter detail(@RequestParam int lidx) {
+	public LetterMemberDto detail(@RequestParam int lidx) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
 //		편지 내용 가져오기
 		Letter letter = letterService.getLetterDetail(lidx);
 		
+//		받은 사람, 보낸 사람 정보 가져오기
+		Member rmember = (memberRepository.findById(new Long(letter.getRmidx()))).get();
+		Member smember = (memberRepository.findById(new Long(letter.getSmidx()))).get();
+		
+//		편지 내용 DTO에 넣어주기
+		LetterMemberDto letterDto = LetterMemberDto.builder()
+				.lidx((letter.getLidx()).intValue())
+				.tlcidx(letter.getTlcidx())
+				.lidx_2(letter.getLidx_2())
+				.smidx(letter.getSmidx())
+				.smid(smember.getUsername())
+				.smnickname(smember.getMnickname())
+				.smphoto(smember.getMphoto())
+				.rmidx(letter.getRmidx())
+				.rmid(rmember.getUsername())
+				.rmnickname(rmember.getMnickname())
+				.rmphoto(rmember.getMphoto())
+				.lregdate(letter.getLregdate())
+				.lcontent(letter.getLcontent())
+				.lreadyn(letter.getLreadyn())
+				.lcategory(letter.getLcategory())
+				.lphoto(letter.getLphoto())
+				.build();
+		
 //		편지 확인 여부 Y로 바꿔주기
 		letter.setLreadyn("Y");
 		letterService.getLetterWrite(letter);
 		
-		return letter;
+		return letterDto;
 	}
 	
 	
