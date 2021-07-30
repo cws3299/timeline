@@ -1,7 +1,7 @@
 import React , {useState , useRef, useCallback, useEffect} from "react";
 import useFetch from "./ReceiveLetterContentuseFetch";
 import './ReceiveLetterContent.css';
-// import Home2Card from "./Home2Card";
+import ReceiveLetterCard from "./ReceiveLetterCard";
 
 
 function ReceiveLetterContent() {
@@ -35,7 +35,7 @@ function ReceiveLetterContent() {
     <div className="ReceiveLetterContent">
         
         {list.map((item, i) => (
-          <div>{item.lcontent}</div>
+          <ReceiveLetterCard props={item}/>
         ))}
       <div ref={loader} />
     </div>

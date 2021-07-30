@@ -13,6 +13,7 @@ import Home2 from './Home2'
 import TimeCapsuleCreate from './TimeCapsuleCreate'
 import Letter from './Letter'
 import ReceiveLetter from './ReceiveLetter'
+import AnswerLetter from './AnswerLetter'
 
 
 export {
@@ -31,4 +32,5 @@ export {
     TimeCapsuleCreate,
     Letter,
     ReceiveLetter,
+    AnswerLetter,
 };

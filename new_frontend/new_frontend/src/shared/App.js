@@ -16,6 +16,7 @@ import {
     TimeCapsuleCreate,
     Letter,
     ReceiveLetter,
+    AnswerLetter,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -51,6 +52,7 @@ function App() {
               <PrivateRoute path="/main/TimeCapsuleCreate" exact component={TimeCapsuleCreate} />
               <PrivateRoute path="/main/Letter" exact component={Letter} />
               <PrivateRoute path="/main/ReceiveLetter" exact component={ReceiveLetter} />
+              <PrivateRoute path="/main/AnswerLetter" exact component={AnswerLetter} />
          
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
