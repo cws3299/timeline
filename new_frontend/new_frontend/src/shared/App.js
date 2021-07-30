@@ -14,6 +14,8 @@ import {
     NotFound,
     TimeLineFeed,
     TimeCapsuleCreate,
+    Letter,
+    ReceiveLetter,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -47,6 +49,8 @@ function App() {
               <PrivateRoute path="/main/timeline" exact component={TimeLine} />
               <PrivateRoute path="/main/TimeLineFeed" exact component={TimeLineFeed} />
               <PrivateRoute path="/main/TimeCapsuleCreate" exact component={TimeCapsuleCreate} />
+              <PrivateRoute path="/main/Letter" exact component={Letter} />
+              <PrivateRoute path="/main/ReceiveLetter" exact component={ReceiveLetter} />
          
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
