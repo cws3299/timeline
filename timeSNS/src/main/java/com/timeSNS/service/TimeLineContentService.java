@@ -61,10 +61,28 @@ public class TimeLineContentService {
 //----------------------------------------------------------------------------------------------------//
 
 	
-//	현재 페이지에 따른 게시글 불러오기
+//	현재 페이지에 따른 타인 게시글 불러오기
 	public List<ContentDto> getTlcList(int tlidx, int page) {
 		
 		Page<ContentDto> tlcPage = timelinecontentRepository.findByTlidxAndTlcpubynAndTlcdelyn(tlidx, "Y", "N", PageRequest.of(page-1, PAGE_POST_COUNT));
+		List<ContentDto> tlcList_ = tlcPage.getContent();
+		List<ContentDto> tlcList = new ArrayList<>();
+		
+		for(int i = 0 ; i < tlcList_.size() ; i++) {
+			tlcList.add(tlcList_.get(i));
+		}
+		
+		return tlcList;
+	}
+	
+	
+//----------------------------------------------------------------------------------------------------//
+
+	
+//	현재 페이지에 따른 본인 게시글 불러오기
+	public List<ContentDto> getMyTlcList(int tlidx, int page) {
+		
+		Page<ContentDto> tlcPage = timelinecontentRepository.findByTlidxAndTlcdelyn(tlidx, "N", PageRequest.of(page-1, PAGE_POST_COUNT));
 		List<ContentDto> tlcList_ = tlcPage.getContent();
 		List<ContentDto> tlcList = new ArrayList<>();
 		

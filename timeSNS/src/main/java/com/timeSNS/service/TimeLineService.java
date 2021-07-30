@@ -64,6 +64,41 @@ public class TimeLineService {
 		return pageList;
 	}
 	
+//----------------------------------------------------------------------------------------------------//	
+
+	
+//	내 모든 타임라인 목록 불러오기
+	public List<TimeLineMemberDto> getTlListAll(int midx) {
+		
+		List<Timeline> tlList_ = timelineRepository.findByMidxAndTldelyn(midx, "N");
+		List<TimeLineMemberDto> tlList = new ArrayList<>();
+		
+		
+		for(int i = 0 ; i < tlList_.size() ; i++) {
+			Long midx_ = new Long(midx);
+			Member member = (memberRepository.findById(midx_)).get();
+			
+			TimeLineMemberDto tlmDto = TimeLineMemberDto.builder()
+					.tlidx(tlList_.get(i).getTlidx())
+					.midx(tlList_.get(i).getMidx())
+					.mid(member.getUsername())
+					.mnickname(member.getMnickname())
+					.mphoto(member.getMphoto())
+					.tltitle(tlList_.get(i).getTltitle())
+					.tlcategory(tlList_.get(i).getTlcategory())
+					.tlintroduce(tlList_.get(i).getTlintroduce())
+					.tlregdate(tlList_.get(i).getTlregdate())
+					.tlpubyn(tlList_.get(i).getTlpubyn())
+					.tldelyn(tlList_.get(i).getTldelyn())
+					.build();
+			
+			tlList.add(tlmDto);
+			
+			System.out.println("tlmDto: " + tlmDto.getTlidx());
+		}
+		
+		return tlList;
+	}
 	
 //----------------------------------------------------------------------------------------------------//	
 
