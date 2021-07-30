@@ -93,11 +93,24 @@ public class PostController {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
+//		타임라인 작성자 확인하기
 		Optional<Timeline> tlDetail = timelineService.getTlDetail(new Long(tlidx));
+		Timeline tlDetail_ = tlDetail.get();
+		int tlMidx = tlDetail_.getMidx();
 		
-//		해당 타임라인에 속하는 게시글 가져오기
-		List<ContentDto> tlcList = timelinecontentService.getTlcList(tlidx, page);
-
+		List<ContentDto> tlcList = null;
+		if(midx == tlMidx) {
+			
+//			내 타임라인에 속하는 게시글 가져오기
+			tlcList = timelinecontentService.getMyTlcList(tlidx, page);
+		
+		}else {
+			
+//			타인 작성 타임라인에 속하는 게시글 가져오기
+			tlcList = timelinecontentService.getTlcList(tlidx, page);
+			
+		}
+		
 //		각 게시글 넣어줄 PostDto 리스트
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
 		

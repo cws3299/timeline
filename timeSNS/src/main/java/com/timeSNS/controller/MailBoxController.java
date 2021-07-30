@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,25 +104,45 @@ public class MailBoxController {
 	
 //	편지 보내기
 	@PostMapping("/sending")
-	public void sending(@RequestParam int tlcidx, @ModelAttribute LetterDto letterDto) throws Exception {
+	public void sending(@RequestParam int tlcidx, @ModelAttribute LetterDto letterDto, HttpServletRequest request) throws Exception {
 		
 //		이때 midx는 smidx(보낸사람 인덱스)
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		Long tlcidx_ = new Long(tlcidx);
+		
+		String savedName = null;
+		if(letterDto.getLphoto() != null) {
+		
+	//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+			UUID uuid = UUID.randomUUID();
+	//		이미지 파일 이름 저장(uuid + _ + 파일이름)
+			savedName = uuid.toString() + "_" + letterDto.getLphoto().getOriginalFilename();
 			
-//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
-		UUID uuid = UUID.randomUUID();
-//		이미지 파일 이름 저장(uuid + _ + 파일이름)
-		String savedName = uuid.toString() + "_" + letterDto.getLphoto().getOriginalFilename();
-		
-//		기본 파일 저장 장소
-		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-		String filePath = rootPath + "/" + savedName;
-		
-//		파일 업로드 작업 수행
-		File file = new File(filePath);
-		File dest = file;
-		letterDto.getLphoto().transferTo(dest);
+	//		기본 파일 저장 장소
+	//		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+			String rootPath = request.getSession().getServletContext().getRealPath("/resources");
+			String filePath = rootPath;
+			
+	//		파일 업로드 작업 수행
+			File file = new File(filePath);
+			
+			if (!file.exists()) {
+				try{
+				    file.mkdir(); //폴더 없을 시 폴더 생성
+				    System.out.println("폴더가 생성되었습니다.");
+			        } 
+			        catch(Exception e){
+				    e.getStackTrace();
+				}        
+		         }else {
+				System.out.println("이미 폴더가 생성되어 있습니다.");
+			}
+			
+			File dest = new File(file + "/" + savedName);
+			letterDto.getLphoto().transferTo(dest);
+			System.out.println("폴더 경로: " + dest);
+			
+		}
 		
 //		편지 받는 사람 인덱스
 		int rmidx = ((timelinecontentService.getTlcDetail(tlcidx_)).get()).getMidx();
@@ -150,7 +171,7 @@ public class MailBoxController {
 	
 //	답장 보내기
 	@PostMapping("/reply")
-	public void reply(@RequestParam int lidx, @ModelAttribute LetterDto letterDto) throws IllegalStateException, IOException {
+	public void reply(@RequestParam int lidx, @ModelAttribute LetterDto letterDto, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
@@ -161,21 +182,39 @@ public class MailBoxController {
 		int tlcidx = letter_.getTlcidx();
 		int rmidx = letter_.getRmidx();
 		
+		String savedName = null;
+		if(letterDto.getLphoto() != null) {
 
-//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
-		UUID uuid = UUID.randomUUID();
-//		이미지 파일 이름 저장(uuid + _ + 파일이름)
-		String savedName = uuid.toString() + "_" + letterDto.getLphoto().getOriginalFilename();
+	//		UUID 생셩 (Universal Unique IDentifier, 	범용 고유 식별자)
+			UUID uuid = UUID.randomUUID();
+	//		이미지 파일 이름 저장(uuid + _ + 파일이름)
+			savedName = uuid.toString() + "_" + letterDto.getLphoto().getOriginalFilename();
+			
+	//		기본 파일 저장 장소
+	//		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+			String rootPath = request.getSession().getServletContext().getRealPath("/resources");
+			String filePath = rootPath;
+			
+	//		파일 업로드 작업 수행
+			File file = new File(filePath);
+			
+			if (!file.exists()) {
+				try{
+				    file.mkdir(); //폴더 없을 시 폴더 생성
+				    System.out.println("폴더가 생성되었습니다.");
+			        } 
+			        catch(Exception e){
+				    e.getStackTrace();
+				}        
+		         }else {
+				System.out.println("이미 폴더가 생성되어 있습니다.");
+			}
+			
+			File dest = new File(file + "/" + savedName);
+			letterDto.getLphoto().transferTo(dest);
+			System.out.println("폴더 경로: " + dest);
 		
-//		기본 파일 저장 장소
-		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-		String filePath = rootPath + "/" + savedName;
-		
-//		파일 업로드 작업 수행
-		File file = new File(filePath);
-		File dest = file;
-		letterDto.getLphoto().transferTo(dest);
-		
+		}
 		
 		Letter letter_2 = Letter.builder()
 			.tlcidx(tlcidx)
