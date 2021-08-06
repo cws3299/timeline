@@ -1,0 +1,17 @@
+.SendLetter{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.SendLetterBox{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.SendLetterBox2{
+    width:1000px;
+}

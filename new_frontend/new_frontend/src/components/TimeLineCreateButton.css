@@ -1,10 +1,10 @@
-.PostButton{
+.TimeLineCreateButton{
     display: flex;
     justify-content: center;
     align-items: center;
     position:fixed;
     right:20px;
-    bottom:20px;
+    bottom:190px;
     width:75px;
     height:75px;
     border-radius: 50%;
@@ -14,7 +14,7 @@
     font-family: 'Jua', sans-serif;
 }
 
-.PostButton:hover{
+.TimeLineCreateButton:hover{
     background-color: gray;
     color:white
 }
@@ -22,15 +22,17 @@
 
 
 @media screen and (max-width: 1250px) {
-    .PostButton{
+    .TimeLineCreateButton{
         position:fixed;
         right:20px;
-        bottom:20px;
+        bottom:105px;
         width:75px;
         height:75px;
         border-radius: 50%;
         background-color: black;
         display:none;
-        font-family: 'Jua', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

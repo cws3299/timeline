@@ -12,7 +12,8 @@ function PostButton(){
 
     return(
       <div className = "PostButton" onClick={goPost}>
-        <i class="fas fa-plus"></i>
+        글 작성
+        {/* <i class="fas fa-plus"></i> */}
       </div>
     )
 }

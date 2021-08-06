@@ -14,6 +14,11 @@ import TimeCapsuleCreate from './TimeCapsuleCreate'
 import Letter from './Letter'
 import ReceiveLetter from './ReceiveLetter'
 import AnswerLetter from './AnswerLetter'
+import SendLetter from './SendLetter'
+import BackLetter from './BackLetter'
+import GoLetter from './GoLetter'
+import CreateTimeLine from './CreateTimeLine'
+import StartFeed from './StartFeed'
 
 
 export {
@@ -33,4 +38,9 @@ export {
     Letter,
     ReceiveLetter,
     AnswerLetter,
+    SendLetter,
+    BackLetter,
+    GoLetter,
+    CreateTimeLine,
+    StartFeed,
 };
