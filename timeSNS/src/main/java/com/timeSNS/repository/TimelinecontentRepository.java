@@ -12,7 +12,7 @@ import com.timeSNS.entity.Timelinecontent;
 
 public interface TimelinecontentRepository extends JpaRepository<Timelinecontent, Long>{
 	
-//	페이징 처리를 위한 쿼리
+//	타인 작성 게시글 페이징 처리를 위한 쿼리
 	@Query(value = 
 			"SELECT TIMELINECONTENT.TLCIDX, TIMELINECONTENT.TLIDX, TIMELINECONTENT.MIDX, "
 			+ "MEMBER.MID, MEMBER.MNICKNAME, MEMBER.MPHOTO, TIMELINECONTENT.TLCREGDATE, "
@@ -37,6 +37,29 @@ public interface TimelinecontentRepository extends JpaRepository<Timelinecontent
 			nativeQuery = true)
 	Page<ContentDto> findByTlidxAndTlcpubynAndTlcdelyn(int tlidx, String tlcpubyn, String tlcdelyn, Pageable pageable);
 	int countByTlidx(int tlidx);
+	
+//	본인 작성 게시글 페이징 처리를 위한 쿼리
+	@Query(value = 
+			"SELECT TIMELINECONTENT.TLCIDX, TIMELINECONTENT.TLIDX, TIMELINECONTENT.MIDX, "
+			+ "MEMBER.MID, MEMBER.MNICKNAME, MEMBER.MPHOTO, TIMELINECONTENT.TLCREGDATE, "
+			+ "TIMELINECONTENT.TLCDATE, TIMELINECONTENT.TLCPLACE, TIMELINECONTENT.TLCIMAGE, TIMELINECONTENT.TLCCONTENT, "
+			+ "TIMELINECONTENT.TLCEMOTION, TIMELINECONTENT.TLCPUBYN, TIMELINECONTENT.TLCDELYN, TIMELINECONTENT.TLCTAG "
+			+ "FROM TIMELINECONTENT "
+			+ "JOIN MEMBER "
+			+ "ON TIMELINECONTENT.MIDX = MEMBER.MIDX "
+			+ "WHERE TIMELINECONTENT.TLCDELYN = 'N' "
+			+ "AND TIMELINECONTENT.TLIDX = ?1 "
+			+ "ORDER BY TIMELINECONTENT.TLCREGDATE DESC",
+			countQuery = 
+			"SELECT COUNT(*) "
+			+ "FROM TIMELINECONTENT "
+			+ "JOIN MEMBER "
+			+ "ON TIMELINECONTENT.MIDX = MEMBER.MIDX "
+			+ "WHERE TIMELINECONTENT.TLCDELYN = 'N' "
+			+ "AND TIMELINECONTENT.TLIDX = ?1 "
+			+ "ORDER BY TIMELINECONTENT.TLCREGDATE DESC",
+			nativeQuery = true)
+	Page<ContentDto> findByTlidxAndTlcdelyn(int tlidx, String tlcdelyn, Pageable pageable);
 	
 //	검색 내역 페이징 처리를 위한 쿼리
 	@Query(value = 

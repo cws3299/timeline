@@ -1,0 +1,17 @@
+.Post{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.PostBox{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.PostBox2{
+    width:1000px;
+}

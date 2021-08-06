@@ -32,6 +32,7 @@ import com.timeSNS.entity.Emotion;
 import com.timeSNS.entity.Notememory;
 import com.timeSNS.entity.Staymemory;
 import com.timeSNS.entity.Staymemoryreview;
+import com.timeSNS.entity.Timeline;
 import com.timeSNS.entity.Timelinecontent;
 import com.timeSNS.repository.MemberRepository;
 import com.timeSNS.repository.TimelinecontentRepository;
@@ -42,6 +43,7 @@ import com.timeSNS.service.StayMemoryReviewService;
 import com.timeSNS.service.StayMemoryService;
 import com.timeSNS.service.TagService;
 import com.timeSNS.service.TimeLineContentService;
+import com.timeSNS.service.TimeLineService;
 import com.timeSNS.util.SecurityUtil;
 
 @RestController
@@ -51,6 +53,7 @@ public class PostController {
 	public static final String AUTHORIZATION_HEADER = "Authorization";
 	
 	private TimeLineContentService timelinecontentService;
+	private TimeLineService timelineService;
 	private StayMemoryService staymemoryService;
 	private StayMemoryReviewService staymemoryreviewService;
 	private NoteMemoryService notememoryService;
@@ -63,7 +66,8 @@ public class PostController {
 	@Autowired
 	private TimelinecontentRepository timelinecontentRepository;
 	
-	public PostController(TimeLineContentService timelinecontentService, 
+	public PostController(TimeLineContentService timelinecontentService,
+			TimeLineService timelineService,
 			StayMemoryService staymemoryService,
 			StayMemoryReviewService staymemoryreviewService,
 			NoteMemoryService notememoryService,
@@ -71,6 +75,7 @@ public class PostController {
 			PostTagService posttagService,
 			EmotionService emotionService) {
 		this.timelinecontentService = timelinecontentService;
+		this.timelineService = timelineService;
 		this.staymemoryService = staymemoryService;
 		this.staymemoryreviewService = staymemoryreviewService;
 		this.notememoryService = notememoryService;
@@ -88,9 +93,24 @@ public class PostController {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-//		해당 타임라인에 속하는 게시글 가져오기
-		List<ContentDto> tlcList = timelinecontentService.getTlcList(tlidx, page);
-
+//		타임라인 작성자 확인하기
+		Optional<Timeline> tlDetail = timelineService.getTlDetail(new Long(tlidx));
+		Timeline tlDetail_ = tlDetail.get();
+		int tlMidx = tlDetail_.getMidx();
+		
+		List<ContentDto> tlcList = null;
+		if(midx == tlMidx) {
+			
+//			내 타임라인에 속하는 게시글 가져오기
+			tlcList = timelinecontentService.getMyTlcList(tlidx, page);
+		
+		}else {
+			
+//			타인 작성 타임라인에 속하는 게시글 가져오기
+			tlcList = timelinecontentService.getTlcList(tlidx, page);
+			
+		}
+		
 //		각 게시글 넣어줄 PostDto 리스트
 		List<PostDto> postDtoList = new ArrayList<PostDto>();
 		

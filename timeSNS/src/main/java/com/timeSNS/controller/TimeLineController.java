@@ -39,21 +39,19 @@ public class TimeLineController {
 		this.timelineService = timelineService;
 	}
 	
-	
 //----------------------------------------------------------------------------------------------------//	
 	
 	
-//	본인 작성 타임라인 목록 가져오기
-	@PostMapping("/list")
-	public List<TimeLineMemberDto> list(@RequestParam(defaultValue = "1") int page) {
+//	본인 작성 타임라인 목록 전체 가져오기
+	@PostMapping("/listall")
+	public List<TimeLineMemberDto> listAll() {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<TimeLineMemberDto> tlList = timelineService.getTlList(midx, page);
+		List<TimeLineMemberDto> tlList = timelineService.getTlListAll(midx);
 		
 		return tlList;
 	}
-	
 
 //----------------------------------------------------------------------------------------------------//	
 	
@@ -64,7 +62,19 @@ public class TimeLineController {
 		
 		int midx_ = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-		List<TimeLineMemberDto> tlList = timelineService.getTlList(midx, page);
+		List<TimeLineMemberDto> tlList = null;
+		
+//		본인 작성 타임라인을 가져오는 경우
+		if(midx == midx_) {
+			
+			tlList = timelineService.getMyTlList(midx, page);
+			
+//		타인 작성 타임라인을 가져오는 경우
+		}else {
+			
+			tlList = timelineService.getTlList(midx, page);
+			
+		}
 		
 		return tlList;
 	}
@@ -100,6 +110,11 @@ public class TimeLineController {
 		Long tlidx_ = new Long(tlidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();	
 		
+		Timeline findTl = (timelineRepository.findById(tlidx_)).get();
+		
+		timeline.setMidx(midx);
+		timeline.setTlregdate(findTl.getTlregdate());
+		timeline.setTldelyn(findTl.getTldelyn());
 		timeline.setTlidx(tlidx_);
 		
 		timelineRepository.save(timeline);
