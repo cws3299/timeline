@@ -46,7 +46,7 @@ public class TimeCapsuleController {
 //----------------------------------------------------------------------------------------------------//	
 	
 	
-//	타임캡슐 리스트 메소드
+//	���엫罹≪뒓 由ъ뒪�듃 硫붿냼�뱶
 	@PostMapping("/main")
 	public List<Timecapsule> main(@RequestParam(defaultValue = "1") int page) {
 		
@@ -63,18 +63,18 @@ public class TimeCapsuleController {
 //----------------------------------------------------------------------------------------------------//	
 	
 	
-//	타임캡슐 내용 확인 메소드
+//	���엫罹≪뒓 �궡�슜 �솗�씤 硫붿냼�뱶
 	@GetMapping("/detail")
 	public Timecapsule detail(@RequestParam int tcidx) {
 		
 		Long tcidx_ = new Long(tcidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 
-//		TCIDX 값에 따라 데이터 가져오기
+//		TCIDX 媛믪뿉 �뵲�씪 �뜲�씠�꽣 媛��졇�삤湲�
 		Optional<Timecapsule> tcDetail_ = timecapsuleService.getTcDetail(tcidx_);
 		Timecapsule tcDetail = tcDetail_.get();
 		
-//		확인여부 Y로 바꿔주기
+//		�솗�씤�뿬遺� Y濡� 諛붽퓭二쇨린
 		tcDetail.setTccheckyn("Y");
 		timecapsuleRepository.save(tcDetail);
 		
@@ -85,13 +85,13 @@ public class TimeCapsuleController {
 //----------------------------------------------------------------------------------------------------//	
 	
 	
-//	타임캡슐 작성 메소드
+//	���엫罹≪뒓 �옉�꽦 硫붿냼�뱶
 	@PostMapping("/write")
 	public void write(@RequestBody TimeCapsuleDto timecapsuleDto) {
 		
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-//		받아온 timecapsule json 파일에 작성자 인덱스와 작성시간, 확인여부(기본값 N) 넣어주기
+//		諛쏆븘�삩 timecapsule json �뙆�씪�뿉 �옉�꽦�옄 �씤�뜳�뒪�� �옉�꽦�떆媛�, �솗�씤�뿬遺�(湲곕낯媛� N) �꽔�뼱二쇨린
 		
 		Timecapsule timecapsule = Timecapsule.builder()
 			.midx(midx)
@@ -104,7 +104,7 @@ public class TimeCapsuleController {
 			.tcregdate(LocalDateTime.now())
 			.build();
 		
-//		내용 저장하기
+//		�궡�슜 ���옣�븯湲�
 		timecapsuleService.getTcWrite(timecapsule);
 		
 	}
@@ -113,21 +113,21 @@ public class TimeCapsuleController {
 //----------------------------------------------------------------------------------------------------//	
 	
 	
-//	피드백 작성 메소드
+//	�뵾�뱶諛� �옉�꽦 硫붿냼�뱶
 	@PostMapping("/feedback/{tcidx}")
 	public void feedback(@PathVariable int tcidx, @RequestBody TimeCapsuleDto timecapsuleDto) {
 		
 		Long tcidx_ = new Long(tcidx);
 		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
 		
-//		TCIDX 값에 따라 데이터 가져오기
+//		TCIDX 媛믪뿉 �뵲�씪 �뜲�씠�꽣 媛��졇�삤湲�
 		Optional<Timecapsule> tcDetail_ = timecapsuleService.getTcDetail(tcidx_);
 		Timecapsule tcDetail = tcDetail_.get();
 		
-//		feedback 내용 넣어주기
+//		feedback �궡�슜 �꽔�뼱二쇨린
 		tcDetail.setTcfeedback(timecapsuleDto.getTcfeedback());
 		
-//		변경내용 저장하기
+//		蹂�寃쎈궡�슜 ���옣�븯湲�
 		timecapsuleRepository.save(tcDetail);
 		
 	}
