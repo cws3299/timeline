@@ -60,11 +60,12 @@ public class MailBoxController {
 		
 		List<LetterMemberDto> rlList = letterService.getRlList(midx, page);
 		Member member = (memberRepository.findById(new Long(midx))).get();
-
-		for(int i = 0 ; i < rlList.size() ; i++) {
-			(rlList.get(i)).setRmid(member.getUsername());
-			(rlList.get(i)).setRmnickname(member.getMnickname());
-			(rlList.get(i)).setRmphoto(member.getMphoto());
+		if(rlList != null) {
+			for(int i = 0 ; i < rlList.size() ; i++) {
+				(rlList.get(i)).setRmid(member.getUsername());
+				(rlList.get(i)).setRmnickname(member.getMnickname());
+				(rlList.get(i)).setRmphoto(member.getMphoto());
+			}
 		}
 		
 		return rlList;
@@ -83,12 +84,13 @@ public class MailBoxController {
 		List<LetterMemberDto> slList = letterService.getSlList(midx, page);
 		Member member = (memberRepository.findById(new Long(midx))).get();
 
-		for(int i = 0 ; i < slList.size() ; i++) {
-			(slList.get(i)).setSmid(member.getUsername());
-			(slList.get(i)).setSmnickname(member.getMnickname());
-			(slList.get(i)).setSmphoto(member.getMphoto());
+		if(slList != null) {
+			for(int i = 0 ; i < slList.size() ; i++) {
+				(slList.get(i)).setSmid(member.getUsername());
+				(slList.get(i)).setSmnickname(member.getMnickname());
+				(slList.get(i)).setSmphoto(member.getMphoto());
+			}
 		}
-		
 		return slList;
 	}
 	
@@ -218,7 +220,7 @@ public class MailBoxController {
 		
 //		기존 편지에서 게시글 번호와 받는 사람 인덱스 가져오기
 		int tlcidx = letter_.getTlcidx();
-		int rmidx = letter_.getRmidx();
+		int rmidx = letter_.getSmidx();
 		
 		String savedName = null;
 		if(letterDto.getLphoto() != null) {
