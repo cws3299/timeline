@@ -218,7 +218,7 @@ public class MailBoxController {
 		
 //		기존 편지에서 게시글 번호와 받는 사람 인덱스 가져오기
 		int tlcidx = letter_.getTlcidx();
-		int rmidx = letter_.getRmidx();
+		int rmidx = letter_.getSmidx();
 		
 		String savedName = null;
 		if(letterDto.getLphoto() != null) {

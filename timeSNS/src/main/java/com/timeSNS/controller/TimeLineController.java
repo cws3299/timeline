@@ -38,26 +38,12 @@ public class TimeLineController {
 		this.userService = userService;
 		this.timelineService = timelineService;
 	}
-	
-//----------------------------------------------------------------------------------------------------//	
-	
-	
-//	본인 작성 타임라인 목록 전체 가져오기
-	@PostMapping("/listall")
-	public List<TimeLineMemberDto> listAll() {
-		
-		int midx = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
-		
-		List<TimeLineMemberDto> tlList = timelineService.getTlListAll(midx);
-		
-		return tlList;
-	}
 
 //----------------------------------------------------------------------------------------------------//	
 	
 	
 //	해당 회원 작성 타임라인 목록 가져오기
-	@PostMapping("/tllist")
+	@PostMapping("/list")
 	public List<TimeLineMemberDto> list(@RequestParam int midx, @RequestParam(defaultValue = "1") int page) {
 		
 		int midx_ = ((memberRepository.findByUsername(SecurityUtil.getCurrentUsername().get())).getMidx()).intValue();
