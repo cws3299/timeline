@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { config } from '../../shared/config'
-import { useSelector, useDispatch } from "react-redux";
 
-function TimeLineFeedListuseFetch({query, page}) {
-  const tlidxx = useSelector(state => state.timelinefeed.homefeed);
+function FollowListuseFetch(query, page) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
@@ -18,7 +16,7 @@ function TimeLineFeedListuseFetch({query, page}) {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.post(`${url}/post/list/${tlidxx}`,null,token)
+      const res = await axios.get(`${url}/follow/followtl/list?page=${page}`,token)
       await setList((prev) => [...prev, ...res.data]);
     //   console.log('u',list)
       setLoading(false);
@@ -34,4 +32,4 @@ function TimeLineFeedListuseFetch({query, page}) {
   return { loading, error, list };
 }
 
-export default TimeLineFeedListuseFetch;
+export default FollowListuseFetch;

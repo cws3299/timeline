@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { config } from '../../shared/config'
+import { config } from '../../../shared/config'
 import { useSelector, useDispatch } from "react-redux";
 
-function TimeLineFeedListuseFetch({query, page}) {
-  const tlidxx = useSelector(state => state.timelinefeed.homefeed);
+function SearchPostUsefetch(query, page) {
+  const searchUser = useSelector(state => state.Search.searchfeed);
+  console.log('--------------12',searchUser)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
@@ -18,9 +19,11 @@ function TimeLineFeedListuseFetch({query, page}) {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.post(`${url}/post/list/${tlidxx}`,null,token)
+      const res = await axios.get(`${url}/search/post?content=${searchUser}&page=${page}`,token)
+      console.log('restt',res.data)
       await setList((prev) => [...prev, ...res.data]);
     //   console.log('u',list)
+      console.log('listtt',list)
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -34,4 +37,4 @@ function TimeLineFeedListuseFetch({query, page}) {
   return { loading, error, list };
 }
 
-export default TimeLineFeedListuseFetch;
+export default SearchPostUsefetch;

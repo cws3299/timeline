@@ -42,16 +42,16 @@ function PostContent() {
       headers: { Authorization: `Bearer ${_token}` },
     };
 
-    const goTimeline = ({props}) => {
-      console.log('props',props)
+    const goTimeline = () => {
+      // console.log('props',props)
       history.push({
-        pathname: `/post/list/${props}`,
+        pathname: `/main/timeline/`,
         })
     } 
 
     const sendQuery = useCallback(async () =>{
         try{
-            const res = await axios.post(`${url}/timeline/list`,null,token)
+            const res = await axios.post(`${url}/timeline/listall`,null,token)
             console.log('res',res)
             await setTimelines((prev) => [...prev, ...res.data])
         }catch (err){
@@ -96,11 +96,11 @@ function PostContent() {
       console.log(tlcimage)
       // 서버의 upload API 호출
       const res = await axios.post(`${url}/post/writepost/${choice_timeline_idx}`, formData, token)
-      // .then(()=>{
-      //   goTimeline(choice_timeline_idx)
-      // }).catch(()=>{
-      //   alert('날짜 확인 버튼을 한 번 더 눌러주세요')
-      // })
+      .then(()=>{
+        goTimeline(choice_timeline_idx)
+      }).catch(()=>{
+        alert('날짜 확인 버튼을 한 번 더 눌러주세요')
+      })
     }
 
     const [state, setState] = React.useState('');

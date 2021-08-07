@@ -19,6 +19,7 @@ import BackLetter from './BackLetter'
 import GoLetter from './GoLetter'
 import CreateTimeLine from './CreateTimeLine'
 import StartFeed from './StartFeed'
+import FollowList from './FollowList'
 
 
 export {
@@ -43,4 +44,5 @@ export {
     GoLetter,
     CreateTimeLine,
     StartFeed,
+    FollowList,
 };

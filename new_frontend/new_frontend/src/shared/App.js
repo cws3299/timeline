@@ -22,6 +22,7 @@ import {
     GoLetter,
     CreateTimeLine,
     StartFeed,
+    FollowList,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -63,6 +64,7 @@ function App() {
               <PrivateRoute path="/main/BackLetter" exact component={BackLetter} />
               <PrivateRoute path="/main/CreateTimeLine" exact component={CreateTimeLine} />
               <PrivateRoute path="/main/StartFeed" exact component={StartFeed} />
+              <PrivateRoute path="/main/FollowList" exact component={FollowList} />
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
           {/* <Route component={NotFound} /> */}
