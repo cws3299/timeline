@@ -139,6 +139,7 @@ public class UserService {
 		
 		for(int i = 0 ; i < memberList_.size() ; i++) {
 			MemberSearchDto memberDto = MemberSearchDto.builder()
+					.midx(((memberList_.get(i)).getMidx()).intValue())
 					.mid((memberList_.get(i)).getUsername())
 					.mnickname((memberList_.get(i)).getMnickname())
 					.mproduce((memberList_.get(i)).getMproduce())

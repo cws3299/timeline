@@ -60,7 +60,7 @@ public class MailBoxController {
 		
 		List<LetterMemberDto> rlList = letterService.getRlList(midx, page);
 		Member member = (memberRepository.findById(new Long(midx))).get();
-		if(rlList != null) {
+		if(rlList.size() != 0) {
 			for(int i = 0 ; i < rlList.size() ; i++) {
 				(rlList.get(i)).setRmid(member.getUsername());
 				(rlList.get(i)).setRmnickname(member.getMnickname());
@@ -84,7 +84,7 @@ public class MailBoxController {
 		List<LetterMemberDto> slList = letterService.getSlList(midx, page);
 		Member member = (memberRepository.findById(new Long(midx))).get();
 
-		if(slList != null) {
+		if(slList.size() != 0) {
 			for(int i = 0 ; i < slList.size() ; i++) {
 				(slList.get(i)).setSmid(member.getUsername());
 				(slList.get(i)).setSmnickname(member.getMnickname());

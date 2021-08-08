@@ -6,6 +6,7 @@ import axios from "axios";
 import { config } from '../shared/config'
 import PostButton from '../components/PostButton'
 import TimeCasulebutton from '../components/TimeCapsulebutton';
+import TimeLineCreateButton from '../components/TimeLineCreateButton';
 
 function TimeLine() {
     const [timeline,setTimeline] = useState([])
@@ -17,7 +18,7 @@ function TimeLine() {
 
     const sendQuery = useCallback(async () => {
         try {
-          const res = await axios.post(`${url}/timeline/list`,null,token)
+          const res = await axios.post(`${url}/timeline/listall`,null,token)
           console.log('res',res)
           await setTimeline((prev) => [...prev, ...res.data]);
         //   console.log('u',list)
@@ -41,6 +42,7 @@ function TimeLine() {
                     ))}
                 </div>
             </div>
+            <TimeLineCreateButton />
             <TimeCasulebutton />
             <PostButton />
         </div>

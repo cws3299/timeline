@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { config } from '../../shared/config'
 
+
 function Home2useFetch(query, page) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);

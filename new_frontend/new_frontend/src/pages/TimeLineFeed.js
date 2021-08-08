@@ -5,12 +5,15 @@ import TimeLineFeedList from '../components/TimeLineFeed/TimeLineFeedList.js';
 import './TimeLineFeed.css'
 import { actionCreators as timeActions } from "../redux/modules/timelinefeed";
 import { useSelector, useDispatch } from "react-redux";
-
+// import {useLocation} from "react-router";
 
 function TimeLineFeed() {
     // const dispatch = useDispatch();
     const tlidxx = useSelector(state => state.timelinefeed.homefeed);
     console.log('--------------12',tlidxx)
+    // const location = useLocation();
+    // const tlidxxx = location.state.tlidx; 
+    // console.log(location.state)
     // const location = useLocation();
     // const item = location.props;
     // const [item2,setItem2] = useState(item)

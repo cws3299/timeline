@@ -43,7 +43,7 @@ const initialState = {
           ] = `Bearer ${token}`;
   
           dispatch(setUser());
-          history.push("/main/Home");
+          history.push("/main/Home2");
         })
         .catch((err) => {
           Swal.fire({

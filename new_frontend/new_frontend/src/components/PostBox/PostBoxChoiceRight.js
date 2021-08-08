@@ -4,6 +4,8 @@ import { useGesture } from 'react-use-gesture'
 import './PostBoxChoiceRight.css'
 import { actionCreators as homeActions } from "../../redux/modules/home";
 import { useSelector, useDispatch } from "react-redux";
+import { history } from "../../redux/configureStore"
+import SendLetter from '../../pages/SendLetter';
 
 const processXY = (x, y, target) => {
     const bounds = target.getBoundingClientRect()
@@ -19,6 +21,12 @@ function PostBoxChoiceRight({props}) {
   const dispatch = useDispatch();
   const maxAngle = 10; 
   const zoom = false;
+
+  const goSend = () => {
+    history.push({
+        pathname: "/main/SendLetter",
+      })
+  } 
 
   // console.log('iii',props)
 
@@ -63,15 +71,11 @@ function PostBoxChoiceRight({props}) {
     { eventOptions: { passive: false } },
   )
 
-  console.log('iii',items)
-  const homeImage= () =>{
-    dispatch(homeActions.homeSV(items));
-  }
 
   return (
     <animated.div
       className="PostBoxChoiceRight"
-      onClick={homeImage}
+      onClick={goSend}
       {...bind()}
       style={{
         backgroundImage: `url(https://img.hankyung.com/photo/202104/01.26133295.1.jpg)`,
