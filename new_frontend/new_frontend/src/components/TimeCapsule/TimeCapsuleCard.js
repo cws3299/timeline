@@ -7,6 +7,7 @@ import { config } from '../../shared/config'
 import TimeCapsuleTimer from './TimeCapsuleTimer';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import { history } from "../../redux/configureStore"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -29,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function TimeCapsuleCard({props}) {
+
+    const move = () => {
+        history.push({
+            pathname: "/main/timeline",
+            })
+
+    }
 
     const setDate = new Date(props.tcterm)
     const now = new Date()
@@ -64,7 +72,8 @@ function TimeCapsuleCard({props}) {
             tcfeedback:back
         }
         const res = await axios.post(`${url}/timecapsule/feedback/${props.tcidx}`, tcfeedback, token);
-        console.log('rrrrrrrrrrr', res)
+        move()
+
     } 
 
     const body = (

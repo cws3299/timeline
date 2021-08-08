@@ -11,6 +11,7 @@
     background-color: white;
     box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
+    font-family: 'Jua', sans-serif;
 }
 
 .PostButton:hover{
@@ -30,5 +31,6 @@
         border-radius: 50%;
         background-color: black;
         display:none;
+        font-family: 'Jua', sans-serif;
     }
 }

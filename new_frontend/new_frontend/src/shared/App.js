@@ -17,6 +17,12 @@ import {
     Letter,
     ReceiveLetter,
     AnswerLetter,
+    SendLetter,
+    BackLetter,
+    GoLetter,
+    CreateTimeLine,
+    StartFeed,
+    FollowList,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -53,7 +59,12 @@ function App() {
               <PrivateRoute path="/main/Letter" exact component={Letter} />
               <PrivateRoute path="/main/ReceiveLetter" exact component={ReceiveLetter} />
               <PrivateRoute path="/main/AnswerLetter" exact component={AnswerLetter} />
-         
+              <PrivateRoute path="/main/SendLetter" exact component={SendLetter} />
+              <PrivateRoute path="/main/GoLetter" exact component={GoLetter} />
+              <PrivateRoute path="/main/BackLetter" exact component={BackLetter} />
+              <PrivateRoute path="/main/CreateTimeLine" exact component={CreateTimeLine} />
+              <PrivateRoute path="/main/StartFeed" exact component={StartFeed} />
+              <PrivateRoute path="/main/FollowList" exact component={FollowList} />
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
           {/* <Route component={NotFound} /> */}

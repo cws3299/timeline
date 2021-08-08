@@ -3,7 +3,7 @@ import axios from "axios";
 import { config } from '../../shared/config'
 import { useSelector, useDispatch } from "react-redux";
 
-function TimeLineFeedListuseFetch(query, page) {
+function TimeLineFeedListuseFetch({query, page}) {
   const tlidxx = useSelector(state => state.timelinefeed.homefeed);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);

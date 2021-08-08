@@ -36,12 +36,20 @@ const useStyles = makeStyles((theme) => ({
   
   function ReceiveLetterCard({props}) {
     const classes = useStyles();
+    console.log('props',props)
 
     const answer = () => {
         history.push({
             pathname: "/main/AnswerLetter",
             state: {lidx: props.lidx}
           })
+    }
+
+    const go = () => {
+        history.push({
+            pathname:"/main/GoLetter",
+            state:{go_idx:props.lidx_2}
+        })
     }
       
     const body2 = (
@@ -60,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
                     <div className="RLC_modalButton" >
                         <Button  onClick={answer} className="RLC_modalButton2" variant="contained" color="secondary">
                             답장 보내기
+                        </Button>
+                        <Button  onClick={go} className="RLC_modalButton2" variant="contained" color="primary">
+                            내가 보냈던 편지 보기
                         </Button>
                     </div>
                 </div>

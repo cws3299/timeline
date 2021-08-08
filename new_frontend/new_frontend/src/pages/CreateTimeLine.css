@@ -1,0 +1,22 @@
+.CreateTimeLine{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.CreateTimeLineBox{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.CreateTimeLineBox2{
+    width:1000px;
+    height:600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
