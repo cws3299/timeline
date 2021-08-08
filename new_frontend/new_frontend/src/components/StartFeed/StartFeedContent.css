@@ -1,0 +1,89 @@
+.StartFeedContent1{
+    width:100%;
+    height:600px;
+    background-color: white;
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.StartFeedContent1Box{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-rows: 10fr 1fr 1fr;
+}
+.StartFeedContent1BoxImg{
+    width:100%;
+    height:100%;
+    background-image: url(http://phone.ybmclass.com/common_css/img/noimage.gif);
+    background-size: 100% 100%;
+}
+.StartFeedContent1BoxTag{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color:white
+}
+.StartFeedContent1BoxMeta{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+.StartFeedContentDate{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color:white
+}
+.StartFeedContentPlace{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color:white
+}
+.StartFeedContent1Content{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-rows: 1fr 11fr;
+}
+.StartFeedContent1ContentName{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.StartFeedContent1ContentContent{
+    width:100%;
+    height:100%;
+    padding: 5% 5% 5% 5%;
+}
+
+.StartFeed1avatarImage {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 10px;
+ }
+
+
+
+.StartFeedContent2{
+    width:100%;
+    height:600px;
+    background-color: white;
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+}

@@ -5,6 +5,8 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { history } from "../../redux/configureStore"
+import axios from "axios";
+import { config } from '../../shared/config'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,15 +38,49 @@ const useStyles = makeStyles((theme) => ({
   
   function SendLetterCard({props}) {
     const classes = useStyles();
+    console.log('props',props)
 
-    const back = () => {
+    const url = config.api
+    const _token = localStorage.getItem("token");
+    let token = {
+      headers: { Authorization: `Bearer ${_token}` },
+    };
+
+    // const [data , setData] = useState(null)
+    let data = null
+    // console.log('feed',feed)
+    const sendQuerys = async() => {
+        console.log('-------')
+        try{
+            const res = await axios.post(`${url}/post/detail/${props.tlcidx}`,null, token)
+            console.log('rr',res.data)
+            // setData(res.data)
+            // console.log('dataaa',data)
+            data = res.data
+            console.log('rrrr',data)
+            
+        }catch(err){
+        }
+    }
+
+    // useEffect(()=>{
+    //     sendQuerys()
+    // },[])
+
+    const back = async() => {
         if (props.lidx_2 !== 0){
             history.push({
                 pathname: "/main/backLetter",
                 state: {lidx_2: props.lidx_2}
               })
         }else{
-            alert('현재 편지가 처음보낸 편지입니다.')
+            alert('현재 편지가 처음보낸 편지이기 때문에 게시글로 이동합니다.')
+            await sendQuerys()
+            console.log('rr2',data)
+            history.push({
+                pathname:'/main/startFeed',
+                state:{data:data}
+            })
         }
     }
       

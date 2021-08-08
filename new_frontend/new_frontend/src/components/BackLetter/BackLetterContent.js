@@ -4,6 +4,9 @@ import './BackLetterContent.css'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+// import { history } from "../../redux/configureStore"
+import axios from "axios";
+import { config } from '../../shared/config'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,21 +18,43 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function BackLetterContent(data){
+    const url = config.api
+    const _token = localStorage.getItem("token");
+    let token = {
+      headers: { Authorization: `Bearer ${_token}` },
+    };
     const classes = useStyles();
-    console.log('data',data)
+    console.log('data',data,data.data)
     const content = data.data.content
     console.log('content',content)
+    let dataa = null
+    const sendQuerys = async() => {
+        console.log('-------')
+        try{
+            const res = await axios.post(`${url}/post/detail/${data.data.tlcidxx}`,null, token)
+            console.log('rr',res.data)
+            // setData(res.data)
+            // console.log('dataaa',data)
+            dataa = res.data
+            console.log('rrrr',dataa)
+            
+        }catch(err){
+        }
+    }
 
-    const go = () => {
+    const go = async() => {
         if (data.data.lidx2 !== 0){
             history.push({
                 pathname:"/main/GoLetter",
                 state:{go_idx:data.data.lidx_2}
             })
         }else{
+            alert('현재 편지가 처음보낸 편지이기 때문에 게시글로 이동합니다.')
+            await sendQuerys()
+            console.log('dataa',dataa)
             history.push({
                 pathname:'/main/startFeed',
-                state:{feed:data.data.tlcidxx}
+                state:{data:dataa}
             })
         }
     }

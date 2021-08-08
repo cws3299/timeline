@@ -1,0 +1,17 @@
+.StartFeed{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.StartFeedBox{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.StartFeedBox2{
+    width:1000px;
+}
