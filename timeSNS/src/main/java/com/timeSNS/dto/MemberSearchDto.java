@@ -13,6 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MemberSearchDto {
 
+	private int midx;
+	
 	private String mid;
 	
 	private String mnickname;
