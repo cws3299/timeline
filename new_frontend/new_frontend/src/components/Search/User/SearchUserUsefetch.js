@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 function SearchUserUsefetch(query, page) {
   const searchUser = useSelector(state => state.Search.searchfeed);
   console.log('--------------12',searchUser)
+  const user1 = searchUser
+  let user = searchUser
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
@@ -19,8 +21,9 @@ function SearchUserUsefetch(query, page) {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.get(`${url}/search/user?user=${searchUser}&page=${page}`,token)
-      console.log('restt',res.data)
+      console.log('+++++',user)
+      const res = await axios.get(`${url}/search/user?user=${user}&page=${page}`,token)
+      await console.log('restt',res,searchUser)
       await setList((prev) => [...prev, ...res.data]);
     //   console.log('u',list)
       console.log('listtt',list)
@@ -28,11 +31,20 @@ function SearchUserUsefetch(query, page) {
     } catch (err) {
       setError(err);
     }
-  }, [query, page]);
+  }, [query, page, user]);
 
   useEffect(() => {
+    // window.location.reload()
+    console.log('새로 시작됨1',query,user,1111,searchUser,333)
     sendQuery(query);
-  }, [query, sendQuery, page]);
+    return () =>{
+      console.log('삭제됨2222222222222222222222222222222222')
+      if(user1 !== user){
+        setList([]);
+      }
+      // sendQuery(user)
+    }
+  }, [query, sendQuery, page , user]);
 
   return { loading, error, list };
 }

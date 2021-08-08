@@ -2,10 +2,12 @@ import React , {useState , useRef, useCallback, useEffect} from "react";
 import useFetch from "./SearchUserUsefetch";
 import './SearchUserList.css';
 import SearchUserCard from "./SearchUserCard";
-
+import { useSelector, useDispatch } from "react-redux";
 
 function SearchUserList(props) {
-  console.log('여기까지')
+  const searchUser = useSelector(state => state.Search.searchfeed);
+  // console.log('여기까지',query)
+  let user = searchUser
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const { loading, error, list } = useFetch(query, page);
@@ -23,6 +25,8 @@ function SearchUserList(props) {
   }, []);
 
   useEffect(() => {
+    // await setQuery(user)
+    // console.log('새로 시작됨2',user)
     const option = {
       root: null,
       rootMargin: "20px",
@@ -30,7 +34,12 @@ function SearchUserList(props) {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) observer.observe(loader.current);
-  }, [handleObserver]);
+    console.log('kojojojoj',page)
+    return () =>{
+      console.log('여기만 되면돼')
+      setPage(1)
+    }
+  }, [handleObserver,user]);
 
   return (
     <div className="SearchUserList">

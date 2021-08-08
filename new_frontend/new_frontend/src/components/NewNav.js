@@ -1,5 +1,6 @@
 import React ,{useState} from 'react'
 import { history } from "../redux/configureStore"
+// import {useLocation} from "react-router";
 import './NewNav.css'
 import { Input } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,9 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 function NewNav(){
     const dispatch = useDispatch();
+    // const location = useLocation();
 
     const feedidx = (word) =>{
-        console.log(1111111111111111111111,word)
+        console.log(331111111111111111111111,word)
         dispatch(searchActions.setsearchFeedSV(word));
       }
 
@@ -22,14 +24,17 @@ function NewNav(){
         console.log(searchWord)
     }
 
-    const onSearch = (event) => {
+    const onSearch = async(event) => {
         if(event.key === 'Enter'){
           console.log('enter press here! ',searchWord)
-          feedidx(searchWord)
+          await feedidx(searchWord)
+        //   location.reload()
+          console.log('rrrrr',searchWord)
           history.push({
-              pathname:"/main/search",
+              pathname:`/main/search/${searchWord}`,
               state:{search:searchWord}
           })
+        //   window.location.reload()
         }
       }
 

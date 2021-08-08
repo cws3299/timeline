@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { history } from "../redux/configureStore"
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -21,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function Search() {
+function Search({match}) {
+    const searchUser = useSelector(state => state.Search.searchfeed);
+    let user = searchUser
+    console.log('------------------------------------',match.params.searchword)
 
     const classes = useStyles();
     const [age, setAge] = React.useState(0);
@@ -33,6 +38,16 @@ function Search() {
     const location = useLocation();
     const searchword = location.state.search;
     const [what , setWhat] = useState("")
+
+
+    useEffect(() => {
+        // history.go(0)
+        // sendQuery(query);
+        console.log('새로시작됨 000000',user)
+        return () =>{
+          console.log('삭제되었습니다~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        }
+      }, [user]);
 
     if (age === 0){
         return(

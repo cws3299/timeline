@@ -51,7 +51,9 @@ function App() {
               <PrivateRoute path="/main/mypage" exact component={Mypage} />
               <PrivateRoute path="/main/post" exact component={Post} />
               <PrivateRoute path="/main/postbox" exact component={PostBox} />
-              <PrivateRoute path="/main/search" exact component={Search} />
+              <PrivateRoute path="/main/search/:searchword" exact component={Search} />
+
+
               <PrivateRoute path="/main/timecapsule" exact component={TimeCapsule} />
               <PrivateRoute path="/main/timeline" exact component={TimeLine} />
               <PrivateRoute path="/main/TimeLineFeed" exact component={TimeLineFeed} />
