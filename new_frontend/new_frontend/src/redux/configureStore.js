@@ -8,6 +8,7 @@ import Home from "./modules/home";
 import Timeline from "./modules/timeline";
 import TimelineFeed from "./modules/timelinefeed";
 import Search from "./modules/search";
+import Search2 from "./modules/search2";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   timeline: Timeline,
   timelinefeed:TimelineFeed,
   Search:Search,
+  Search2:Search2,
 });
 
 const middlewares = [thunk.withExtraArgument({ history: history })];

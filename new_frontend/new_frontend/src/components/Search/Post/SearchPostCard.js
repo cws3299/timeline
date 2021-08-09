@@ -2,7 +2,7 @@ import React from 'react'
 import './SearchPostCard.css'
 
 function SearchPostCard(props){
-    console.log(props)
+    console.log('ppppppppppppppppppppppppppppppppp',props)
     return(
         <div className="SearchPostCard">
             {props.props.mid}

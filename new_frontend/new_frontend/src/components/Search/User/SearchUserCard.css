@@ -1,7 +1,57 @@
 .SearchUserCard{
-    width:100%;
-    height:200px;
-    background-color: green;
-    color:white;
-    margin-bottom:50px;
+    height:300px;
+    width:300px;
+    background-color: white;
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+    margin:15px;
+    display: inline-block;
+    box-sizing: border-box;
 }
+
+.SearchUserCard:hover{
+    background-color: black;
+    color:white
+}
+
+.SearchUserCard1{
+    width:100%;
+    height:100%;
+    display: grid;
+    grid-template-rows:1fr 7fr;
+}
+
+.SearchUserCard11{
+    width: 100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.SearchUserCard12{
+    width: 100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: flex-start; 
+}
+
+
+.SearchUserCard1Avatar{
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+ }
+
+ .SearchUserCard1Name{
+     margin-bottom:5px;
+ }
+
+ .SearchUserCard1NameIntroduce{
+    width: 100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+ }

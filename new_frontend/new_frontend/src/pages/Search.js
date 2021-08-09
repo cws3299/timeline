@@ -4,6 +4,8 @@ import './Search.css'
 import {useLocation} from "react-router";
 import SearchUserList from '../components/Search/User/SearchUserList';
 import SearchPostList from '../components/Search/Post/SearchPostList';
+import SearchTagList from '../components/Search/Tag/SearchTagList';
+import SearchTimelineList from '../components/Search/Timeline/SearchTimelineList';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -37,6 +39,7 @@ function Search({match}) {
 
     const location = useLocation();
     const searchword = location.state.search;
+    const searchword2 = location.state.search2;
     const [what , setWhat] = useState("")
 
 
@@ -71,7 +74,7 @@ function Search({match}) {
                         </Select>
                     </FormControl>
                     </div>
-                        <SearchUserList />
+                        <SearchUserList searchword2={searchword2} />
                     </div>
                 </div>
             </div>
@@ -125,7 +128,7 @@ function Search({match}) {
                         </Select>
                     </FormControl>
                     </div>
-                        {/* <PostContent /> */}
+                        <SearchTimelineList />
                     </div>
                 </div>
             </div>
@@ -152,7 +155,7 @@ function Search({match}) {
                         </Select>
                     </FormControl>
                     </div>
-                        {/* <PostContent /> */}
+                        <SearchTagList />
                     </div>
                 </div>
             </div>

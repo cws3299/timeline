@@ -32,7 +32,9 @@ function NewNav(){
           console.log('rrrrr',searchWord)
           history.push({
               pathname:`/main/search/${searchWord}`,
-              state:{search:searchWord}
+              state:{search:searchWord,
+                    search2:""
+            }
           })
         //   window.location.reload()
         }

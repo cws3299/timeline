@@ -20,6 +20,7 @@ import GoLetter from './GoLetter'
 import CreateTimeLine from './CreateTimeLine'
 import StartFeed from './StartFeed'
 import FollowList from './FollowList'
+import UserPage from './UserPage'
 
 
 export {
@@ -45,4 +46,5 @@ export {
     CreateTimeLine,
     StartFeed,
     FollowList,
+    UserPage,
 };

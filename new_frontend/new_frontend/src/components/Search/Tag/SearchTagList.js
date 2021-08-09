@@ -1,10 +1,10 @@
 import React , {useState , useRef, useCallback, useEffect} from "react";
-import useFetch from "./SearchUserUsefetch";
-import './SearchUserList.css';
-import SearchUserCard from "./SearchUserCard";
+import useFetch from "./SearchTagUseFetch";
+import './SearchTagList.css';
+import SearchTagCard from "./SearchTagCard";
 import { useSelector, useDispatch } from "react-redux";
 
-function SearchUserList(props) {
+function SearchTagList(props) {
   console.log('props',props)
   const searchUser = useSelector(state => state.Search.searchfeed);
   // console.log('여기까지',query)
@@ -43,14 +43,14 @@ function SearchUserList(props) {
   }, [handleObserver,user]);
 
   return (
-    <div className="SearchUserList">
+    <div className="SearchTagList">
         
         {list.map((item, i) => (
-          <SearchUserCard key={i} props={item}/>
+          <SearchTagCard key={i} props={item}/>
         ))}
       <div ref={loader} />
     </div>
   );
 }
 
-export default SearchUserList;
+export default SearchTagList;

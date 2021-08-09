@@ -4,7 +4,7 @@ import { config } from '../../../shared/config'
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as searchActions2 } from "../../../redux/modules/search2";
 
-function SearchUserUsefetch(query, page) {
+function SearchTimelineUsefetch(query, page) {
   const searchUser = useSelector(state => state.Search.searchfeed);
   let searchUser2 = useSelector(state => state.Search2.searchfeed2);
 
@@ -35,8 +35,8 @@ function SearchUserUsefetch(query, page) {
       await setError(false);
       // console.log('+++++',user)
       let aa = 0
-      const res = await axios.get(`${url}/search/user?user=${user}&page=${page}`,token)
-      // console.log('resssssssssssssssssss',res)
+      const res = await axios.get(`${url}/search/timeline?timeline=${user}&page=${page}`,token)
+      console.log('resssssssssssssssssss',res)
       await setList((prev) => [...prev, ...res.data]);
       if (res.data.length === 0){
         return { query ,aa, user }
@@ -54,8 +54,8 @@ function SearchUserUsefetch(query, page) {
 
   useEffect(async() => {
     let a = await sendQuery(query);
-    let a1 = a.page
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',a1)
+    // let a1 = a.page
+    // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',a1)
     return () =>{
       setList([]);
       // if(page !== a1){
@@ -69,4 +69,4 @@ function SearchUserUsefetch(query, page) {
   return { loading, error, list };
 }
 
-export default SearchUserUsefetch;
+export default SearchTimelineUsefetch;
