@@ -21,6 +21,7 @@ import CreateTimeLine from './CreateTimeLine'
 import StartFeed from './StartFeed'
 import FollowList from './FollowList'
 import UserPage from './UserPage'
+import Usertimelinefeed from'./Usertimelinefeed'
 
 
 export {
@@ -47,4 +48,5 @@ export {
     StartFeed,
     FollowList,
     UserPage,
+    Usertimelinefeed,
 };

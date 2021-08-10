@@ -1,0 +1,17 @@
+.MypageBox1{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.Mypage1Box{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.Mypage1Box2{
+    width:1000px;
+}

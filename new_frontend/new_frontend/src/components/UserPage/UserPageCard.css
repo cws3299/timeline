@@ -4,12 +4,14 @@
     margin-top:50px;
     box-shadow: 10px 10px 30px -5px rgba(0, 0, 0, 0.3);
     background-color: white;
-    display:flex;
+    /* display:flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    display:grid;
+    grid-template-rows: 5fr 1fr;
 }
 
-.UserPageCard:hover{
+/* .UserPageCard:hover{
     width:100%;
     height:200px;
     margin-top:50px;
@@ -19,4 +21,64 @@
     display:flex;
     justify-content: center;
     align-items: center;
+} */
+
+.UserPageCardBox1{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.UserPageCardBox{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+.UserPageCard1{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    border:1px solid white;
+    box-sizing: border-box;
+}
+
+.UserPageCard1:hover{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color:white;
+    border:1px solid white;
+    box-sizing: border-box;
+}
+.UserPageCardBox{
+    width:100%;
+    height:100%;
+}
+
+.UserPageCard2{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    border:1px solid white;
+    box-sizing: border-box;
+}
+
+.UserPageCard2:hover{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color:white;
+    border:1px solid white;
+    box-sizing: border-box;
 }

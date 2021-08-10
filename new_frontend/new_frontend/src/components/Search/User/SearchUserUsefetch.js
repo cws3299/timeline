@@ -16,7 +16,7 @@ function SearchUserUsefetch(query, page) {
     }
 
 
-  // console.log('--------------12',searchUser,searchUser2)
+  console.log('--------------12',searchUser,searchUser2)
   let user1 = searchUser
   let user = searchUser
   const [loading, setLoading] = useState(true);
@@ -54,8 +54,8 @@ function SearchUserUsefetch(query, page) {
 
   useEffect(async() => {
     let a = await sendQuery(query);
-    let a1 = a.page
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',a1)
+    // let a1 = a.page
+    // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',a1)
     return () =>{
       setList([]);
       // if(page !== a1){

@@ -24,6 +24,7 @@ import {
     StartFeed,
     FollowList,
     UserPage,
+    Usertimelinefeed,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -69,6 +70,7 @@ function App() {
               <PrivateRoute path="/main/StartFeed" exact component={StartFeed} />
               <PrivateRoute path="/main/FollowList" exact component={FollowList} />
               <PrivateRoute path="/main/UserPage" exact component={UserPage} />
+              <PrivateRoute path="/main/Usertimelinefeed" exact component={Usertimelinefeed} />
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
           {/* <Route component={NotFound} /> */}

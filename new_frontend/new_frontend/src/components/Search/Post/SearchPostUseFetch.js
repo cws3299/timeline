@@ -55,8 +55,8 @@ function SearchPostUsefetch(query, page) {
 
   useEffect(async() => {
     let a = await sendQuery(query);
-    let a1 = a.page
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',a1)
+    // let a1 = a.page
+    // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',a1)
     return () =>{
       setList([]);
       // if(page !== a1){
