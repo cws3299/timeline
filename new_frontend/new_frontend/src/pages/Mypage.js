@@ -1,7 +1,7 @@
 import React from 'react'
 import NewNav from '../components/NewNav';
 import './Mypage.css'
-// import PostBoxChoice from '../components/PostBox/PostBoxChoice';
+import MypageContents from '../components/Mypage/MypageContents';
 
 function Mypage() {
     return(
@@ -9,7 +9,7 @@ function Mypage() {
             <NewNav className = "MypageNewNav"/>
             <div className = "Mypage1Box">
                 <div className = "Mypage1Box2">
-                    {/* <PostBoxChoice /> */}
+                    < MypageContents />
                 </div>
             </div>
         </div>

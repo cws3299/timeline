@@ -3,7 +3,7 @@ import axios from "axios";
 import { config } from '../../shared/config'
 import { useSelector, useDispatch } from "react-redux";
 
-function TimeLineFeedListuseFetch({query, page}) {
+function TimeLineFeedListuseFetch(query, page) {
   const tlidxx = useSelector(state => state.timelinefeed.homefeed);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -18,7 +18,7 @@ function TimeLineFeedListuseFetch({query, page}) {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.post(`${url}/post/list/${tlidxx}`,null,token)
+      const res = await axios.post(`${url}/post/list/${tlidxx}?page=${page}`,null,token)
       await setList((prev) => [...prev, ...res.data]);
     //   console.log('u',list)
       setLoading(false);

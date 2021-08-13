@@ -3,7 +3,7 @@ import axios from "axios";
 import { config } from '../../shared/config'
 import { useSelector, useDispatch } from "react-redux";
 
-function UsertimelinefeeduseFetch({query, page}) {
+function UsertimelinefeeduseFetch(query, page) {
   const tlidxx = useSelector(state => state.Usertimelinefeed.userfeed);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -14,12 +14,16 @@ function UsertimelinefeeduseFetch({query, page}) {
     headers: { Authorization: `Bearer ${_token}` },
   };
 
+  console.log('tlidxx',tlidxx,page)
+
   const sendQuery = useCallback(async () => {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.post(`${url}/post/list/${tlidxx}`,null,token)
+      console.log('여기는',page)
+      const res = await axios.post(`${url}/post/list/${tlidxx}?page=${page}`,null,token)
       await setList((prev) => [...prev, ...res.data]);
+      console.log('res',res)
     //   console.log('u',list)
       setLoading(false);
     } catch (err) {

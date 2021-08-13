@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState , useEffect} from 'react'
 import './TimeCapsuleCard.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
 
 function TimeCapsuleCard({props}) {
 
-    const move = () => {
-        history.push({
-            pathname: "/main/timeline",
-            })
+    // const move = () => {
+    //     history.push({
+    //         pathname: "/main/timeline",
+    //         })
 
-    }
+    // }
 
     const setDate = new Date(props.tcterm)
     const now = new Date()
@@ -46,6 +46,7 @@ function TimeCapsuleCard({props}) {
     const classes = useStyles();
     const url = config.api
     const [open, setOpen] = useState(false);
+    const [feedback11, setFeedback] = useState(props.tcfeedback)
     const [back, setBack] = useState('');
     const [useElipsis, setUseElipsis] = useState(true);
     const _token = localStorage.getItem("token");
@@ -72,9 +73,18 @@ function TimeCapsuleCard({props}) {
             tcfeedback:back
         }
         const res = await axios.post(`${url}/timecapsule/feedback/${props.tcidx}`, tcfeedback, token);
-        move()
+        console.log('back',back)
+        await setFeedback(back)
+        console.log(feedback11)
+        
+        // move()
 
     } 
+
+    // useEffect(()=>{
+    //     console.log('???')
+    //     setFeedback(props.tcfeedback)
+    // })
 
     const body = (
         <div className={classes.paper}>
@@ -107,7 +117,7 @@ function TimeCapsuleCard({props}) {
                 {props.tcthink}
             </div>
             <div className="CapsuleModal4">
-                <div className="CapsuleModal4Feedback">{props.tcfeedback}</div>
+                <div className="CapsuleModal4Feedback">{feedback11}</div>
                 <div className="CapsuleModal4FeedbackButton">
                     <form className={classes.roots} noValidate autoComplete="off">
                         <div>

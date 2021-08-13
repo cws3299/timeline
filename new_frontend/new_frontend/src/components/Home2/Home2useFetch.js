@@ -17,7 +17,7 @@ function Home2useFetch(query, page) {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.get(`${url}/main/feed/?page=${page}`,token)
+      const res = await axios.get(`${url}/main/feed?page=${page}`,token)
       await setList((prev) => [...prev, ...res.data]);
     //   console.log('u',list)
       setLoading(false);

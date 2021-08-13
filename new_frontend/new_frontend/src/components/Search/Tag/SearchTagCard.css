@@ -46,3 +46,40 @@
     display:grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.Tagmodal2{
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+}
+
+.Tagmodal21{
+    padding-left: 10px;
+    box-sizing: border-box;
+    display:grid;
+    grid-template-columns: 3fr 1fr;
+    background-color: black;
+    color:white;
+}
+
+.Tagmodal211{
+    box-sizing: border-box;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: black;
+    color:white;
+}
+
+.Tagmodal212{
+    box-sizing: border-box;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: black;
+    color:white;
+}
+
+.Tagmodal22{
+    padding-left: 10px;
+    box-sizing: border-box;
+}

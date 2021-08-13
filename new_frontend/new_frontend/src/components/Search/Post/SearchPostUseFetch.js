@@ -36,7 +36,7 @@ function SearchPostUsefetch(query, page) {
       await setError(false);
       // console.log('+++++',user)
       let aa = 0
-      const res = await axios.get(`${url}/search/user?user=${user}&page=${page}`,token)
+      const res = await axios.get(`${url}/search/post?content=${user}&page=${page}`,token)
       // console.log('resssssssssssssssssss',res)
       await setList((prev) => [...prev, ...res.data]);
       if (res.data.length === 0){

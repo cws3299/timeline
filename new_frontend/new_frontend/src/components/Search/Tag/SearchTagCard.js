@@ -143,7 +143,36 @@ function SearchTagCard(props){
                     </div>
                 </div>
                 <div className="Tagmodal2">
-                    
+                    <div className ="Tagmodal21">
+                        <div className ="Tagmodal211">
+                            장소 : {props.props.tlcplace}
+                        </div>
+                        <div className ="Tagmodal212">
+                            {props.props.tlcdate}
+                        </div>
+                    </div>
+                    <div className ="Tagmodal22">
+                        {useElipsis ? (
+                                <LinesEllipsis
+                                text={props.props.tlccontent}
+                                maxLine="10"
+                                ellipsis={
+                                    <span style={{ color: "black" , fontSize:'0.5rem'}} onClick={() => setUseElipsis(false)}>
+                                    ...더보기
+                                    </span>
+                                }
+                                trimRight
+                                basedOn="letters"
+                                />
+                            ) : (
+                                <>
+                                {props.props.tlccontent}
+                                <span style={{ color: "black" , fontSize:'0.5rem' }} onClick={() => setUseElipsis(true)}>
+                                    닫기
+                                </span>
+                                </>
+                            )}
+                    </div>
                 </div>
             </div>
         </div>
