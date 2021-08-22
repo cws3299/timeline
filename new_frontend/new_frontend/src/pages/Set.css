@@ -1,0 +1,78 @@
+.SetFix{
+    position:fixed;
+    width:100vw;
+    top:0px;
+    min-width:1000px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100px;
+    /* border:solid gray; */
+    border-top-width:1px;
+    border-left-width:0px;
+    border-right-width:0px;
+    border-bottom-width:1px;
+    box-sizing: border-box;
+    z-index: 9999;
+    /* background-color: white; */
+}
+
+.SetFix1{
+    position: relative;
+    width:100%;
+    height:100%;
+}
+
+.setFix2{
+    position: absolute;
+    bottom:10px;
+    right:30px;
+    width:100px;
+    height:100px;
+    background-color: green;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    /* border:5px solid black; */
+}
+
+.setFix2:hover{
+    background-color: yellow;
+    color:black;
+    box-sizing: border-box;
+    /* border:5px solid black; */
+}
+
+.Image1{
+    width:100vw;
+    height:120vh;
+    background-image: url(../Image/image1.JPG);
+    background-size: 100% 100%;
+}
+.Image2{
+    width:100vw;
+    height:120vh;
+    background-image: url(../Image/image2.JPG);
+    background-size: 100% 100%;
+}
+.Image3{
+    width:100vw;
+    height:120vh;
+    background-image: url(../Image/image3.JPG);
+    background-size: 100% 100%;
+}
+.Image4{
+    width:100vw;
+    height:120vh;
+    background-image: url(../Image/image4.JPG);
+    background-size: 100% 100%;
+}
+.Image5{
+    width:100vw;
+    height:120vh;
+    background-image: url(../Image/image5.JPG);
+    background-size: 100% 100%;
+}

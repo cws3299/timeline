@@ -30,21 +30,21 @@ function MypageContents(){
     }
 
     const goTimeline = () =>{
-        console.log('여기')
         history.push({
             pathname:"/main/timeline"
         })
     }
-    const goTimecapsule = () =>{
+    const goFollowTimeline = () =>{
         history.push({
-            pathname:"/main/timecapsule"
+            pathname:"/main/FollowTimeline"
         })
     }
-    const goPostbox = () =>{
-        history.push({
-            pathname:"/main/postbox"
-        })
-    }
+    // const goPostboxx = () =>{
+    //     console.log('+++++++++++++++++++++++++++++++')
+    //     history.push({
+    //         pathname:"/main/postbox"
+    //     })
+    // }
 
     useEffect(()=>{
         sendQuerys()
@@ -71,15 +71,15 @@ function MypageContents(){
                     </div>
                 </div>
             </div>
-            <div className="userBox">
-                <div className="userBox1">
-                    < MypageTimeline />
+            <div className="uuserBox">
+                <div className="uuserBox1">
+                    < MypageTimeline onClick={goTimeline} />
                 </div>
-                <div className="userBox2">
-                    < MypagePost onClick={goPostbox} />
-                </div>
-                <div className="userBox3">
-                    < MypageTimeCapsule onClick={goTimecapsule} />
+                {/* <div className="userBox2">
+                    < MypagePost onClick={goPostboxx} />
+                </div> */}
+                <div className="uuserBox3">
+                    < MypageTimeCapsule onClick={goFollowTimeline} />
                 </div>
             </div>
 

@@ -22,7 +22,10 @@ import StartFeed from './StartFeed'
 import FollowList from './FollowList'
 import UserPage from './UserPage'
 import Usertimelinefeed from'./Usertimelinefeed'
-
+import Set from'./Set'
+import FollowTimeline from './FollowTimeline'
+import Revise from './Revise'
+import Memo from './Memo'
 
 export {
     Home,
@@ -49,4 +52,8 @@ export {
     FollowList,
     UserPage,
     Usertimelinefeed,
+    Set,
+    FollowTimeline,
+    Revise,
+    Memo,
 };

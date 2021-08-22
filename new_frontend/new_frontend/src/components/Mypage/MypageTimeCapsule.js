@@ -68,12 +68,17 @@ function MypageTimeCapsule({props}) {
     })
 }
 
+const goFollowTimeline = () =>{
+  history.push({
+      pathname:"/main/FollowTimeline"
+  })
+}
   
 
   return (
     <animated.div
       className="TimeLineListImage"
-      onClick={goTimecapsule}
+      onClick={goFollowTimeline}
       {...bind()}
       style={{
         backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg/250px-Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg)`,

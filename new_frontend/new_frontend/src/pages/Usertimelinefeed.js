@@ -3,7 +3,9 @@ import NewNav from '../components/NewNav';
 import './Usertimelinefeed.css' 
 import { useSelector, useDispatch } from "react-redux";
 import UsertimelinefeedList from '../components/UserTimelineFeed/UsertimelinefeedList.js';
-
+import PostButton from '../components/PostButton';
+import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
+import TimeLineCreateButton from '../components/TimeLineCreateButton';
 
 function Usertimelinefeed(){
     const tlidxx = useSelector(state => state.Usertimelinefeed.userfeed);
@@ -16,6 +18,9 @@ function Usertimelinefeed(){
                     < UsertimelinefeedList />
                 </div>
             </div>
+            < TimeLineCreateButton />
+            < TimeCapsulebutton />
+            < PostButton />
         </div>
     )
 };

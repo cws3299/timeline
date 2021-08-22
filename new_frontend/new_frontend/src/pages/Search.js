@@ -14,6 +14,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { history } from "../redux/configureStore"
 import { useSelector, useDispatch } from "react-redux";
+import PostButton from '../components/PostButton';
+import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
+import TimeLineCreateButton from '../components/TimeLineCreateButton';
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {

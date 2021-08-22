@@ -36,14 +36,15 @@ function PostContent() {
     const dateInput = useRef();
     const placeInput = useRef();
     const [timelines , setTimelines] = useState([])
+    const [choice_timeline_idx, setChoiceIdx] = useState(0)
     const url = config.api
     const _token = localStorage.getItem("token");
     let token = {
       headers: { Authorization: `Bearer ${_token}` },
     };
 
-    const goTimeline = () => {
-      // console.log('props',props)
+    const goTimeline = (pp) => {
+      console.log('++++++++++++++++++++++++++++++++++++++++++',pp)
       history.push({
         pathname: `/main/timeline/`,
         })
@@ -53,6 +54,8 @@ function PostContent() {
         try{
             const res = await axios.post(`${url}/timeline/listall`,null,token)
             console.log('res',res)
+            await setChoiceIdx(res.data[0].tlidx)
+            console.log('reees',choice_timeline_idx)
             await setTimelines((prev) => [...prev, ...res.data])
         }catch (err){
             console.log(err)
@@ -60,20 +63,21 @@ function PostContent() {
 
     },[])
 
-    useEffect(() => {
-        sendQuery();
+    useEffect(async() => {
+        await sendQuery();
+        // setChoiceIdx(timelines[0])
       }, []);
 
     const classes = useStyles();
     const [fileUrl, setFileUrl] = useState(null);
-    const [choice_timeline_idx, setChoiceIdx] = React.useState(0)
-    const [tlcdate, setTlcdate] = React.useState('')
-    const [tlcplace, setTlcplace] = React.useState('')
-    const [tlcimage, setTlcimage] = React.useState(null)
-    const [tlccontent, setTlccontent] = React.useState('')
+    
+    const [tlcdate, setTlcdate] = useState('')
+    const [tlcplace, setTlcplace] = useState('')
+    const [tlcimage, setTlcimage] = useState(null)
+    const [tlccontent, setTlccontent] = useState('')
     // const [tlcemotion, setTlcemotion] = React.useState('')
     // const [tlcpubyn, setTlcpubyn] = React.useState('')
-    const [tlctag, setTlctag] = React.useState('')
+    const [tlctag, setTlctag] = useState('')
 
 
     const onChange = (e) => {
@@ -83,7 +87,7 @@ function PostContent() {
       setFileUrl(imageUrl)
     }
   
-    const onClick = async () => {
+    const onClick = async() => {
       const formData = new FormData();
       formData.append('tlcdate', tlcdate)
       formData.append('tlcplace', tlcplace)
@@ -91,14 +95,23 @@ function PostContent() {
       // formData.append('tlcemotion', null)
       formData.append('tlcpubyn', "Y")
       formData.append('tlctag', tlctag)
-      formData.append('tlcimage', tlcimage);
+      if (tlcimage === null){
+        // formData.append('tlcimage',tlcimage);
+        console.log(111)
+      }else{
+        formData.append('tlcimage', tlcimage);
+        console.log(222)
+      }
       console.log(formData)
       console.log(tlcimage)
       // 서버의 upload API 호출
       const res = await axios.post(`${url}/post/writepost/${choice_timeline_idx}`, formData, token)
       .then(()=>{
+        // console.log('reees')
+        // console.log(choice_timeline_idx)
         goTimeline(choice_timeline_idx)
       }).catch(()=>{
+        // console.log('tlcdate',tlcdate)
         alert('날짜 확인 버튼을 한 번 더 눌러주세요')
       })
     }

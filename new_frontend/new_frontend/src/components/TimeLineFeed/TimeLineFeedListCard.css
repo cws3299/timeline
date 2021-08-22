@@ -1,0 +1,32 @@
+.Home2ImageModal2ContentUser1111{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-columns: 1fr 5fr 1fr 1fr;
+}
+
+.d110{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d111{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d112{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Home2ImageModalContentUser1111{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    /* background-color: red; */
+}

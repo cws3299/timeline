@@ -1,23 +1,20 @@
 import React from 'react'
 import NewNav from '../components/NewNav';
-import './Mypage.css'
-import MypageContents from '../components/Mypage/MypageContents';
+import './Revise.css'
+// import PostBoxChoice from '../components/PostBox/PostBoxChoice';
 import PostButton from '../components/PostButton';
 import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
 import TimeLineCreateButton from '../components/TimeLineCreateButton';
-import ReviseButton from '../components/ReviseButton';
 
-
-function Mypage() {
+function Revise() {
     return(
-        <div className="MypageBox1">
-            <NewNav className = "MypageNewNav"/>
-            <div className = "Mypage1Box">
-                <div className = "Mypage1Box2">
-                    < MypageContents />
+        <div className="PostBox1">
+            <NewNav className = "PostBoxNewNav"/>
+            <div className = "PostBox1Box">
+                <div className = "PostBox1Box2">
+                    {/* <PostBoxChoice /> */}
                 </div>
             </div>
-            < ReviseButton />
             < TimeLineCreateButton />
             < TimeCapsulebutton />
             < PostButton />
@@ -25,4 +22,4 @@ function Mypage() {
     )
 }
 
-export default Mypage;
+export default Revise;

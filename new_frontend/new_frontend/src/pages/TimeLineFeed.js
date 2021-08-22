@@ -6,6 +6,9 @@ import './TimeLineFeed.css'
 import { actionCreators as timeActions } from "../redux/modules/timelinefeed";
 import { useSelector, useDispatch } from "react-redux";
 // import {useLocation} from "react-router";
+import PostButton from '../components/PostButton';
+import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
+import TimeLineCreateButton from '../components/TimeLineCreateButton';
 
 function TimeLineFeed() {
     // const dispatch = useDispatch();
@@ -33,6 +36,9 @@ function TimeLineFeed() {
             <div className='TimeLineFeedBox'>
                 <TimeLineFeedList tlidxx={tlidxx}/>
             </div>
+            < TimeLineCreateButton />
+            < TimeCapsulebutton />
+            < PostButton />
         </div>
     )
 }

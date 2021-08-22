@@ -20,6 +20,12 @@ function TimeLineListContent({props}) {
           })
       } 
 
+    const goHome = () => {
+        history.push({
+            pathname: '/main/home2',
+            })
+    } 
+
     const url = config.api
     const _token = localStorage.getItem("token");
     let token = {
@@ -32,6 +38,7 @@ function TimeLineListContent({props}) {
             if (returnValue === true){
                 console.log(returnValue)
                 const res = axios.post(`${url}/timeline/deletetime/${props.tlidx}`,null,token)
+                goHome()
             }else{
                 console.log(returnValue)
             }

@@ -25,6 +25,10 @@ import {
     FollowList,
     UserPage,
     Usertimelinefeed,
+    Set,
+    FollowTimeline,
+    Revise,
+    Memo,
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -41,6 +45,8 @@ function App() {
     <div className="App">
       <ConnectedRouter history={history}>
         <Switch>
+          <Route path="/" exact component={Set}/>
+
           <Route path="/intro">
             <NoLoginRoute path="/intro/intro" exact component={Intro} />
             <NoLoginRoute path="/intro/login" exact component={Login} />
@@ -48,7 +54,7 @@ function App() {
           
 
           <Route path="/main">
-              <PrivateRoute path="/main/home" exact component={Home} />
+              {/* <PrivateRoute path="/main/home" exact component={Home} /> */}
               <PrivateRoute path="/main/home2" exact component={Home2} />
               <PrivateRoute path="/main/mypage" exact component={Mypage} />
               <PrivateRoute path="/main/post" exact component={Post} />
@@ -71,6 +77,9 @@ function App() {
               <PrivateRoute path="/main/FollowList" exact component={FollowList} />
               <PrivateRoute path="/main/UserPage" exact component={UserPage} />
               <PrivateRoute path="/main/Usertimelinefeed" exact component={Usertimelinefeed} />
+              <PrivateRoute path="/main/FollowTimeline" exact component={FollowTimeline} />
+              <PrivateRoute path="/main/Revise" exact component={Revise} />
+              <PrivateRoute path="/main/Memo" exact component={Memo} />
           </Route>
           <Route path="/notfound" exact component={NotFound}></Route>
           {/* <Route component={NotFound} /> */}

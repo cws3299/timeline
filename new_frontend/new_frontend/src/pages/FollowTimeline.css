@@ -1,0 +1,17 @@
+.FollowTimeline1{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.FollowTimelineBox{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.FollowTimeline2{
+    width:1000px;
+}

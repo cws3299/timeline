@@ -4,6 +4,7 @@ import NewNav from '../components/NewNav';
 import './Letter.css'
 import LetterContent from '../components/Letter/LetterContent';
 
+
 function Letter(){
     const location = useLocation();
     const tlcidx = location.state.tlcidx;
@@ -15,6 +16,7 @@ function Letter(){
                     <LetterContent props={tlcidx}/>
                 </div>
             </div>
+            
         </div>
     )
 };

@@ -1,0 +1,17 @@
+.Memo{
+    width:100vw;
+    min-width: 1000px;
+    position: relative;
+}
+
+.MemoBox{
+    width:100%;
+    position: absolute;
+    top:110px;
+    display: flex;
+    justify-content: center;
+}
+
+.MemoBox2{
+    width:1000px;
+}

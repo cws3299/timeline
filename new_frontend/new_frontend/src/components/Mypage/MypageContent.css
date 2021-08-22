@@ -54,20 +54,21 @@
     justify-content: center;
     align-items: flex-start;
 }
-.userBox{
-    /* background-color: black; */
+.uuserBox{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
 }
-.userBox1{
+.uuserBox1{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.userBox2{
+/* .userBox2{
     display: flex;
     justify-content: center;
-    align-items: center;
-}
-.userBox3{
+    align-items: center; */
+/* } */
+.uuserBox3{
     display: flex;
     justify-content: center;
     align-items: center;

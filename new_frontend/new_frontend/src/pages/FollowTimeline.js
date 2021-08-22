@@ -1,18 +1,19 @@
 import React from 'react'
 import NewNav from '../components/NewNav';
-import './PostBox.css'
-import PostBoxChoice from '../components/PostBox/PostBoxChoice';
+import './FollowTimeline.css'
+// import PostBoxChoice from '../components/PostBox/PostBoxChoice';
 import PostButton from '../components/PostButton';
 import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
 import TimeLineCreateButton from '../components/TimeLineCreateButton';
+import FollowTimelineList from '../components/FollowTimeline/FollowTimelineList';
 
-function PostBox() {
+function FollowTimeline() {
     return(
-        <div className="PostBox1">
+        <div className="FollowTimeline1">
             <NewNav className = "PostBoxNewNav"/>
-            <div className = "PostBox1Box">
-                <div className = "PostBox1Box2">
-                    <PostBoxChoice />
+            <div className = "FollowTimelineBox">
+                <div className = "FollowTimeline2">
+                    <FollowTimelineList />
                 </div>
             </div>
             < TimeLineCreateButton />
@@ -22,4 +23,4 @@ function PostBox() {
     )
 }
 
-export default PostBox;
+export default FollowTimeline;

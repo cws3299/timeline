@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { config } from '../../shared/config'
 import axios from 'axios';
+import { history } from "../../redux/configureStore"
 
 const useStyles = makeStyles((theme) => ({
     roots: {
@@ -34,6 +35,12 @@ function LetterContent({props}) {
     const [photo , setPhoto] = useState("")
     const [fileUrl, setFileUrl] = useState(null);
 
+    const goHome2 = () => {
+        history.push({
+            pathname: "/main/home2",
+          })
+    }
+
     const url = config.api
     const _token = localStorage.getItem("token");
     let token = {
@@ -59,11 +66,16 @@ function LetterContent({props}) {
         const formData = new FormData();
         formData.append('lcontent', content)
         formData.append('lcategory', category)
-        formData.append('lphoto', photo)
+        if (photo !== ""){
+            formData.append('lphoto', photo)
+        }
+        console.log('props',props)
+        console.log(photo)
         // 서버의 upload API 호출
         const res = await axios.post(`${url}/mailbox/sending/?tlcidx=${props}`, formData, token)
         .then(()=>{
           alert("성공")
+          goHome2()
         }).catch(()=>{
           alert('날짜 확인 버튼을 한 번 더 눌러주세요')
         })

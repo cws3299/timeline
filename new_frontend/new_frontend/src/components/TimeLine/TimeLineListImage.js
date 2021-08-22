@@ -1,7 +1,8 @@
-import React from 'react';
+import React , {useEffect ,useState} from 'react';
 import { useSpring, animated, interpolate } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import './TimeLineListImage.css'
+import {imageConfig} from '../../shared/imageConfig'
 
 
 const processXY = (x, y, target) => {
@@ -60,13 +61,28 @@ function TimeLineListImage({props}) {
     },
     { eventOptions: { passive: false } },
   )
+  const [img, setImg] = useState("https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png")
+  const image_url = imageConfig.src
+  useEffect(async()=>{
+    // console.log('props',props.mphoto)
+    if (props.mphoto === null || props.mphoto === undefined){
+      console.log()
+      // console.log('==',image_url)
+    }else{
+      console.log(image_url)
+      console.log('===',props.mphoto)
+      // await setImg(`${image_url}/${props.mphoto}`)
+      await setImg('https://cdn.crowdpic.net/detail-thumb/thumb_d_4CF137F200A8D56B729959D8D9E8FC3A.jpg')
+      console.log('pppppppp',img)
+    }
+  })
 
   return (
     <animated.div
       className="TimeLineListImage"
       {...bind()}
       style={{
-        backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg/250px-Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg)`,
+        backgroundImage: `url(${img})`,
         backgroundSize:'100% 100%',
         transform: interpolate(
           [

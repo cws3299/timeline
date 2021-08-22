@@ -16,7 +16,7 @@
 .StartFeedContent1BoxImg{
     width:100%;
     height:100%;
-    background-image: url(http://phone.ybmclass.com/common_css/img/noimage.gif);
+    /* background-image: url(http://phone.ybmclass.com/common_css/img/noimage.gif); */
     background-size: 100% 100%;
 }
 .StartFeedContent1BoxTag{
