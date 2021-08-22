@@ -81,7 +81,7 @@ const goFollowTimeline = () =>{
       onClick={goFollowTimeline}
       {...bind()}
       style={{
-        backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg/250px-Kang_Seul-gi_at_Coca-Cola_Event_on_January_18%2C_2020_03.jpg)`,
+        backgroundImage: `url(https://cdn.crowdpic.net/detail-thumb/thumb_d_4CF137F200A8D56B729959D8D9E8FC3A.jpg)`,
         backgroundSize:'100% 100%',
         transform: interpolate(
           [

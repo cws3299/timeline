@@ -185,10 +185,10 @@ function TimeCapsuleCard({props}) {
                     )}
                 </div>
                 <div className="TCC22">
-                    타임캡슐 생성시 내 생각: {props.tcthink}
+                    <span className="sdfsdf">타임캡슐 생성시 내 생각 :</span> {props.tcthink}
                 </div>
                 <div className="TCC23">
-                    타임캡슐에 대한 피드백: {feedback11}
+                    <span className="sdfsdf">타임캡슐에 대한 피드백:</span> {feedback11}
                 </div>
             </div>
             <div className="TCC3">
@@ -210,7 +210,7 @@ function TimeCapsuleCard({props}) {
                         </div>
                     </div>
                     <div className={classes.root}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" onClick={feedback1}>
                             피드백 수정
                         </Button>
                         {/* <button className="CapsuleModal4FeedbackButton1" onClick={feedback1}>피드백 수정</button> */}

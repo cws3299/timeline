@@ -78,7 +78,7 @@ function PostBoxChoiceRight({props}) {
       onClick={goSend}
       {...bind()}
       style={{
-        backgroundImage: `url(https://img.hankyung.com/photo/202104/01.26133295.1.jpg)`,
+        // backgroundImage: `url(https://img.hankyung.com/photo/202104/01.26133295.1.jpg)`,
         backgroundSize:'100% 100%',
         transform: interpolate(
           [

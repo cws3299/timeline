@@ -6,8 +6,21 @@ import MypageTimeline from './MypageTimeline'
 import MypagePost from './MypagePost'
 import MypageTimeCapsule from './MypageTimeCapsule'
 import { history } from "../../redux/configureStore"
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        // margin: theme.spacing(1),
+        width:'300px',
+        fontFamily:'Noto Sans KR , sans-serif',
+      },
+    },
+  }));
 
 function MypageContents(){
+    const classes = useStyles();
     const url = config.api
     const _token = localStorage.getItem("token");
     let token = {
@@ -75,6 +88,22 @@ function MypageContents(){
                 </div> */}
                 <div className="uuserBox3">
                     < MypageTimeCapsule onClick={goFollowTimeline} />
+                </div>
+            </div>
+            <div className="uuserBox2">
+                <div className="uuserBox12">
+                    <div className={classes.root}>
+                        <Button variant="contained" color="primary" onClick={goTimeline}>
+                            내 타임라인
+                        </Button>
+                    </div>
+                </div>    
+                <div className="uuserBox12">
+                    <div className={classes.root}>
+                        <Button variant="contained" color="secondary" onClick={goFollowTimeline}>
+                            내가 팔로우한 타임라인
+                        </Button>
+                    </div>
                 </div>
             </div>
 

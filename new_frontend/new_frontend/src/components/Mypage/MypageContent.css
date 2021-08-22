@@ -46,6 +46,7 @@
     font-weight: bold;
 }
 .uuserBox{
+    margin-top:100px;
     display:grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -54,13 +55,19 @@
     justify-content: center;
     align-items: center;
 }
-/* .userBox2{
-    display: flex;
-    justify-content: center;
-    align-items: center; */
-/* } */
 .uuserBox3{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.uuserBox2{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+.uuserBox12{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+} 

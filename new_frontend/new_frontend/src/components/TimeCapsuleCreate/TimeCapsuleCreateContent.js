@@ -160,15 +160,19 @@ const useStyles = makeStyles((theme) => ({
                 </form>
             </div>
             <div className = "TimeCapsuleCreateContent3">
-                <form className={classes.rootss} style={{width:'800px', margin:'0' ,display:'inline-block'}} noValidate autoComplete="off">
-                    <div className="TimeCapsuleCreateContentThink">
-                        <TextField onChange={thinkChange} id="outlined-search" placeholder="마지막으로 미래의 자신에게 한마디 해주세요" type="search" variant="outlined" />
-                    </div>
-                </form>
-                <div className={classes.submit}  style = {{position:'relative' , width:'200px', height:'100%' , margin:'0' ,display:'inline-block' ,textAlign:'center'}}>
-                    <Button onClick={onClick} className = "TimeCapsuleCreateContentSubmit3" variant="contained" color="primary">
-                        타임캡슐 묻기
-                    </Button>
+                <div className="sss">
+                  <form className={classes.rootss} style={{width:'800px', margin:'0' ,display:'inline-block'}} noValidate autoComplete="off">
+                      <div className="TimeCapsuleCreateContentThink">
+                          <TextField onChange={thinkChange} id="outlined-search" placeholder="마지막으로 미래의 자신에게 한마디 해주세요" type="search" variant="outlined" />
+                      </div>
+                  </form>
+                </div>
+                <div className="kkk">
+                  <div className={classes.submit}  style = {{position:'relative' , width:'200px', height:'100%' , margin:'0' ,display:'inline-block' ,textAlign:'center'}}>
+                      <Button onClick={onClick} className = "TimeCapsuleCreateContentSubmit3" variant="contained" color="primary">
+                          타임캡슐 묻기
+                      </Button>
+                  </div>
                 </div>
             </div>
         </div>

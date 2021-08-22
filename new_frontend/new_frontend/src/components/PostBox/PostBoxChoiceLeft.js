@@ -77,7 +77,7 @@ function PostBoxChoiceLeft({props}) {
       onClick={goReceive}
       {...bind()}
       style={{
-        backgroundImage: `url(https://img.hankyung.com/photo/202104/01.26133295.1.jpg)`,
+        // backgroundImage: `url("../../Image/1.png")`,
         backgroundSize:'100% 100%',
         transform: interpolate(
           [

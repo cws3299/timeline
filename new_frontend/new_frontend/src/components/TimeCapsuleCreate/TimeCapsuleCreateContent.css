@@ -31,3 +31,19 @@
     top:20px;
 } */
 
+.sss{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kkk{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TimeCapsuleCreateContent3{
+    display:grid;
+    grid-template-columns: 8fr 2fr;
+}

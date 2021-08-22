@@ -129,8 +129,10 @@
 }
 .Home2ImageModal2ContentContent{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    box-sizing: border-box;
+    padding:30px
 }
 
 

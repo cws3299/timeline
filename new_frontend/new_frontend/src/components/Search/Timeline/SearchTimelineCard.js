@@ -11,7 +11,10 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
           margin: theme.spacing(1),
           width:'980px',
-        //   height:'62px',
+          fontFamily:'Do Hyeon, sans-serif',
+          fontWeight:'bold',
+          backgroundColor:'black',
+          color:'white'
         },
       },
   }));
@@ -46,7 +49,7 @@ function SearchTimelineCard(props){
             </div>
             <div className="SearchTimelineCard3">
                 <div className={classes.root1}>
-                    <Button variant="contained" color="primary" onClick={onClick}>
+                    <Button variant="contained" onClick={onClick}>
                         타임라인으로 이동하기
                     </Button>
                 </div>

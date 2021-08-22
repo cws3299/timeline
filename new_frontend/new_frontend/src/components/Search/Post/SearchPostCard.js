@@ -48,9 +48,9 @@ function SearchPostCard(props){
     let token = {
       headers: { Authorization: `Bearer ${_token}` },
     };
-    console.log(props)
-    const tag = props.props.tag
-    const tagg = tag.join(' #')
+    const tagg = props.props.tag
+    const taggg = tagg.join(' #')
+    console.log(tagg)
     console.log('img',props.props.tlcimage)
     const feedidx= (idx) =>{
         dispatch(usertimeActions.usersettimeFeedSV(idx));
@@ -180,10 +180,12 @@ function SearchPostCard(props){
         </div>
     )
     return(
-        <div  className="SearchTagCard">
-            <div className="SearchTagCard"  onClick={handleOpen}>
+        <div  className="SearchTagCard1">
+            <div className="SearchTagCard2"  onClick={handleOpen}>
                 {/* {props.props.tlccontent} */}
-                {introduce}
+                {/* {introduce}
+                ddddd */}
+                {taggg}
             </div>
             <Modal
                         props={props}

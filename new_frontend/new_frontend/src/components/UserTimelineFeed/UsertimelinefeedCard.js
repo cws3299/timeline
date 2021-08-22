@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 function TimeLineFeedListCard({props}){
 
     const classes = useStyles();
-    console.log(props)
     // const [modalStyle] = useState(getModalStyle);
     const url = config.api
     const [open, setOpen] = useState(false);
@@ -233,16 +232,16 @@ function TimeLineFeedListCard({props}){
                     )}
                     </div>
                     <div className="Home2ImageModalContentInfo">
-                        {data.tlcplace}
+                        {data.tlcplace} / {data.tlcdate}
                     </div>
                     <div className="Home2ImageModalContentEmotion">
-                        <i class="far fa-thumbs-up" onClick={egoodyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-thumbs-up" onClick={efightingyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-surprise" onClick={econgratulationyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={eexpectyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={esurpriseyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={esadyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={eniceyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-smile" onClick={egoodyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-angry" onClick={efightingyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-laugh-squint" onClick={econgratulationyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-laugh-squint" onClick={eexpectyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-surprise" onClick={esurpriseyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-sad-tear" onClick={esadyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-grin-hearts" onClick={eniceyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
                     </div>
                     <div className="Home2ImageModalContentEmotionCount">
                         <span style={{paddingLeft:'11px',paddingRight:'11px'}}>{egoodyn}</span> 
@@ -272,39 +271,39 @@ function TimeLineFeedListCard({props}){
                 </div>
                 <div className="Home2ImageModal2ContentBox">
                     <div className="Home2ImageModal2ContentContent">
-                    {useElipsis ? (
-                        <LinesEllipsis
-                        text={data.tlccontent}
-                        maxLine="15"
-                        ellipsis={
-                            <span style={{ color: "black" , fontSize:'0.5rem'}} onClick={() => setUseElipsis(false)}>
-                            ...더보기
+                        {useElipsis ? (
+                            <LinesEllipsis
+                            text={data.tlccontent}
+                            maxLine="15"
+                            ellipsis={
+                                <span style={{ color: "black" , fontSize:'0.5rem'}} onClick={() => setUseElipsis(false)}>
+                                ...더보기
+                                </span>
+                            }
+                            trimRight
+                            basedOn="letters"
+                            />
+                        ) : (
+                            <>
+                            {data.tlccontent}
+                            <span style={{ color: "black" , fontSize:'0.5rem' }} onClick={() => setUseElipsis(true)}>
+                                닫기
                             </span>
-                        }
-                        trimRight
-                        basedOn="letters"
-                        />
-                    ) : (
-                        <>
-                        {data.tlccontent}
-                        <span style={{ color: "black" , fontSize:'0.5rem' }} onClick={() => setUseElipsis(true)}>
-                            닫기
-                        </span>
-                        </>
-                    )}
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className="Home2ImageModal2ContentInfo">
-                        {data.tlcplace}
+                        {data.tlcplace} / {data.tlcdate} 
                     </div>
                     <div className="Home2ImageModal2ContentEmotion">
-                        <i class="far fa-thumbs-up" onClick={egoodyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-thumbs-up" onClick={efightingyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-surprise" onClick={econgratulationyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={eexpectyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={esurpriseyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={esadyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
-                        <i class="far fa-heart" onClick={eniceyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-smile" onClick={egoodyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-angry" onClick={efightingyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-laugh-squint" onClick={econgratulationyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-laugh-squint" onClick={eexpectyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-surprise" onClick={esurpriseyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-sad-tear" onClick={esadyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
+                        <i class="far fa-grin-hearts" onClick={eniceyn1} style={{paddingLeft:'7.5px',paddingRight:'7.5px'}}></i>
                     </div>
                     <div className="Home2ImageModal2ContentEmotionCount">
                         <span style={{paddingLeft:'11px',paddingRight:'11px'}}>{egoodyn}</span> 

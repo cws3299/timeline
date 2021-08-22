@@ -54,7 +54,7 @@ function GoLetterContent(data) {
         }else{
             await sendQuerys()
             history.push({
-                pathname:'main/startFeed',
+                pathname:'/main/startFeed',
                 state:{data:dataa}
             })
         }

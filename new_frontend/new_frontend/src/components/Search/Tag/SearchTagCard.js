@@ -179,7 +179,7 @@ function SearchTagCard(props){
     )
     return(
         <div  className="SearchTagCard">
-            <div className="SearchTagCard"  onClick={handleOpen}>
+            <div className="SearchTagCard2"  onClick={handleOpen}>
                 {/* {props.props.tlccontent} */}
                 {tagg}
             </div>
