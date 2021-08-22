@@ -62,13 +62,8 @@ function MypageContents(){
                 <div className="userInfo2">
                     {data.mproduce}
                 </div>
-                <div className="userInfo3">
-                    <div className="userInfo31">
-                        팔로워
-                    </div>
-                    <div className="userInfo32">
-                        {followDto.tlFollow}
-                    </div>
+                <div className="userInfo4">
+                    팔로워 : {followDto.tlFollow}
                 </div>
             </div>
             <div className="uuserBox">

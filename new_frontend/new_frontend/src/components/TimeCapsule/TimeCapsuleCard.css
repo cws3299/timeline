@@ -44,7 +44,7 @@
 }
 
 
-.CapsuleModal1{
+/* .CapsuleModal1{
     width:100%;
     height:10%;
     background-color: black;
@@ -97,4 +97,129 @@
 .CapsuleModal4FeedbackButton1{
     width:100%;
     height:100%;
+} */
+
+.TCC1{
+    width:100%;
+    height:10%;
+    display:grid;
+    grid-template-columns: 8fr 2fr 2fr;
+}
+
+.TCC11{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 30px;
+    font-size:1.5rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    /* border:5px solid black */
+
+}
+
+.TCC12{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:0.5rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+
+.TCC13{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:0.5rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+
+
+.TCC2{
+    width:100%;
+    height:80%;
+    display:grid;
+    grid-template-rows: 8fr 1fr 1fr;
+}
+
+.TCC21{
+    width:100%;
+    height:100%;
+    background-color: black;
+    color:white;
+    box-sizing: border-box;
+    padding:30px;
+}
+
+.TCC22{
+    width:100%;
+    height:100%;
+    /* background-color: blue;
+    color: white; */
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right:30px;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.TCC23{
+    width:100%;
+    height:100%;
+    /* background-color: black;
+    color: white; */
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right:30px;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.TCC3{
+    width:100%;
+    height:10%;
+}
+
+.TCC31{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-columns: 8fr 2fr;
+}
+.TCC312{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+}
+
+.TCC311{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+}
+.TCC3111{
+    width:100%;
+    height:100%;
+    /* display:flex;
+    justify-content: center; */
+    /* background-color: blue; */
+}
+
+
+.CapsuleModal4FeedbackButton1{
+    width:100%;
+    height:90%;
 }

@@ -7,7 +7,8 @@ import { config } from '../../shared/config'
 import TimeCapsuleTimer from './TimeCapsuleTimer';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
-import { history } from "../../redux/configureStore"
+import { history } from "../../redux/configureStore";
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -23,10 +24,19 @@ const useStyles = makeStyles((theme) => ({
     },
     roots: {
         '& .MuiTextField-root': {
-          margin: theme.spacing(1),
+          margin: '2px',
           width: '850px',
+          height:'40px'
+        //   backgroundColor:'black'
         },
       },
+    root: {
+    '& > *': {
+        margin: '2px',
+        width:'95%',
+        height:'90%'
+    },
+    },
   }));
 
 function TimeCapsuleCard({props}) {
@@ -49,6 +59,7 @@ function TimeCapsuleCard({props}) {
     const [feedback11, setFeedback] = useState(props.tcfeedback)
     const [back, setBack] = useState('');
     const [useElipsis, setUseElipsis] = useState(true);
+    const [tcCreateDate, setTcCreateDate] = useState("");
     const _token = localStorage.getItem("token");
     let token = {
       headers: { Authorization: `Bearer ${_token}` },
@@ -73,65 +84,137 @@ function TimeCapsuleCard({props}) {
             tcfeedback:back
         }
         const res = await axios.post(`${url}/timecapsule/feedback/${props.tcidx}`, tcfeedback, token);
-        console.log('back',back)
         await setFeedback(back)
-        console.log(feedback11)
         
         // move()
 
     } 
 
-    // useEffect(()=>{
-    //     console.log('???')
-    //     setFeedback(props.tcfeedback)
-    // })
+    useEffect(()=>{
+        setTcCreateDate(props.tcregdate.slice(0,10))
+        // setFeedback(props.tcfeedback)
+        // console.log('--------------',feedback11)
+    })
+
+    console.log('props00',props)
+    // const body = (
+    //     <div className={classes.paper}>
+    //         <div className="CapsuleModal1">
+    //             {props.tctitle}
+    //         </div>
+    //         <div className="CapsuleModal2">
+                // {useElipsis ? (
+                //     <LinesEllipsis
+                //     text={props.tccontent}
+                //     maxLine="10"
+                //     ellipsis={
+                //         <span style={{ color: "black" , fontSize:'0.5rem'}} onClick={() => setUseElipsis(false)}>
+                //         ...더보기
+                //         </span>
+                //     }
+                //     trimRight
+                //     basedOn="letters"
+                //     />
+                // ) : (
+                //     <>
+                //     {props.tlccontent}
+                //     <span style={{ color: "black" , fontSize:'0.5rem' }} onClick={() => setUseElipsis(true)}>
+                //         닫기
+                //     </span>
+                //     </>
+                // )}
+    //         </div>
+    //         <div className="CapsuleModal3">
+    //             {props.tcthink}
+    //         </div>
+    //         <div className="CapsuleModal4">
+    //             <div className="CapsuleModal4Feedback">{feedback11}</div>
+                // <div className="CapsuleModal4FeedbackButton">
+                //     <form className={classes.roots} noValidate autoComplete="off">
+                //         <div>
+                //         <TextField
+                //             onChange={feedbackChange}
+                //             id="outlined-multiline-static"
+                //             multiline
+                //             rows={1}
+                //             placeholder = "피드백을 수정해주세요"
+                //             variant="outlined"
+                //             />
+                //         </div>
+                //     </form>
+                //     <button className="CapsuleModal4FeedbackButton1" onClick={feedback1}>피드백 수정</button>
+                // </div>
+    //         </div>
+    //     </div>
+    // )
 
     const body = (
         <div className={classes.paper}>
-            <div className="CapsuleModal1">
-                {props.tctitle}
+            <div className="TCC1">
+                <div className="TCC11">
+                    {props.tctitle}
+                </div>
+                <div className="TCC12">
+                    생성:  {tcCreateDate}
+                </div>
+                <div className="TCC13">
+                    open:  {props.tcterm}
+                </div>
             </div>
-            <div className="CapsuleModal2">
-                {useElipsis ? (
-                    <LinesEllipsis
-                    text={props.tccontent}
-                    maxLine="10"
-                    ellipsis={
-                        <span style={{ color: "black" , fontSize:'0.5rem'}} onClick={() => setUseElipsis(false)}>
-                        ...더보기
+            <div className="TCC2">
+                <div className="TCC21">
+                    {useElipsis ? (
+                        <LinesEllipsis
+                        text={props.tccontent}
+                        maxLine="10"
+                        ellipsis={
+                            <span style={{ color: "black" , fontSize:'0.5rem'}} onClick={() => setUseElipsis(false)}>
+                            ...더보기
+                            </span>
+                        }
+                        trimRight
+                        basedOn="letters"
+                        />
+                    ) : (
+                        <>
+                        {props.tlccontent}
+                        <span style={{ color: "black" , fontSize:'0.5rem' }} onClick={() => setUseElipsis(true)}>
+                            닫기
                         </span>
-                    }
-                    trimRight
-                    basedOn="letters"
-                    />
-                ) : (
-                    <>
-                    {props.tlccontent}
-                    <span style={{ color: "black" , fontSize:'0.5rem' }} onClick={() => setUseElipsis(true)}>
-                        닫기
-                    </span>
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
+                <div className="TCC22">
+                    타임캡슐 생성시 내 생각: {props.tcthink}
+                </div>
+                <div className="TCC23">
+                    타임캡슐에 대한 피드백: {feedback11}
+                </div>
             </div>
-            <div className="CapsuleModal3">
-                {props.tcthink}
-            </div>
-            <div className="CapsuleModal4">
-                <div className="CapsuleModal4Feedback">{feedback11}</div>
-                <div className="CapsuleModal4FeedbackButton">
-                    <form className={classes.roots} noValidate autoComplete="off">
-                        <div>
-                        <TextField
-                            onChange={feedbackChange}
-                            id="outlined-multiline-static"
-                            multiline
-                            rows={1}
-                            placeholder = "피드백을 수정해주세요"
-                            variant="outlined"
-                            />
+            <div className="TCC3">
+                <div className="TCC31">
+                    <div className="TCC311">
+                        <div className="TCC3111">
+                            <form className={classes.roots} noValidate autoComplete="off">
+                                <div>
+                                <TextField
+                                    onChange={feedbackChange}
+                                    id="outlined-multiline-static"
+                                    multiline
+                                    rows={1}
+                                    placeholder = "피드백을 수정해주세요"
+                                    variant="outlined"
+                                    />
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                    <button className="CapsuleModal4FeedbackButton1" onClick={feedback1}>피드백 수정</button>
+                    </div>
+                    <div className={classes.root}>
+                        <Button variant="contained" color="primary">
+                            피드백 수정
+                        </Button>
+                        {/* <button className="CapsuleModal4FeedbackButton1" onClick={feedback1}>피드백 수정</button> */}
+                    </div>
                 </div>
             </div>
         </div>

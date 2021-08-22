@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
     const onClick = async () => {
 
+
         const capsule = {
             tcterm : tcterm,
             tctitle : tctitle,
