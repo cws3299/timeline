@@ -1,0 +1,25 @@
+.revise{
+    width:100%;
+    height:70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviseBox{
+    width:40%;
+    height:90%;
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 2fr 1fr
+}
+
+
+
+/* 
+닉네임
+사진
+자기소개
+패스워드1
+패스워드2
+버튼
+*/

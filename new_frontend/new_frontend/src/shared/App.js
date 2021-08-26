@@ -29,6 +29,7 @@ import {
     FollowTimeline,
     Revise,
     Memo,
+    Signup
 } from "../pages/index";
 
 import { Switch, Route } from "react-router-dom";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/intro">
             <NoLoginRoute path="/intro/intro" exact component={Intro} />
             <NoLoginRoute path="/intro/login" exact component={Login} />
+            <NoLoginRoute path="/intro/Signup" exact component={Signup} />
           </Route>
           
 

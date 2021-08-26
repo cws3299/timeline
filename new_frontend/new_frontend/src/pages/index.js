@@ -26,6 +26,7 @@ import Set from'./Set'
 import FollowTimeline from './FollowTimeline'
 import Revise from './Revise'
 import Memo from './Memo'
+import Signup from './Signup'
 
 export {
     Home,
@@ -56,4 +57,5 @@ export {
     FollowTimeline,
     Revise,
     Memo,
+    Signup,
 };

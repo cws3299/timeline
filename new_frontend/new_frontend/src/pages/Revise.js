@@ -1,7 +1,7 @@
 import React from 'react'
 import NewNav from '../components/NewNav';
 import './Revise.css'
-// import PostBoxChoice from '../components/PostBox/PostBoxChoice';
+import ReviseContent from '../components/Revise/ReviseContent';
 import PostButton from '../components/PostButton';
 import TimeCapsulebutton from '../components/TimeCapsulebutton.js';
 import TimeLineCreateButton from '../components/TimeLineCreateButton';
@@ -12,7 +12,7 @@ function Revise() {
             <NewNav className = "PostBoxNewNav"/>
             <div className = "PostBox1Box">
                 <div className = "PostBox1Box2">
-                    {/* <PostBoxChoice /> */}
+                    <ReviseContent />
                 </div>
             </div>
             < TimeLineCreateButton />

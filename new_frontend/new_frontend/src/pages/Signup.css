@@ -1,0 +1,104 @@
+.Signup{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.SignupBox{
+    width:30%;
+    height:90%;
+    background-color: gray;
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.SignupBoxIntro{
+    font-size: 2rem;
+    background-color: white;
+    font-family: 'Do Hyeon', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    padding-left: 3%;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+.SignupBoxId{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.SignupBoxName{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.SignupBoxIntroduce{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+}
+.SignupBoxBirthday{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+}
+.SignupBoxPassword{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+}
+.SignupBoxPasswordConfirm{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+}
+.SignupBoxButton{
+    width:100%;
+    height:100%;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;  
+}
+.SignupBoxFile{
+    width:100%;
+    height:100%;
+    background-color: white; 
+}   
+
+
+
+/* 
+아이디
+닉네임
+사진
+자기소개
+생일
+패스워드1
+패스워드2
+버튼
+*/
